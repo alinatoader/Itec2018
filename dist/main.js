@@ -71,6 +71,10 @@ var map = {
 		"common",
 		"component-typehead-typehead-module"
 	],
+	"./events/events.module": [
+		"./src/app/admin/events/events.module.ts",
+		"events-events-module"
+	],
 	"./login/login.module": [
 		"./src/app/login/login.module.ts",
 		"common",
@@ -264,7 +268,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -279,7 +282,7 @@ var AppModule = /** @class */ (function () {
             ],
             providers: [
                 _shared_guard_auth_guard__WEBPACK_IMPORTED_MODULE_4__["AuthGuard"],
-                { provide: _angular_common__WEBPACK_IMPORTED_MODULE_7__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_7__["PathLocationStrategy"] },
+                { provide: _angular_common__WEBPACK_IMPORTED_MODULE_7__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_7__["HashLocationStrategy"] },
                 { provide: _angular_common__WEBPACK_IMPORTED_MODULE_7__["APP_BASE_HREF"], useValue: '/' }
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]

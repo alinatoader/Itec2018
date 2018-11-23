@@ -6,8 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { APP_BASE_HREF } from '@angular/common';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { APP_BASE_HREF, HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +17,7 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
     AppRoutingModule],
   providers: [
     AuthGuard,
-    { provide: LocationStrategy, useClass: PathLocationStrategy },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: APP_BASE_HREF, useValue: '/' }
   ],
   bootstrap: [AppComponent]

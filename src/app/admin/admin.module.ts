@@ -20,7 +20,6 @@ import { BreadcrumbComponent } from '../shared/breadcrumb/breadcrumb.component';
         SidebarComponent,
         BreadcrumbComponent,
         SIDEBAR_TOGGLE_DIRECTIVES
-
     ]
 })
 export class AdminModule { }
