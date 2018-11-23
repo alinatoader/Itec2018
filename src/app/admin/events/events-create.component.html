@@ -1,0 +1,17 @@
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">
+            Create new event
+        </h3>
+        <form class="form-horizontal form-material" id="eventCreateForm" (submit)="saveEvent()" [formGroup]="eventCreateForm">
+            <input class="form-control" type="text" required="" placeholder="Name" formControlName="name">
+            <input class="form-control" type="text" required="" placeholder="Description" formControlName="description">
+            <input class="form-control" type="text" required="" placeholder="StartDate" formControlName="startDate">
+            <input class="form-control" type="text" required="" placeholder="EndDate" formControlName="endDate">
+            <div class="text-center m-t-20">
+                <button type="submit" [disabled]="eventCreateForm.invalid" class="btn btn-info btn-md btn-block text-uppercase waves-effect waves-light">
+                    Save</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -14,7 +14,8 @@ import { APP_BASE_HREF, HashLocationStrategy, LocationStrategy } from '@angular/
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule],
+    AppRoutingModule,
+  ],
   providers: [
     AuthGuard,
     { provide: LocationStrategy, useClass: HashLocationStrategy },

@@ -1,27 +1,43 @@
 <div class="row">
-        <div class="col-md-6" *ngFor="let event of events">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title">{{event}}</h3>
-                    <h6 class="card-subtitle">This is basic Default pagination</h6>
-                    <ngb-tabset>
-                      <ngb-tab title="Simple">
-                        <ng-template ngbTabContent>
-                          <p class="p-t-20">event description tab1</p>
-                        </ng-template>
-                      </ngb-tab>
-                      <ngb-tab>
-                        <ng-template ngbTabTitle><b>Fancy</b></ng-template>
-                        <ng-template ngbTabContent>
-                          <p class="p-t-20">event descirption tab2</p>
-                        </ng-template>
-                      </ngb-tab>
-                      <ngb-tab title="Disabled" [disabled]="true">
-                        <ng-template ngbTabContent>
-                          <p class="p-t-20">event descr tab3</p>
-                        </ng-template>
-                      </ngb-tab>
-                    </ngb-tabset>
-                  </div>
-            </div>
-        </div>
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <a routerLink="/admin/events/create" class="btn btn-info btn-large">Create new event</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6" *ngFor="let event of events">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">
+          {{event.name}}
+          <div style="float:right;">
+              <button type="button" class="btn btn-warning btn-sm" (click)="editEvent(event.name)">Edit</button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="deleteEvent(event.name)">Delete</button>
+          </div>
+        </h3>
+        <h6 class="card-subtitle">Description</h6>
+        <ngb-tabset>
+          <ngb-tab title="Dates">
+            <ng-template ngbTabContent>
+              <p class="p-t-20">Begins: {{event.startDate}}</p>
+              <p class="p-t-20">Ends: {{event.endDate}}</p>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab>
+            <ng-template ngbTabTitle><b>Leaderboard</b></ng-template>
+            <ng-template ngbTabContent>
+              <p class="p-t-20">Leaderboard</p>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Statistics">
+            <ng-template ngbTabContent>
+              <p class="p-t-20">Statistics</p>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </div>
+  </div>
