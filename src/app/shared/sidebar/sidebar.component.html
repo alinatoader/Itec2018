@@ -19,13 +19,13 @@
           <!-- text-->
           <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
           <!-- text-->
-          <!-- <a href="#" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a> -->
+          <a href="#" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
           <!-- text-->
-          <!-- <a href="#" class="dropdown-item"><i class="ti-email"></i> Inbox</a> -->
+          <a href="#" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
           <!-- text-->
           <div class="dropdown-divider"></div>
           <!-- text-->
-          <!-- <a href="#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a> -->
+          <a href="#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
           <!-- text-->
           <div class="dropdown-divider"></div>
           <!-- text-->
@@ -49,6 +49,10 @@
           <a routerLink="/admin/questions" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i
               class="mdi mdi-equal"></i><span class="hide-menu">Questions</span></a>
         </li>
+        <li>
+            <a routerLink="/admin/events" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i
+                class="mdi mdi-equal"></i><span class="hide-menu">Events</span></a>
+          </li>
         <li class="nav-small-cap">UI COMPONENTS</li>
         <li>
           <a routerLink="/admin/accordion" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i
