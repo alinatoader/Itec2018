@@ -692,11 +692,11 @@ function getAuthServiceConfigs() {
     var config = new angular_6_social_login__WEBPACK_IMPORTED_MODULE_7__["AuthServiceConfig"]([
         {
             id: angular_6_social_login__WEBPACK_IMPORTED_MODULE_7__["FacebookLoginProvider"].PROVIDER_ID,
-            provider: new angular_6_social_login__WEBPACK_IMPORTED_MODULE_7__["FacebookLoginProvider"]("270259607169157")
+            provider: new angular_6_social_login__WEBPACK_IMPORTED_MODULE_7__["FacebookLoginProvider"]("375716326500876")
         },
         {
             id: angular_6_social_login__WEBPACK_IMPORTED_MODULE_7__["GoogleLoginProvider"].PROVIDER_ID,
-            provider: new angular_6_social_login__WEBPACK_IMPORTED_MODULE_7__["GoogleLoginProvider"]("286737876027-301fqmppj4jgh4lrone6ebdpadr3mikj.apps.googleusercontent.com")
+            provider: new angular_6_social_login__WEBPACK_IMPORTED_MODULE_7__["GoogleLoginProvider"]("145324692401-35t8rl1mu5sa4a461ci3k60ra4citbma.apps.googleusercontent.com")
         },
     ]);
     return config;
