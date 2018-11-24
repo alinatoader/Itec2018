@@ -25,15 +25,15 @@ export class QuizCreateComponent implements OnInit {
     }
 
     saveQuiz() {
-        console.log(this.quizCreateForm.value);
-        // this.eventsService.create(this.quizCreateForm.value)
-        //     .subscribe(response => {
-        //         console.log(response);
-        //         this.router.navigateByUrl('/admin/events');
-        //     }, error => {
-        //         console.log(error);
-        //     }
-        //     );
+        let quiz = this.quizCreateForm.value;
+        quiz.eventId = this.eventId;
+        this.eventsService.createQuiz(quiz)
+            .subscribe(response => {
+                this.router.navigateByUrl('/admin/events');
+            }, error => {
+                console.log(error);
+            }
+            );
     }
 
     addNewRule() {

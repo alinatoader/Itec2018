@@ -40,8 +40,8 @@ export class EventsDisplayComponent implements OnInit {
             })
     }
 
-    deleteEvent(name: string) {
-        this.eventsService.delete(name).subscribe(_ => {
+    deleteEvent(id:number) {
+        this.eventsService.delete(id).subscribe(_ => {
             this.getAll();
         },
             error => {
@@ -50,8 +50,8 @@ export class EventsDisplayComponent implements OnInit {
         );
     }
 
-    editEvent(name: string) {
-        this.router.navigateByUrl('/admin/events/create/' + name);
+    editEvent(id:number) {
+        this.router.navigateByUrl('/admin/events/create/' + id);
     }
 
     addQuiz(eventId: number) {
@@ -101,17 +101,42 @@ export class EventsDisplayComponent implements OnInit {
         }
     }
 
-    search(event){
-        var searchText = event.target.value;
+    search(event, statusSelect, sortSelect) {
+        const searchValue = event.target.value;
+        const body = {
+            searchName: searchValue,
+            eventStatus: statusSelect.value,
+            sortByDate: sortSelect.value === 'ASC' ? true : false,
+        }
+        this.eventsService.filter(body)
+            .subscribe(response => {
+                this.events = response;
+            }, error => console.log(error));
     }
 
-    filter(event){
-        var filterDifficulty = event.target.value;
-        console.log(filterDifficulty);
+    filter(event, sortSelect, searchInput) {
+        const filterStatus = event.target.value;
+        const body = {
+            searchName: searchInput.value,
+            eventStatus: filterStatus,
+            sortByDate: sortSelect.value === 'ASC' ? true : false,
+        }
+        this.eventsService.filter(body)
+            .subscribe(response => {
+                this.events = response;
+            }, error => console.log(error));
     }
 
-    sort(event){
-        var sortDir = event.target.value;
-        console.log(sortDir);
+    sort(event, statusSelect, searchInput) {
+        const sortDir = event.target.value;
+        const body = {
+            searchName: searchInput.value,
+            eventStatus: statusSelect.value,
+            sortByDate: sortDir === 'ASC' ? true : false,
+        }
+        this.eventsService.filter(body)
+            .subscribe(response => {
+                this.events = response;
+            }, error => console.log(error));
     }
 }

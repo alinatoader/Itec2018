@@ -18,7 +18,7 @@ const routes: Routes = [
         component: EventsCreateComponent
     },
     {
-        path: 'create/:name',
+        path: 'create/:id',
         component: EventsCreateComponent
     },
     {

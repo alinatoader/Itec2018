@@ -8,7 +8,7 @@ import { Router, ActivatedRoute } from "@angular/router";
     templateUrl: 'events-create.component.html'
 })
 export class EventsCreateComponent implements OnInit {
-    name: any;
+    id: any;
     events: any;
     eventCreateForm: FormGroup;
 
@@ -17,15 +17,16 @@ export class EventsCreateComponent implements OnInit {
 
     ngOnInit(): void {
         this.eventCreateForm = new FormGroup({
+            id: new FormControl(0),
             name: new FormControl(''),
             description: new FormControl(''),
             startDate: new FormControl(''),
             endDate: new FormControl(''),
             quizzes: new FormControl('')
         });
-        this.name = this.route.snapshot.paramMap.get('name');
-        if (this.name) {
-            this.getEventByName(this.name);
+        this.id = this.route.snapshot.paramMap.get('id');
+        if (this.id) {
+            this.getEventByName(this.id);
         }
     }
 
@@ -41,7 +42,7 @@ export class EventsCreateComponent implements OnInit {
     }
 
     saveEvent() {
-        if (this.name) {
+        if (this.id) {
             this.updateEvent();
         } else {
             this.addEvent();
@@ -49,9 +50,7 @@ export class EventsCreateComponent implements OnInit {
     }
 
     updateEvent() {
-        //const formValue = this.eventCreateForm.value;
-        //const event = { name: formValue.name, description: formValue.description, startDate: formValue.startDate, endDate: formValue.endDate };
-        this.eventsService.update(this.name, this.eventCreateForm.value)
+        this.eventsService.update(this.id, this.eventCreateForm.value)
             .subscribe(response => {
                 console.log(response);
                 this.router.navigateByUrl('/admin/events');
@@ -61,8 +60,8 @@ export class EventsCreateComponent implements OnInit {
             );
     }
 
-    getEventByName(name: string) {
-        this.eventsService.getByName(name).subscribe(
+    getEventByName(id: number) {
+        this.eventsService.getById(id).subscribe(
             response => {
                 console.log(response);
                 this.eventCreateForm.setValue(response);

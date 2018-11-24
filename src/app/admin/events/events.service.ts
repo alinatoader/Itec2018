@@ -13,20 +13,29 @@ export class EventsService implements OnInit {
         return this.http.get(this.apiUrl);
     }
 
-    delete(name: string) {
-        return this.http.delete(this.apiUrl + name);
+    delete(id: number) {
+        return this.http.delete(this.apiUrl + id);
     }
 
-    getByName(name: string) {
-        return this.http.get(this.apiUrl + name);
+    getById(id: number) {
+        return this.http.get(this.apiUrl + id);
     }
 
     create(event: any) {
         return this.http.post(this.apiUrl, event);
     }
 
-    update(name: string, event: any) {
-        return this.http.put(this.apiUrl + name, event);
+    update(id: number, event: any) {
+        return this.http.put(this.apiUrl + id, event);
+    }
+
+    filter(body: any) {
+        console.log(body);
+        return this.http.post(this.apiUrl + 'filter', body);
+    }
+
+    createQuiz(quiz: any) {
+        return this.http.post('https://apiitec2018tm.herokuapp.com/quiz', quiz);
     }
 
     ngOnInit(): void {

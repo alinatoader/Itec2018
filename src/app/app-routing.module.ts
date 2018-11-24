@@ -19,6 +19,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'user',
+    loadChildren: './user/user.module#UserModule',
+    canActivate: [AuthGuard]
+  },
+  {
     path: '**',
     loadChildren: './404/not-found.module#NotFoundModule'
   }
