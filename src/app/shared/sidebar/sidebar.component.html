@@ -7,13 +7,20 @@
     <!-- User profile -->
     <div class="user-profile">
       <!-- User profile image -->
-      <div class="profile-img"> <img [src]="user.image" alt="user" />
+      <div class="profile-img">
+        <div *ngIf="user.image; else defaultImg">
+          <img [src]="user.image" alt="user" />
+        </div>
+        <ng-template #defaultImg>
+            <img src="assets/images/background/cute-cat.png" alt="user" />
+        </ng-template>
         <!-- this is blinking heartbit-->
         <div class="notify setpos"> <span class="heartbit"></span> <span class="point"></span> </div>
       </div>
       <!-- User profile text-->
       <div class="profile-text">
-        <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+        <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true"
+          aria-expanded="true">
           {{user.name}} <i class="fa fa-angle-down"></i></a>
         <div class="dropdown-menu animated flipInY">
           <!-- text-->
@@ -41,26 +48,26 @@
         <li class="nav-devider"></li>
         <li class="nav-small-cap">PERSONAL</li>
         <li [class.active]="showMenu === 'start'">
-          <a routerLink="/admin/starter" (click)="addExpandClass('start')" [routerLinkActive]="['router-link-active']"><i class="icon-speedometer"></i><span
-              class="hide-menu">Starter Page</span></a>
+          <a routerLink="/admin/starter" (click)="addExpandClass('start')" [routerLinkActive]="['router-link-active']"><i
+              class="icon-speedometer"></i><span class="hide-menu">Starter Page</span></a>
         </li>
         <li class="nav-small-cap">DASHBOARD</li>
         <li>
           <a routerLink="/admin/questions" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i
-            class="mdi mdi-message-bulleted"></i><span class="hide-menu">Questions</span></a>
+              class="mdi mdi-message-bulleted"></i><span class="hide-menu">Questions</span></a>
         </li>
         <li>
-            <a routerLink="/admin/events" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i
+          <a routerLink="/admin/events" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i
               class="mdi mdi-calendar-clock"></i><span class="hide-menu">Events</span></a>
-          </li>
+        </li>
         <li class="nav-small-cap">UI COMPONENTS</li>
         <li>
           <a routerLink="/admin/accordion" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i
               class="mdi mdi-equal"></i><span class="hide-menu">Accordion</span></a>
         </li>
         <li>
-          <a routerLink="/admin/alert" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i class="mdi mdi-message-bulleted"></i><span
-              class="hide-menu">Alert</span></a>
+          <a routerLink="/admin/alert" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i
+              class="mdi mdi-message-bulleted"></i><span class="hide-menu">Alert</span></a>
         </li>
         <li>
           <a routerLink="/admin/carousel" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i
@@ -75,28 +82,28 @@
               class="mdi mdi-arrange-bring-to-front"></i><span class="hide-menu">Dropdown - Collapse</span></a>
         </li>
         <li>
-          <a routerLink="/admin/modal" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i class="mdi mdi-tablet"></i><span
-              class="hide-menu">Modal</span></a>
+          <a routerLink="/admin/modal" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i
+              class="mdi mdi-tablet"></i><span class="hide-menu">Modal</span></a>
         </li>
         <li>
           <a routerLink="/admin/pagination" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i
               class="mdi mdi-backburger"></i><span class="hide-menu">Pagination</span></a>
         </li>
         <li>
-          <a routerLink="/admin/poptool" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i class="mdi mdi-image-filter-vintage"></i><span
-              class="hide-menu">Popover & Tooltip</span></a>
+          <a routerLink="/admin/poptool" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i
+              class="mdi mdi-image-filter-vintage"></i><span class="hide-menu">Popover & Tooltip</span></a>
         </li>
         <li>
           <a routerLink="/admin/progressbar" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i
               class="mdi mdi-poll"></i><span class="hide-menu">Progressbar</span></a>
         </li>
         <li>
-          <a routerLink="/admin/rating" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i class="mdi mdi-bandcamp"></i><span
-              class="hide-menu">Ratings</span></a>
+          <a routerLink="/admin/rating" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i
+              class="mdi mdi-bandcamp"></i><span class="hide-menu">Ratings</span></a>
         </li>
         <li>
-          <a routerLink="/admin/tabs" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i class="mdi mdi-sort-variant"></i><span
-              class="hide-menu">Tabs</span></a>
+          <a routerLink="/admin/tabs" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i
+              class="mdi mdi-sort-variant"></i><span class="hide-menu">Tabs</span></a>
         </li>
         <li>
           <a routerLink="/admin/timepicker" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i
