@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"confirmed\" class=\"success-box\" >\r\n        <div class=\"success-body text-center\">\r\n            <h3 class=\"text-uppercase\">Success</h3>\r\n            <p class=\"text-muted m-t-30 m-b-30\">You've successfully confirmed your account! You can log in now. </p>\r\n            <a class=\"btn btn-info btn-rounded waves-effect waves-light m-b-40\" [routerLink]=\"['/']\">Go to Login</a> </div>\r\n    </div>"
+module.exports = "<div *ngIf=\"confirmed\" class=\"success-box\">\r\n        <div class=\"success-body text-center\">\r\n                <h3 class=\"text-uppercase\">Success</h3>\r\n                <p class=\"text-muted m-t-30 m-b-30\">You've successfully confirmed your account! You can log in now. </p>\r\n                <a class=\"btn btn-info btn-rounded waves-effect waves-light m-b-40\" [routerLink]=\"['/']\">Go to Login</a>\r\n        </div>\r\n</div>"
 
 /***/ }),
 
@@ -42,14 +42,30 @@ var SignupConfirmComponent = /** @class */ (function () {
         this.route = route;
         this.confirmed = false;
     }
-    SignupConfirmComponent.prototype.ngOnInit = function () {
+    SignupConfirmComponent.prototype.confirm = function (email) {
         var _this = this;
-        var email = this.route.snapshot.paramMap.get('email');
         this.userService.confirm(email)
             .subscribe(function (response) {
             _this.confirmed = true;
+            console.log('confirmed');
         }, function (error) {
             console.log(error);
+        });
+    };
+    SignupConfirmComponent.prototype.ngOnInit = function () {
+        var email = this.route.snapshot.paramMap.get('email');
+        this.confirm(email);
+    };
+    SignupConfirmComponent.prototype.ngAfterViewInit = function () {
+        $(function () {
+            $(".preloader").fadeOut();
+        });
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+        $('#to-recover').on("click", function () {
+            $("#loginform").slideUp();
+            $("#recoverform").fadeIn();
         });
     };
     SignupConfirmComponent = __decorate([

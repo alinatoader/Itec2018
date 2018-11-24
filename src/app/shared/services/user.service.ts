@@ -30,7 +30,7 @@ export class UserService implements OnInit {
     }
 
     confirm(email:string){
-        return this.http.post(this.apiUrl + '/admin/user/update/isConfirmed/email', null);
+        return this.http.post(this.apiUrl + '/admin/user/update/isConfirmed/' + email, null);
     }
 
     ngOnInit(): void {

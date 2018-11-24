@@ -200,7 +200,7 @@ var UserService = /** @class */ (function () {
         return this.http.post(this.apiUrl + '/register', user);
     };
     UserService.prototype.confirm = function (email) {
-        return this.http.post(this.apiUrl + '/admin/user/update/isConfirmed/email', null);
+        return this.http.post(this.apiUrl + '/admin/user/update/isConfirmed/' + email, null);
     };
     UserService.prototype.ngOnInit = function () {
     };
