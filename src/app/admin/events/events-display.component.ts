@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgbTabChangeEvent, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { EventsService } from "./events.service";
 import { Router } from "@angular/router";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 @Component({
     templateUrl: 'events-display.component.html',
     styles: [`
@@ -16,8 +17,10 @@ import { Router } from "@angular/router";
 })
 export class EventsDisplayComponent implements OnInit {
     events: any;
-    public linkForQR: string;
+    public linkForQR: string = null;
     closeResult: string;
+    emailForm: FormGroup;
+    quizId = 0;
 
     constructor(private eventsService: EventsService, private router: Router,
         private modalService: NgbModal, private modalService2: NgbModal) { }
@@ -57,11 +60,23 @@ export class EventsDisplayComponent implements OnInit {
 
     ngOnInit(): void {
         this.getAll();
+        this.emailForm = new FormGroup({
+            email: new FormControl('', Validators.email)
+        })
     }
 
     generateQR(quizId: number, content) {
-        this.linkForQR = 'https://quizzmee.herokuapp.com/';
+        this.linkForQR = null;
+        this.emailForm.reset();
+        this.quizId = quizId;
         this.open2(content);
+    }
+
+    onEmailChange(event) {
+        const emailInput = this.emailForm.get('email');
+        if (emailInput.valid) {
+            this.linkForQR = 'https://quizzmee.herokuapp.com/#/quiz/' + this.quizId + '/' + emailInput.value;
+        }
     }
 
     open2(content) {

@@ -967,7 +967,7 @@ var EventsCreateComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"col-12\">\r\n    <div class=\"card\">\r\n      <div class=\"card-body\">\r\n        <a routerLink=\"/admin/events/create\" class=\"btn btn-info btn-large\">Create new event</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-6\" *ngFor=\"let event of events\">\r\n    <div class=\"card\">\r\n      <div class=\"card-body\">\r\n        <h3 class=\"card-title\">\r\n          {{event.name}}\r\n          <div style=\"float:right;\">\r\n            <button type=\"button\" class=\"btn btn-info btn-sm\" (click)=\"addQuiz(event.id)\">Add quiz</button>\r\n            <button type=\"button\" class=\"btn btn-warning btn-sm\" (click)=\"editEvent(event.name)\">Edit</button>\r\n            <button type=\"button\" class=\"btn btn-danger btn-sm\" (click)=\"deleteEvent(event.name)\">Delete</button>\r\n          </div>\r\n        </h3>\r\n        <h6 class=\"card-subtitle\">{{event.description}}</h6>\r\n        <ngb-tabset>\r\n          <ngb-tab title=\"Dates\">\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Begins: {{event.startDate}}</p>\r\n              <p class=\"p-t-20\">Ends: {{event.endDate}}</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab title=\"Quizzes\">\r\n            <ng-template ngbTabContent>\r\n              <p *ngFor=\"let quiz of event.quizzes\" class=\"p-t-20\">\r\n                {{quiz.id}}\r\n                <span style=\"float:right\"><button type=\"button\" class=\"btn btn-info btn-sm\" (click)=\"generateQR(quiz.id, content)\">Generate\r\n                    QRCode</button></span>\r\n              </p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab>\r\n            <ng-template ngbTabTitle><b>Leaderboard</b></ng-template>\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Leaderboard</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab title=\"Statistics\">\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Statistics</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n        </ngb-tabset>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <ng-template #content let-c=\"close\" let-d=\"dismiss\">\r\n    <div class=\"modal-header\">\r\n      <h4 class=\"modal-title\">Scan this!</h4>\r\n      <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\r\n        <span aria-hidden=\"true\">&times;</span>\r\n      </button>\r\n    </div>\r\n    <div class=\"modal-body\" style=\"margin-left:auto; margin-right:auto\">\r\n      <qrcode [qrdata]=\"linkForQR\" [size]=\"256\" [level]=\"'M'\"></qrcode>\r\n    </div>\r\n  </ng-template>"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col-12\">\r\n    <div class=\"card\">\r\n      <div class=\"card-body\">\r\n        <a routerLink=\"/admin/events/create\" class=\"btn btn-info btn-large\">Create new event</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-6\" *ngFor=\"let event of events\">\r\n    <div class=\"card\">\r\n      <div class=\"card-body\">\r\n        <h3 class=\"card-title\">\r\n          {{event.name}}\r\n          <div style=\"float:right;\">\r\n            <button type=\"button\" class=\"btn btn-info btn-sm\" (click)=\"addQuiz(event.id)\">Add quiz</button>\r\n            <button type=\"button\" class=\"btn btn-warning btn-sm\" (click)=\"editEvent(event.name)\">Edit</button>\r\n            <button type=\"button\" class=\"btn btn-danger btn-sm\" (click)=\"deleteEvent(event.name)\">Delete</button>\r\n          </div>\r\n        </h3>\r\n        <h6 class=\"card-subtitle\">{{event.description}}</h6>\r\n        <ngb-tabset>\r\n          <ngb-tab title=\"Dates\">\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Begins: {{event.startDate}}</p>\r\n              <p class=\"p-t-20\">Ends: {{event.endDate}}</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab title=\"Quizzes\">\r\n            <ng-template ngbTabContent>\r\n              <p *ngFor=\"let quiz of event.quizzes\" class=\"p-t-20\">\r\n                {{quiz.id}}\r\n                <span style=\"float:right\"><button type=\"button\" class=\"btn btn-info btn-sm\" (click)=\"generateQR(quiz.id, content)\">Generate\r\n                    QRCode</button></span>\r\n              </p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab>\r\n            <ng-template ngbTabTitle><b>Leaderboard</b></ng-template>\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Leaderboard</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab title=\"Statistics\">\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Statistics</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n        </ngb-tabset>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <ng-template #content let-c=\"close\" let-d=\"dismiss\">\r\n    <div class=\"modal-header\">\r\n      <h4 class=\"modal-title\">Scan this!</h4>\r\n      <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\r\n        <span aria-hidden=\"true\">&times;</span>\r\n      </button>\r\n    </div>\r\n    <div class=\"modal-body\" style=\"margin-left:auto; margin-right:auto\">\r\n      <form [formGroup]=\"emailForm\">\r\n        <label class=\"control-label\">User email: </label>\r\n        <input type=\"email\" formControlName=\"email\" class=\"form-control\" (input)=\"onEmailChange($event)\">\r\n      </form>\r\n      <br />\r\n      <div *ngIf=\"linkForQR\">\r\n        <qrcode [qrdata]=\"linkForQR\" [size]=\"256\" [level]=\"'M'\"></qrcode>\r\n      </div>\r\n    </div>\r\n  </ng-template>"
 
 /***/ }),
 
@@ -985,6 +985,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
 /* harmony import */ var _events_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./events.service */ "./src/app/admin/events/events.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -998,12 +999,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var EventsDisplayComponent = /** @class */ (function () {
     function EventsDisplayComponent(eventsService, router, modalService, modalService2) {
         this.eventsService = eventsService;
         this.router = router;
         this.modalService = modalService;
         this.modalService2 = modalService2;
+        this.linkForQR = null;
+        this.quizId = 0;
     }
     EventsDisplayComponent.prototype.beforeChange = function ($event) {
         if ($event.nextId === 'tab-preventchange2') {
@@ -1035,10 +1039,21 @@ var EventsDisplayComponent = /** @class */ (function () {
     };
     EventsDisplayComponent.prototype.ngOnInit = function () {
         this.getAll();
+        this.emailForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormGroup"]({
+            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].email)
+        });
     };
     EventsDisplayComponent.prototype.generateQR = function (quizId, content) {
-        this.linkForQR = 'https://quizzmee.herokuapp.com/';
+        this.linkForQR = null;
+        this.emailForm.reset();
+        this.quizId = quizId;
         this.open2(content);
+    };
+    EventsDisplayComponent.prototype.onEmailChange = function (event) {
+        var emailInput = this.emailForm.get('email');
+        if (emailInput.valid) {
+            this.linkForQR = 'https://quizzmee.herokuapp.com/#/quiz/' + this.quizId + '/' + emailInput.value;
+        }
     };
     EventsDisplayComponent.prototype.open2 = function (content) {
         var _this = this;

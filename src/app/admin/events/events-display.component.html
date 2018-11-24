@@ -60,6 +60,13 @@
       </button>
     </div>
     <div class="modal-body" style="margin-left:auto; margin-right:auto">
-      <qrcode [qrdata]="linkForQR" [size]="256" [level]="'M'"></qrcode>
+      <form [formGroup]="emailForm">
+        <label class="control-label">User email: </label>
+        <input type="email" formControlName="email" class="form-control" (input)="onEmailChange($event)">
+      </form>
+      <br />
+      <div *ngIf="linkForQR">
+        <qrcode [qrdata]="linkForQR" [size]="256" [level]="'M'"></qrcode>
+      </div>
     </div>
   </ng-template>
