@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { SignupRoutingModule } from './signup-routing.module';
 import { SignupComponent } from './signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SignupConfirmComponent } from './signup-confirm.component';
 
 @NgModule({
   imports: [
@@ -13,6 +13,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SignupRoutingModule,
     NgbModule
   ],
-  declarations: [SignupComponent]
+  declarations: [
+    SignupComponent,
+    SignupConfirmComponent
+  ]
 })
 export class SignupModule { }

@@ -1,5 +1,66 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["signup-signup-module"],{
 
+/***/ "./src/app/signup/signup-confirm.component.html":
+/*!******************************************************!*\
+  !*** ./src/app/signup/signup-confirm.component.html ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"confirmed\" class=\"success-box\" >\r\n        <div class=\"success-body text-center\">\r\n            <h3 class=\"text-uppercase\">Success</h3>\r\n            <p class=\"text-muted m-t-30 m-b-30\">You've successfully confirmed your account! You can log in now. </p>\r\n            <a class=\"btn btn-info btn-rounded waves-effect waves-light m-b-40\" [routerLink]=\"['/']\">Go to Login</a> </div>\r\n    </div>"
+
+/***/ }),
+
+/***/ "./src/app/signup/signup-confirm.component.ts":
+/*!****************************************************!*\
+  !*** ./src/app/signup/signup-confirm.component.ts ***!
+  \****************************************************/
+/*! exports provided: SignupConfirmComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignupConfirmComponent", function() { return SignupConfirmComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _shared_services_user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/services/user.service */ "./src/app/shared/services/user.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var SignupConfirmComponent = /** @class */ (function () {
+    function SignupConfirmComponent(userService) {
+        this.userService = userService;
+        this.confirmed = false;
+    }
+    SignupConfirmComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.userService.confirm()
+            .subscribe(function (response) {
+            _this.confirmed = true;
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    SignupConfirmComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            template: __webpack_require__(/*! ./signup-confirm.component.html */ "./src/app/signup/signup-confirm.component.html")
+        }),
+        __metadata("design:paramtypes", [_shared_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"]])
+    ], SignupConfirmComponent);
+    return SignupConfirmComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/signup/signup-routing.module.ts":
 /*!*************************************************!*\
   !*** ./src/app/signup/signup-routing.module.ts ***!
@@ -13,6 +74,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _signup_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./signup.component */ "./src/app/signup/signup.component.ts");
+/* harmony import */ var _signup_confirm_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./signup-confirm.component */ "./src/app/signup/signup-confirm.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -22,8 +84,10 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var routes = [
-    { path: '', component: _signup_component__WEBPACK_IMPORTED_MODULE_2__["SignupComponent"] }
+    { path: '', component: _signup_component__WEBPACK_IMPORTED_MODULE_2__["SignupComponent"] },
+    { path: 'confirm', component: _signup_confirm_component__WEBPACK_IMPORTED_MODULE_3__["SignupConfirmComponent"] }
 ];
 var SignupRoutingModule = /** @class */ (function () {
     function SignupRoutingModule() {
@@ -114,14 +178,20 @@ var SignupComponent = /** @class */ (function () {
             this.errorMessage = 'Password doesn\'t match! Try again!';
             return;
         }
-        var registerUser = { name: user.name, email: user.email, password: user.password, image: user.image, phone: user.phone };
+        var registerUser = { name: user.name,
+            email: user.email,
+            password: user.password,
+            image: user.image,
+            phone: user.phone,
+            confirmUrl: 'https://apiitec2018tm.herokuapp.com/#/signup/confirm'
+        };
         this.userService.register(registerUser).toPromise()
             .then(function (response) {
             if (response == null) {
                 _this.errorMessage = 'This user already exists!';
             }
             else {
-                _this.userService.saveUserInLocalStorage(response);
+                localStorage.setItem('email', response.email);
                 _this.router.navigateByUrl('admin');
             }
         })
@@ -172,12 +242,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _signup_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./signup.component */ "./src/app/signup/signup.component.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+/* harmony import */ var _signup_confirm_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./signup-confirm.component */ "./src/app/signup/signup-confirm.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -195,7 +267,10 @@ var SignupModule = /** @class */ (function () {
                 _signup_routing_module__WEBPACK_IMPORTED_MODULE_2__["SignupRoutingModule"],
                 _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_5__["NgbModule"]
             ],
-            declarations: [_signup_component__WEBPACK_IMPORTED_MODULE_3__["SignupComponent"]]
+            declarations: [
+                _signup_component__WEBPACK_IMPORTED_MODULE_3__["SignupComponent"],
+                _signup_confirm_component__WEBPACK_IMPORTED_MODULE_6__["SignupConfirmComponent"]
+            ]
         })
     ], SignupModule);
     return SignupModule;
