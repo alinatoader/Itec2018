@@ -5,7 +5,7 @@ import { SignupConfirmComponent } from './signup-confirm.component';
 
 const routes: Routes = [
   { path: '', component: SignupComponent },
-  { path: 'confirm', component: SignupConfirmComponent }
+  { path: 'confirm/:email', component: SignupConfirmComponent }
 ];
 
 @NgModule({

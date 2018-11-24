@@ -29,8 +29,7 @@ export class UserService implements OnInit {
         return this.http.post(this.apiUrl + '/register', user);
     }
 
-    confirm(){
-        const email = localStorage.getItem('email');
+    confirm(email:string){
         return this.http.post(this.apiUrl + '/admin/user/update/isConfirmed/email', null);
     }
 

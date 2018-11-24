@@ -206,6 +206,11 @@ var QuestionsDisplayComponent = /** @class */ (function () {
             console.log(error);
         });
     };
+    QuestionsDisplayComponent.prototype.searchByText = function (category, text) {
+        var myquestions = this.questions[category];
+        var m = myquestions.find(function (q) { return q.text.indexOf(text) > -1; });
+        console.log(m);
+    };
     QuestionsDisplayComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             template: __webpack_require__(/*! ./questions-display.component.html */ "./src/app/admin/questions/questions-display.component.html")

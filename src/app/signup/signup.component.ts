@@ -36,15 +36,14 @@ export class SignupComponent implements OnInit, AfterViewInit {
             password: user.password, 
             image: user.image, 
             phone: user.phone,
-            confirmUrl: 'https://apiitec2018tm.herokuapp.com/#/signup/confirm'
+            confirmUrl: 'https://quizzmee.herokuapp.com/#/signup/confirm/'  + user.email
          };
         this.userService.register(registerUser).toPromise()
             .then(response => {
                 if (response == null) {
                     this.errorMessage = 'This user already exists!';
                 } else {
-                    localStorage.setItem('email', (response as any).email)
-                    this.router.navigateByUrl('admin');
+                    this.router.navigateByUrl('/');
                 }
             })
             .catch(error => {

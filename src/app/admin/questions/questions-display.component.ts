@@ -55,4 +55,10 @@ export class QuestionsDisplayComponent implements OnInit {
             }
         );
     }
+
+    searchByText(category: string, text: string) {
+        const myquestions = this.questions[category];
+        const m = myquestions.find(q => q.text.indexOf(text) > -1);
+        console.log(m);
+    }
 }

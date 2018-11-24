@@ -23,6 +23,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignupConfirmComponent", function() { return SignupConfirmComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _shared_services_user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/services/user.service */ "./src/app/shared/services/user.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34,14 +35,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var SignupConfirmComponent = /** @class */ (function () {
-    function SignupConfirmComponent(userService) {
+    function SignupConfirmComponent(userService, route) {
         this.userService = userService;
+        this.route = route;
         this.confirmed = false;
     }
     SignupConfirmComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.userService.confirm()
+        var email = this.route.snapshot.paramMap.get('email');
+        this.userService.confirm(email)
             .subscribe(function (response) {
             _this.confirmed = true;
         }, function (error) {
@@ -52,7 +56,7 @@ var SignupConfirmComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             template: __webpack_require__(/*! ./signup-confirm.component.html */ "./src/app/signup/signup-confirm.component.html")
         }),
-        __metadata("design:paramtypes", [_shared_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"]])
+        __metadata("design:paramtypes", [_shared_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
     ], SignupConfirmComponent);
     return SignupConfirmComponent;
 }());
@@ -87,7 +91,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 var routes = [
     { path: '', component: _signup_component__WEBPACK_IMPORTED_MODULE_2__["SignupComponent"] },
-    { path: 'confirm', component: _signup_confirm_component__WEBPACK_IMPORTED_MODULE_3__["SignupConfirmComponent"] }
+    { path: 'confirm/:email', component: _signup_confirm_component__WEBPACK_IMPORTED_MODULE_3__["SignupConfirmComponent"] }
 ];
 var SignupRoutingModule = /** @class */ (function () {
     function SignupRoutingModule() {
@@ -183,7 +187,7 @@ var SignupComponent = /** @class */ (function () {
             password: user.password,
             image: user.image,
             phone: user.phone,
-            confirmUrl: 'https://apiitec2018tm.herokuapp.com/#/signup/confirm'
+            confirmUrl: 'https://quizzmee.herokuapp.com/#/signup/confirm/' + user.email
         };
         this.userService.register(registerUser).toPromise()
             .then(function (response) {
@@ -191,8 +195,7 @@ var SignupComponent = /** @class */ (function () {
                 _this.errorMessage = 'This user already exists!';
             }
             else {
-                localStorage.setItem('email', response.email);
-                _this.router.navigateByUrl('admin');
+                _this.router.navigateByUrl('/');
             }
         })
             .catch(function (error) {
