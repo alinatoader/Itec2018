@@ -3,6 +3,23 @@
     <div class="card">
       <div class="card-body">
         <a routerLink="/admin/events/create" class="btn btn-info btn-large">Create new event</a>
+        <form role="search" class="app-search hidden-sm-down">
+
+            <select class="form-control" title="Status" (change)="filter($event)">
+                <option value="" disabled selected>Status</option>
+                <option>EXPIRED</option>
+                <option>IN PROGRESS</option>
+                <option>INCOMING</option>
+            </select>
+            <select class="form-control" title="Sort" (change)="sort($event)">
+                <option value="" disabled selected>Sort</option>
+                <option>ASC</option>
+                <option>DESC</option>
+            </select>
+
+            <input type="text" placeholder="Search..." class="form-control" (input)="search($event)">
+            <a href=""><i class="fa fa-search"></i></a>
+        </form>
       </div>
     </div>
   </div>

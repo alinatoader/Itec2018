@@ -100,4 +100,18 @@ export class EventsDisplayComponent implements OnInit {
             return `with: ${reason}`;
         }
     }
+
+    search(event){
+        var searchText = event.target.value;
+    }
+
+    filter(event){
+        var filterDifficulty = event.target.value;
+        console.log(filterDifficulty);
+    }
+
+    sort(event){
+        var sortDir = event.target.value;
+        console.log(sortDir);
+    }
 }
