@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EventsDisplayComponent } from './events-display.component';
 import { EventsCreateComponent } from './events-create.component';
+import { QuizCreateComponent } from './quiz-create.component';
 
 const routes: Routes = [
     {
@@ -19,6 +20,10 @@ const routes: Routes = [
     {
         path: 'create/:name',
         component: EventsCreateComponent
+    },
+    {
+        path: 'quiz/:eventId',
+        component: QuizCreateComponent
     }
 ];
 

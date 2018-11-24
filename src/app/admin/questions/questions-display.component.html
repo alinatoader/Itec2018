@@ -30,9 +30,14 @@
                                             <div><label class="control-label">Score: {{question.score}}</label></div>
                                             <div><label class="control-label">Category: {{question.category}}</label></div>
                                         </div>
-                                        <div class="col-md-6" ><img [src]="question.image" alt="question image" style="max-height:100px"/></div>
+                                        <div class="col-md-6"><img [src]="question.image" alt="question image" style="max-height:100px" /></div>
                                     </div>
-                                    Raspunsuri
+                                    <h4>Answers</h4>
+                                    <div class="row">
+                                        <div  class="col-md-6" *ngFor="let answer of question.answersList">
+                                            <div [ngClass]="answer.correct ? 'text-success' : 'text-danger'">{{answer.value}}</div>
+                                        </div>
+                                    </div>
                                 </ng-template>
                             </ngb-panel>
                         </span>

@@ -5,17 +5,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EventsCreateComponent } from './events-create.component';
+import { QuizCreateComponent } from './quiz-create.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
     imports: [
         ReactiveFormsModule,
         CommonModule,
         NgbModule.forRoot(),
-        EventsRoutingModule
+        EventsRoutingModule,
+        QRCodeModule
     ],
     declarations: [
         EventsDisplayComponent,
-        EventsCreateComponent
+        EventsCreateComponent,
+        QuizCreateComponent
     ]
 })
 export class EventsModule { }

@@ -1,0 +1,51 @@
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">
+            Create new quiz
+        </h3>
+        <form class="form-horizontal form-material" id="quizCreateForm" (submit)="saveQuiz()" [formGroup]="quizCreateForm">
+
+            <input class="form-control" type="text" placeholder="Name" formControlName="name" title="name">
+            <input class="form-control" type="number" placeholder="Time" formControlName="time" title="Time">
+            <input class="form-control" type="number" placeholder="Score" formControlName="score" title="Score">
+            <hr />
+            <fieldset formArrayName="ruleList">
+                <h4>Rules: </h4>
+                <div class="form-group row" *ngFor="let rule of quizCreateForm.get('ruleList').controls; let i=index"
+                    [formGroup]="rule">
+                    <select class="form-control" formControlName="category" title="Category">
+                        <option value="" disabled selected>Category</option>
+                        <option>SCIENCE</option>
+                        <option>FOOTBALL</option>
+                        <option>HISTORY </option>
+                        <option>MATH</option>
+                    </select>
+                    <select class="form-control" formControlName="difficulty" title="Difficulty">
+                        <option value="" disabled selected>Difficulty</option>
+                        <option>BEGINNER</option>
+                        <option>EASY</option>
+                        <option>MEDIUM</option>
+                        <option>HARD</option>
+                        <option>LEGEND</option>
+                    </select>
+                    <input class="form-control" type="number" placeholder="NoQuestions" formControlName="nrOfQuiestion"
+                        title="NoQuestions">
+                    <div class="col-sm-1 py-1">
+                        <button type="button" class="btn" (click)="quizCreateForm.get('ruleList').removeAt(i)">-</button>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group row">
+                <div class="col-sm-2 col-sm-offset-10">
+                    <div class="form-group row">
+                        <button type="button" class="btn btn-link" (click)="addNewRule()">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center m-t-20">
+                <button type="submit" [disabled]="quizCreateForm.invalid" class="btn btn-info btn-md btn-block text-uppercase waves-effect waves-light">
+                    Save</button>
+            </div>
+        </form>
+    </div>
+</div>
