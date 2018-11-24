@@ -30,7 +30,12 @@ export class QuestionsService {
     }
 
     filter(body: any) {
-        console.log(body);
         return this.http.post(this.apiUrl + 'filter', body);
+    }
+
+    upload(file: any) {
+        let data = new FormData();
+        data.append('file', file);
+        return this.http.post(this.apiUrl + 'csv', data);
     }
 }

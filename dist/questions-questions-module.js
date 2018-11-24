@@ -135,7 +135,7 @@ var QuestionsCreateComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n    <div class=\"col-12\">\r\n        <div class=\"card\">\r\n            <div class=\"card-body\">\r\n                <a routerLink=\"/admin/questions/create\" class=\"btn btn-info btn-large\">Create new question</a>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div *ngIf=\"categories\">\r\n    <div class=\"row\" *ngFor=\"let category of categories\">\r\n        <div class=\"col-12\">\r\n            <div class=\"card\">\r\n                <div class=\"card-body\">\r\n                    <h3 class=\"card-title\">{{category}} </h3>\r\n                    <form role=\"search\" class=\"app-search hidden-sm-down\">\r\n\r\n                        <select class=\"form-control\" title=\"Difficulty\" (change)=\"filter($event, category, sortSelect, searchInput)\"\r\n                            #difficultySelect>\r\n                            <option selected>NONE</option>\r\n                            <option>BEGINNER</option>\r\n                            <option>EASY</option>\r\n                            <option>MEDIUM</option>\r\n                            <option>HARD</option>\r\n                            <option>LEGEND</option>\r\n                        </select>\r\n                        <select class=\"form-control\" title=\"Sort\" (change)=\"sort($event, category, difficultySelect, searchInput)\"\r\n                            #sortSelect>\r\n                            <option value=\"\" disabled selected>Sort</option>\r\n                            <option>ASC</option>\r\n                            <option>DESC</option>\r\n                        </select>\r\n\r\n                        <input type=\"text\" placeholder=\"Search...\" class=\"form-control\" (input)=\"search($event, category, difficultySelect, sortSelect)\"\r\n                            #searchInput>\r\n                        <a href=\"\"><i class=\"fa fa-search\"></i></a>\r\n                    </form>\r\n                    <ngb-accordion #acc=\"ngbAccordion\">\r\n                        <span *ngFor=\"let question of questions[category]\">\r\n                            <ngb-panel [id]=\"question.text\" [title]=\"question.text\">\r\n                                <ng-template ngbPanelContent>\r\n                                    <button type=\"button\" style=\"margin-right:5px;\" class=\"btn btn-warning btn-sm\"\r\n                                        (click)=\"editQuestion(question.id)\">Edit</button>\r\n                                    <button type=\"button\" class=\"btn btn-danger btn-sm\" (click)=\"deleteQuestion(question.id)\">Delete</button>\r\n                                    <div class=\"row\">\r\n                                        <div class=\"col-md-6\">\r\n                                            <div><label class=\"control-label\">Time: {{question.time}}</label></div>\r\n                                            <div><label class=\"control-label\">Difficulty: {{question.difficulty}}</label></div>\r\n                                            <div><label class=\"control-label\">Score: {{question.score}}</label></div>\r\n                                            <div><label class=\"control-label\">Category: {{question.category}}</label></div>\r\n                                        </div>\r\n                                        <div class=\"col-md-6\"><img [src]=\"question.image\" alt=\"question image\" style=\"max-height:100px\" /></div>\r\n                                    </div>\r\n                                    <h4>Answers</h4>\r\n                                    <div class=\"row\">\r\n                                        <div class=\"col-md-6\" *ngFor=\"let answer of question.answersList\">\r\n                                            <div [ngClass]=\"answer.correct ? 'text-success' : 'text-danger'\">{{answer.value}}</div>\r\n                                        </div>\r\n                                    </div>\r\n                                </ng-template>\r\n                            </ngb-panel>\r\n                        </span>\r\n                    </ngb-accordion>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"row\">\r\n    <div class=\"col-12\">\r\n        <div class=\"card\">\r\n            <div class=\"card-body\">\r\n                <a routerLink=\"/admin/questions/create\" style=\"margin-right:5px;\" class=\"btn btn-info btn-large\">Create\r\n                    new question</a>\r\n                <button (click)=\"importQuestions(content)\" class=\"btn btn-info btn-large\">Import questions</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div *ngIf=\"categories\">\r\n    <div class=\"row\" *ngFor=\"let category of categories\">\r\n        <div class=\"col-12\">\r\n            <div class=\"card\">\r\n                <div class=\"card-body\">\r\n                    <h3 class=\"card-title\">{{category}} </h3>\r\n                    <form role=\"search\" class=\"app-search hidden-sm-down\">\r\n\r\n                        <select class=\"form-control\" title=\"Difficulty\" (change)=\"filter($event, category, sortSelect, searchInput)\"\r\n                            #difficultySelect>\r\n                            <option selected>NONE</option>\r\n                            <option>BEGINNER</option>\r\n                            <option>EASY</option>\r\n                            <option>MEDIUM</option>\r\n                            <option>HARD</option>\r\n                            <option>LEGEND</option>\r\n                        </select>\r\n                        <select class=\"form-control\" title=\"Sort\" (change)=\"sort($event, category, difficultySelect, searchInput)\"\r\n                            #sortSelect>\r\n                            <option value=\"\" disabled selected>Sort</option>\r\n                            <option>ASC</option>\r\n                            <option>DESC</option>\r\n                        </select>\r\n\r\n                        <input type=\"text\" placeholder=\"Search...\" class=\"form-control\" (input)=\"search($event, category, difficultySelect, sortSelect)\"\r\n                            #searchInput>\r\n                        <a href=\"\"><i class=\"fa fa-search\"></i></a>\r\n                    </form>\r\n                    <ngb-accordion #acc=\"ngbAccordion\">\r\n                        <span *ngFor=\"let question of questions[category]\">\r\n                            <ngb-panel [id]=\"question.text\" [title]=\"question.text\">\r\n                                <ng-template ngbPanelContent>\r\n                                    <button type=\"button\" style=\"margin-right:5px;\" class=\"btn btn-warning btn-sm\"\r\n                                        (click)=\"editQuestion(question.id)\">Edit</button>\r\n                                    <button type=\"button\" class=\"btn btn-danger btn-sm\" (click)=\"deleteQuestion(question.id)\">Delete</button>\r\n                                    <div class=\"row\">\r\n                                        <div class=\"col-md-6\">\r\n                                            <div><label class=\"control-label\">Time: {{question.time}}</label></div>\r\n                                            <div><label class=\"control-label\">Difficulty: {{question.difficulty}}</label></div>\r\n                                            <div><label class=\"control-label\">Score: {{question.score}}</label></div>\r\n                                            <div><label class=\"control-label\">Category: {{question.category}}</label></div>\r\n                                        </div>\r\n                                        <div class=\"col-md-6\"><img [src]=\"question.image\" alt=\"question image\" style=\"max-height:100px\" /></div>\r\n                                    </div>\r\n                                    <h4>Answers</h4>\r\n                                    <div class=\"row\">\r\n                                        <div class=\"col-md-6\" *ngFor=\"let answer of question.answersList\">\r\n                                            <div [ngClass]=\"answer.correct ? 'text-success' : 'text-danger'\">{{answer.value}}</div>\r\n                                        </div>\r\n                                    </div>\r\n                                </ng-template>\r\n                            </ngb-panel>\r\n                        </span>\r\n                    </ngb-accordion>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<ng-template #content let-c=\"close\" let-d=\"dismiss\">\r\n    <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Upload csv file</h4>\r\n        <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\r\n            <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n    </div>\r\n    <div class=\"modal-body\" style=\"margin-left:auto; margin-right:auto\">\r\n        <form [formGroup]=\"uploadForm\"  enctype=\"multipart/form-data\">\r\n            <input type=\"file\" formControlName=\"file\" class=\"form-control\" (input)=\"uploadFile($event)\">\r\n        </form>\r\n        <br />\r\n    </div>\r\n</ng-template>"
 
 /***/ }),
 
@@ -150,8 +150,10 @@ module.exports = "<div class=\"row\">\r\n    <div class=\"col-12\">\r\n        <
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QuestionsDisplayComponent", function() { return QuestionsDisplayComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _questions_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./questions.service */ "./src/app/admin/questions/questions.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+/* harmony import */ var _questions_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./questions.service */ "./src/app/admin/questions/questions.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -164,10 +166,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var QuestionsDisplayComponent = /** @class */ (function () {
-    function QuestionsDisplayComponent(questionsService, router) {
+    function QuestionsDisplayComponent(questionsService, router, modalService, modalService2) {
         this.questionsService = questionsService;
         this.router = router;
+        this.modalService = modalService;
+        this.modalService2 = modalService2;
     }
     QuestionsDisplayComponent.prototype.beforeChange = function ($event) {
         if ($event.panelId === 'preventchange-2') {
@@ -194,6 +200,9 @@ var QuestionsDisplayComponent = /** @class */ (function () {
     };
     QuestionsDisplayComponent.prototype.ngOnInit = function () {
         this.getAll();
+        this.uploadForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormGroup"]({
+            file: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControl"]()
+        });
     };
     QuestionsDisplayComponent.prototype.editQuestion = function (id) {
         this.router.navigateByUrl('/admin/questions/create/' + id);
@@ -248,11 +257,45 @@ var QuestionsDisplayComponent = /** @class */ (function () {
             _this.questions[category] = response;
         }, function (error) { return console.log(error); });
     };
+    QuestionsDisplayComponent.prototype.open2 = function (content) {
+        var _this = this;
+        this.modalService.open(content).result.then(function (result) {
+            _this.closeResult = "Closed with: " + result;
+        }, function (reason) {
+            _this.closeResult = "Dismissed " + _this.getDismissReason(reason);
+        });
+    };
+    QuestionsDisplayComponent.prototype.open = function (content) {
+        this.modalService2.open(content, { windowClass: 'dark-modal' });
+    };
+    QuestionsDisplayComponent.prototype.getDismissReason = function (reason) {
+        if (reason === _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["ModalDismissReasons"].ESC) {
+            return 'by pressing ESC';
+        }
+        else if (reason === _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["ModalDismissReasons"].BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        }
+        else {
+            return "with: " + reason;
+        }
+    };
+    QuestionsDisplayComponent.prototype.importQuestions = function (content) {
+        this.open2(content);
+    };
+    QuestionsDisplayComponent.prototype.uploadFile = function (event) {
+        this.questionsService.upload(this.uploadForm.value.file)
+            .subscribe(function (_) {
+            // this.router.navigateByUrl('/admin/questions');
+        }, function (error) {
+            console.log(error);
+        });
+    };
     QuestionsDisplayComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             template: __webpack_require__(/*! ./questions-display.component.html */ "./src/app/admin/questions/questions-display.component.html")
         }),
-        __metadata("design:paramtypes", [_questions_service__WEBPACK_IMPORTED_MODULE_1__["QuestionsService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+        __metadata("design:paramtypes", [_questions_service__WEBPACK_IMPORTED_MODULE_2__["QuestionsService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
+            _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["NgbModal"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["NgbModal"]])
     ], QuestionsDisplayComponent);
     return QuestionsDisplayComponent;
 }());
@@ -430,8 +473,12 @@ var QuestionsService = /** @class */ (function () {
         return this.http.put(this.apiUrl + id, question);
     };
     QuestionsService.prototype.filter = function (body) {
-        console.log(body);
         return this.http.post(this.apiUrl + 'filter', body);
+    };
+    QuestionsService.prototype.upload = function (file) {
+        var data = new FormData();
+        data.append('file', file);
+        return this.http.post(this.apiUrl + 'csv', data);
     };
     QuestionsService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({

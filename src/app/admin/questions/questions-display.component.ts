@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { NgbPanelChangeEvent } from "@ng-bootstrap/ng-bootstrap";
+import { NgbPanelChangeEvent, NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { QuestionsService } from "./questions.service";
 import { Router } from "@angular/router";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 @Component({
     templateUrl: 'questions-display.component.html'
@@ -9,8 +10,11 @@ import { Router } from "@angular/router";
 export class QuestionsDisplayComponent implements OnInit {
     private questions: any;
     private categories: any;
+    closeResult: string;
+    uploadForm: FormGroup;
 
-    constructor(private questionsService: QuestionsService, private router: Router) { }
+    constructor(private questionsService: QuestionsService, private router: Router,
+        private modalService: NgbModal, private modalService2: NgbModal) { }
 
     beforeChange($event: NgbPanelChangeEvent) {
 
@@ -40,6 +44,9 @@ export class QuestionsDisplayComponent implements OnInit {
 
     ngOnInit(): void {
         this.getAll();
+        this.uploadForm = new FormGroup({
+            file: new FormControl()
+        });
     }
 
     editQuestion(id: number) {
@@ -96,5 +103,40 @@ export class QuestionsDisplayComponent implements OnInit {
             .subscribe(response => {
                 this.questions[category] = response;
             }, error => console.log(error));
+    }
+
+    open2(content) {
+        this.modalService.open(content).result.then((result) => {
+            this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+    }
+
+    open(content) {
+        this.modalService2.open(content, { windowClass: 'dark-modal' });
+    }
+
+    private getDismissReason(reason: any): string {
+        if (reason === ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        } else {
+            return `with: ${reason}`;
+        }
+    }
+
+    importQuestions(content: any) {
+        this.open2(content);
+    }
+
+    uploadFile(event:any) {
+        this.questionsService.upload(this.uploadForm.value.file)
+            .subscribe(_ => {
+               // this.router.navigateByUrl('/admin/questions');
+            }, error => {
+                console.log(error)
+            });
     }
 }
