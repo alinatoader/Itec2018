@@ -4,6 +4,7 @@ import { QuestionsDisplayComponent } from './questions-display.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { QuestionsCreateComponent } from './questions-create.component';
 
 const routes: Routes = [
     {
@@ -14,6 +15,14 @@ const routes: Routes = [
         },
         component: QuestionsDisplayComponent,
     },
+    {
+        path: 'create',
+        component: QuestionsCreateComponent
+    },
+    {
+        path: 'create/:id',
+        component: QuestionsCreateComponent
+    }
 ];
 
 @NgModule({

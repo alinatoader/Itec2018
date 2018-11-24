@@ -18,7 +18,7 @@
               <button type="button" class="btn btn-danger btn-sm" (click)="deleteEvent(event.name)">Delete</button>
           </div>
         </h3>
-        <h6 class="card-subtitle">Description</h6>
+        <h6 class="card-subtitle">{{event.description}}</h6>
         <ngb-tabset>
           <ngb-tab title="Dates">
             <ng-template ngbTabContent>

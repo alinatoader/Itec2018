@@ -49,7 +49,8 @@ var EventsCreateComponent = /** @class */ (function () {
             name: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
             description: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
             startDate: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
-            endDate: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('')
+            endDate: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
+            quizzes: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('')
         });
         this.name = this.route.snapshot.paramMap.get('name');
         if (this.name) {
@@ -76,9 +77,9 @@ var EventsCreateComponent = /** @class */ (function () {
     };
     EventsCreateComponent.prototype.updateEvent = function () {
         var _this = this;
-        var formValue = this.eventCreateForm.value;
-        var event = { name: formValue.name, description: formValue.description, startDate: formValue.startDate, endDate: formValue.endDate };
-        this.eventsService.update(this.name, event)
+        //const formValue = this.eventCreateForm.value;
+        //const event = { name: formValue.name, description: formValue.description, startDate: formValue.startDate, endDate: formValue.endDate };
+        this.eventsService.update(this.name, this.eventCreateForm.value)
             .subscribe(function (response) {
             console.log(response);
             _this.router.navigateByUrl('/admin/events');
@@ -89,6 +90,7 @@ var EventsCreateComponent = /** @class */ (function () {
     EventsCreateComponent.prototype.getEventByName = function (name) {
         var _this = this;
         this.eventsService.getByName(name).subscribe(function (response) {
+            console.log(response);
             _this.eventCreateForm.setValue(response);
         }, function (error) { return console.log(error); });
     };
@@ -114,7 +116,7 @@ var EventsCreateComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"col-12\">\r\n    <div class=\"card\">\r\n      <div class=\"card-body\">\r\n        <a routerLink=\"/admin/events/create\" class=\"btn btn-info btn-large\">Create new event</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-6\" *ngFor=\"let event of events\">\r\n    <div class=\"card\">\r\n      <div class=\"card-body\">\r\n        <h3 class=\"card-title\">\r\n          {{event.name}}\r\n          <div style=\"float:right;\">\r\n              <button type=\"button\" class=\"btn btn-warning btn-sm\" (click)=\"editEvent(event.name)\">Edit</button>\r\n              <button type=\"button\" class=\"btn btn-danger btn-sm\" (click)=\"deleteEvent(event.name)\">Delete</button>\r\n          </div>\r\n        </h3>\r\n        <h6 class=\"card-subtitle\">Description</h6>\r\n        <ngb-tabset>\r\n          <ngb-tab title=\"Dates\">\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Begins: {{event.startDate}}</p>\r\n              <p class=\"p-t-20\">Ends: {{event.endDate}}</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab>\r\n            <ng-template ngbTabTitle><b>Leaderboard</b></ng-template>\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Leaderboard</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab title=\"Statistics\">\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Statistics</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n        </ngb-tabset>\r\n      </div>\r\n    </div>\r\n  </div>"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col-12\">\r\n    <div class=\"card\">\r\n      <div class=\"card-body\">\r\n        <a routerLink=\"/admin/events/create\" class=\"btn btn-info btn-large\">Create new event</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-6\" *ngFor=\"let event of events\">\r\n    <div class=\"card\">\r\n      <div class=\"card-body\">\r\n        <h3 class=\"card-title\">\r\n          {{event.name}}\r\n          <div style=\"float:right;\">\r\n              <button type=\"button\" class=\"btn btn-warning btn-sm\" (click)=\"editEvent(event.name)\">Edit</button>\r\n              <button type=\"button\" class=\"btn btn-danger btn-sm\" (click)=\"deleteEvent(event.name)\">Delete</button>\r\n          </div>\r\n        </h3>\r\n        <h6 class=\"card-subtitle\">{{event.description}}</h6>\r\n        <ngb-tabset>\r\n          <ngb-tab title=\"Dates\">\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Begins: {{event.startDate}}</p>\r\n              <p class=\"p-t-20\">Ends: {{event.endDate}}</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab>\r\n            <ng-template ngbTabTitle><b>Leaderboard</b></ng-template>\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Leaderboard</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab title=\"Statistics\">\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Statistics</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n        </ngb-tabset>\r\n      </div>\r\n    </div>\r\n  </div>"
 
 /***/ }),
 

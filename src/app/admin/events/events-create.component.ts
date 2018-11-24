@@ -20,7 +20,8 @@ export class EventsCreateComponent implements OnInit {
             name: new FormControl(''),
             description: new FormControl(''),
             startDate: new FormControl(''),
-            endDate: new FormControl('')
+            endDate: new FormControl(''),
+            quizzes: new FormControl('')
         });
         this.name = this.route.snapshot.paramMap.get('name');
         if (this.name) {
@@ -48,9 +49,9 @@ export class EventsCreateComponent implements OnInit {
     }
 
     updateEvent() {
-        const formValue = this.eventCreateForm.value;
-        const event = { name: formValue.name, description: formValue.description, startDate: formValue.startDate, endDate: formValue.endDate };
-        this.eventsService.update(this.name, event)
+        //const formValue = this.eventCreateForm.value;
+        //const event = { name: formValue.name, description: formValue.description, startDate: formValue.startDate, endDate: formValue.endDate };
+        this.eventsService.update(this.name, this.eventCreateForm.value)
             .subscribe(response => {
                 console.log(response);
                 this.router.navigateByUrl('/admin/events');
@@ -63,6 +64,7 @@ export class EventsCreateComponent implements OnInit {
     getEventByName(name: string) {
         this.eventsService.getByName(name).subscribe(
             response => {
+                console.log(response);
                 this.eventCreateForm.setValue(response);
             }, error => console.log(error)
         );

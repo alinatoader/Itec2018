@@ -2,22 +2,46 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">Questions</h3>
-                <h6 class="card-subtitle">Category groups</h6>
-                <form role="search" class="app-search hidden-sm-down">
-                    <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a>
-                </form>
-                <ngb-accordion #acc="ngbAccordion">
-                    <span *ngFor="let category of categories">
-                        <ngb-panel [id]="category" [title]="category">
-                            <ng-template ngbPanelContent>{{category}}</ng-template>
-                        </ngb-panel>
-                    </span>
-                </ngb-accordion>
-                <p>
+                <a routerLink="/admin/questions/create" class="btn btn-info btn-large">Create new question</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="categories">
+    <div class="row" *ngFor="let category of categories">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">{{category}} </h3>
+                    <form role="search" class="app-search hidden-sm-down">
+                        <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a>
+                    </form>
+                    <ngb-accordion #acc="ngbAccordion">
+                        <span *ngFor="let question of questions[category]">
+                            <ngb-panel [id]="question.text" [title]="question.text">
+                                <ng-template ngbPanelContent>
+                                    <button type="button" style="margin-right:5px;" class="btn btn-warning btn-sm"
+                                        (click)="editQuestion(question.id)">Edit</button>
+                                    <button type="button" class="btn btn-danger btn-sm" (click)="deleteQuestion(question.id)">Delete</button>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div><label class="control-label">Time: {{question.time}}</label></div>
+                                            <div><label class="control-label">Difficulty: {{question.difficulty}}</label></div>
+                                            <div><label class="control-label">Score: {{question.score}}</label></div>
+                                            <div><label class="control-label">Category: {{question.category}}</label></div>
+                                        </div>
+                                        <div class="col-md-6" ><img [src]="question.image" alt="question image" style="max-height:100px"/></div>
+                                    </div>
+                                    Raspunsuri
+                                </ng-template>
+                            </ngb-panel>
+                        </span>
+                    </ngb-accordion>
+                    <!-- <p>
                     <button class="btn btn-sm btn-outline-primary" (click)="acc.toggle('toggle-1')">Toggle first</button>
                     <button class="btn btn-sm btn-outline-primary" (click)="acc.toggle('toggle-2')">Toggle second</button>
-                </p>
+                </p> -->
+                </div>
             </div>
         </div>
     </div>
