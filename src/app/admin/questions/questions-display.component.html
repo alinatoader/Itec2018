@@ -15,21 +15,24 @@
                     <h3 class="card-title">{{category}} </h3>
                     <form role="search" class="app-search hidden-sm-down">
 
-                        <select class="form-control" title="Difficulty" (change)="filter($event, category)">
-                            <option value="" disabled selected>Difficulty</option>
+                        <select class="form-control" title="Difficulty" (change)="filter($event, category, sortSelect, searchInput)"
+                            #difficultySelect>
+                            <option selected>NONE</option>
                             <option>BEGINNER</option>
                             <option>EASY</option>
                             <option>MEDIUM</option>
                             <option>HARD</option>
                             <option>LEGEND</option>
                         </select>
-                        <select class="form-control" title="Sort" (change)="sort($event, category)">
+                        <select class="form-control" title="Sort" (change)="sort($event, category, difficultySelect, searchInput)"
+                            #sortSelect>
                             <option value="" disabled selected>Sort</option>
                             <option>ASC</option>
                             <option>DESC</option>
                         </select>
 
-                        <input type="text" placeholder="Search..." class="form-control" (input)="search($event, category)">
+                        <input type="text" placeholder="Search..." class="form-control" (input)="search($event, category, difficultySelect, sortSelect)"
+                            #searchInput>
                         <a href=""><i class="fa fa-search"></i></a>
                     </form>
                     <ngb-accordion #acc="ngbAccordion">

@@ -29,8 +29,16 @@ export class UserService implements OnInit {
         return this.http.post(this.apiUrl + '/register', user);
     }
 
-    confirm(email:string){
+    confirm(email: string) {
         return this.http.post(this.apiUrl + '/admin/user/update/isConfirmed/' + email, null);
+    }
+
+    getAll() {
+        return this.http.get(this.apiUrl + '/admin/user');
+    }
+
+    modifyAdminRole(email:string){
+        return this.http.post(this.apiUrl + '/admin/user/update/isAdmin/' + email, null);
     }
 
     ngOnInit(): void {

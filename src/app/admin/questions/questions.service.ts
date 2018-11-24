@@ -28,4 +28,9 @@ export class QuestionsService {
     update(id: number, question: any) {
         return this.http.put(this.apiUrl + id, question);
     }
+
+    filter(body: any) {
+        console.log(body);
+        return this.http.post(this.apiUrl + 'filter', body);
+    }
 }

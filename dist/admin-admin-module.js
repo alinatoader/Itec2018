@@ -107,6 +107,78 @@ function mergeMap(project, concurrent) {
 
 /***/ }),
 
+/***/ "./src/app/admin/admin-add/admin-add.component.html":
+/*!**********************************************************!*\
+  !*** ./src/app/admin/admin-add/admin-add.component.html ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\r\n    <div class=\"col-md-6\" *ngFor=\"let user of users\">\r\n        <div class=\"card\">\r\n            <div class=\"card-body\">\r\n                <h3 class=\"card-title\">{{user.name}}\r\n                    <div style=\"float:right;\">\r\n                        <button  *ngIf=\"!user.admin\" type=\"button\" class=\"btn btn-info btn-sm\" (click)=\"modifyAdminRole(user.email)\">Add admin role</button>\r\n                        <button  *ngIf=\"user.admin\" type=\"button\" class=\"btn btn-danger btn-sm\" (click)=\"modifyAdminRole(user.email)\">Remove admin role</button>\r\n                    </div>\r\n                </h3>\r\n                <h6 class=\"card-subtitle\">{{user.email}} - {{user.phone}} </h6>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/admin/admin-add/admin-add.component.ts":
+/*!********************************************************!*\
+  !*** ./src/app/admin/admin-add/admin-add.component.ts ***!
+  \********************************************************/
+/*! exports provided: AdminAddComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdminAddComponent", function() { return AdminAddComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _shared_services_user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../shared/services/user.service */ "./src/app/shared/services/user.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var AdminAddComponent = /** @class */ (function () {
+    function AdminAddComponent(userService) {
+        this.userService = userService;
+    }
+    AdminAddComponent.prototype.getAll = function () {
+        var _this = this;
+        this.userService.getAll()
+            .subscribe(function (users) {
+            _this.users = users;
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    AdminAddComponent.prototype.modifyAdminRole = function (email) {
+        var _this = this;
+        this.userService.modifyAdminRole(email)
+            .subscribe(function (_) {
+            _this.getAll();
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    AdminAddComponent.prototype.ngOnInit = function () {
+        this.getAll();
+    };
+    AdminAddComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            template: __webpack_require__(/*! ./admin-add.component.html */ "./src/app/admin/admin-add/admin-add.component.html")
+        }),
+        __metadata("design:paramtypes", [_shared_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"]])
+    ], AdminAddComponent);
+    return AdminAddComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/admin/admin-routing.module.ts":
 /*!***********************************************!*\
   !*** ./src/app/admin/admin-routing.module.ts ***!
@@ -120,6 +192,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _admin_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin.component */ "./src/app/admin/admin.component.ts");
+/* harmony import */ var _admin_add_admin_add_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./admin-add/admin-add.component */ "./src/app/admin/admin-add/admin-add.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -129,12 +202,14 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var routes = [
     {
         path: '', component: _admin_component__WEBPACK_IMPORTED_MODULE_2__["AdminComponent"],
         children: [
             { path: 'questions', loadChildren: './questions/questions.module#QuestionsModule' },
             { path: 'events', loadChildren: './events/events.module#EventsModule' },
+            { path: 'add', component: _admin_add_admin_add_component__WEBPACK_IMPORTED_MODULE_3__["AdminAddComponent"] },
             { path: 'starter', loadChildren: './starter/starter.module#StarterModule' },
             { path: 'accordion', loadChildren: './component/accordion/accordion.module#AccordionModule' },
             { path: 'alert', loadChildren: './component/alert/alert.module#NgAlertModule' },
@@ -255,12 +330,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_header_navigation_navigation_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/header-navigation/navigation.component */ "./src/app/shared/header-navigation/navigation.component.ts");
 /* harmony import */ var _shared_sidebar_sidebar_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/sidebar/sidebar.component */ "./src/app/shared/sidebar/sidebar.component.ts");
 /* harmony import */ var _shared_breadcrumb_breadcrumb_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../shared/breadcrumb/breadcrumb.component */ "./src/app/shared/breadcrumb/breadcrumb.component.ts");
+/* harmony import */ var _admin_add_admin_add_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./admin-add/admin-add.component */ "./src/app/admin/admin-add/admin-add.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -283,7 +360,8 @@ var AdminModule = /** @class */ (function () {
                 _shared_header_navigation_navigation_component__WEBPACK_IMPORTED_MODULE_5__["NavigationComponent"],
                 _shared_sidebar_sidebar_component__WEBPACK_IMPORTED_MODULE_6__["SidebarComponent"],
                 _shared_breadcrumb_breadcrumb_component__WEBPACK_IMPORTED_MODULE_7__["BreadcrumbComponent"],
-                _shared_sidebar_directive__WEBPACK_IMPORTED_MODULE_4__["SIDEBAR_TOGGLE_DIRECTIVES"]
+                _shared_sidebar_directive__WEBPACK_IMPORTED_MODULE_4__["SIDEBAR_TOGGLE_DIRECTIVES"],
+                _admin_add_admin_add_component__WEBPACK_IMPORTED_MODULE_8__["AdminAddComponent"]
             ]
         })
     ], AdminModule);
@@ -592,7 +670,7 @@ var SIDEBAR_TOGGLE_DIRECTIVES = [
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- ============================================================== -->\r\n<!-- Left Sidebar - style you can find in sidebar.scss  -->\r\n<!-- ============================================================== -->\r\n<aside class=\"left-sidebar\">\r\n  <!-- Sidebar scroll-->\r\n  <div class=\"scroll-sidebar\">\r\n    <!-- User profile -->\r\n    <div class=\"user-profile\">\r\n      <!-- User profile image -->\r\n      <div class=\"profile-img\"> <img [src]=\"user.image\" alt=\"user\" />\r\n        <!-- this is blinking heartbit-->\r\n        <div class=\"notify setpos\"> <span class=\"heartbit\"></span> <span class=\"point\"></span> </div>\r\n      </div>\r\n      <!-- User profile text-->\r\n      <div class=\"profile-text\">\r\n        <a href=\"#\" class=\"dropdown-toggle u-dropdown\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"true\">\r\n          {{user.name}} <i class=\"fa fa-angle-down\"></i></a>\r\n        <div class=\"dropdown-menu animated flipInY\">\r\n          <!-- text-->\r\n          <a href=\"#\" class=\"dropdown-item\"><i class=\"ti-user\"></i> My Profile</a>\r\n          <!-- text-->\r\n          <a href=\"#\" class=\"dropdown-item\"><i class=\"ti-wallet\"></i> My Balance</a>\r\n          <!-- text-->\r\n          <a href=\"#\" class=\"dropdown-item\"><i class=\"ti-email\"></i> Inbox</a>\r\n          <!-- text-->\r\n          <div class=\"dropdown-divider\"></div>\r\n          <!-- text-->\r\n          <a href=\"#\" class=\"dropdown-item\"><i class=\"ti-settings\"></i> Account Setting</a>\r\n          <!-- text-->\r\n          <div class=\"dropdown-divider\"></div>\r\n          <!-- text-->\r\n          <button type=\"button\" (click)=\"onLogout()\" class=\"dropdown-item\"><i class=\"fa fa-power-off\"></i> Logout</button>\r\n          <!-- text-->\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <!-- End User profile text-->\r\n    <!-- Sidebar navigation-->\r\n    <nav class=\"sidebar-nav\">\r\n      <ul id=\"sidebarnav\">\r\n        <li class=\"nav-devider\"></li>\r\n        <li class=\"nav-small-cap\">PERSONAL</li>\r\n        <li [class.active]=\"showMenu === 'start'\">\r\n          <a routerLink=\"/admin/starter\" (click)=\"addExpandClass('start')\" [routerLinkActive]=\"['router-link-active']\"><i class=\"icon-speedometer\"></i><span\r\n              class=\"hide-menu\">Starter Page</span></a>\r\n        </li>\r\n        <li class=\"nav-small-cap\">DASHBOARD</li>\r\n        <li>\r\n          <a routerLink=\"/admin/questions\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n            class=\"mdi mdi-message-bulleted\"></i><span class=\"hide-menu\">Questions</span></a>\r\n        </li>\r\n        <li>\r\n            <a routerLink=\"/admin/events\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n              class=\"mdi mdi-calendar-clock\"></i><span class=\"hide-menu\">Events</span></a>\r\n          </li>\r\n        <li class=\"nav-small-cap\">UI COMPONENTS</li>\r\n        <li>\r\n          <a routerLink=\"/admin/accordion\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n              class=\"mdi mdi-equal\"></i><span class=\"hide-menu\">Accordion</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/alert\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i class=\"mdi mdi-message-bulleted\"></i><span\r\n              class=\"hide-menu\">Alert</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/carousel\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n              class=\"mdi mdi-view-carousel\"></i><span class=\"hide-menu\">Carousel</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/datepicker\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n              class=\"mdi mdi-calendar-clock\"></i><span class=\"hide-menu\">Datepicker</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/dropdown\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n              class=\"mdi mdi-arrange-bring-to-front\"></i><span class=\"hide-menu\">Dropdown - Collapse</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/modal\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i class=\"mdi mdi-tablet\"></i><span\r\n              class=\"hide-menu\">Modal</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/pagination\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n              class=\"mdi mdi-backburger\"></i><span class=\"hide-menu\">Pagination</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/poptool\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i class=\"mdi mdi-image-filter-vintage\"></i><span\r\n              class=\"hide-menu\">Popover & Tooltip</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/progressbar\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n              class=\"mdi mdi-poll\"></i><span class=\"hide-menu\">Progressbar</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/rating\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i class=\"mdi mdi-bandcamp\"></i><span\r\n              class=\"hide-menu\">Ratings</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/tabs\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i class=\"mdi mdi-sort-variant\"></i><span\r\n              class=\"hide-menu\">Tabs</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/timepicker\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n              class=\"mdi mdi-calendar-clock\"></i><span class=\"hide-menu\">Timepicker</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/typehead\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n              class=\"mdi mdi-blur-radial\"></i><span class=\"hide-menu\">Typehead</span></a>\r\n        </li>\r\n\r\n      </ul>\r\n    </nav>\r\n    <!-- End Sidebar navigation -->\r\n  </div>\r\n  <!-- End Sidebar scroll-->\r\n</aside>\r\n<!-- ============================================================== -->\r\n<!-- End Left Sidebar - style you can find in sidebar.scss  -->\r\n<!-- ============================================================== -->"
+module.exports = "<!-- ============================================================== -->\r\n<!-- Left Sidebar - style you can find in sidebar.scss  -->\r\n<!-- ============================================================== -->\r\n<aside class=\"left-sidebar\">\r\n  <!-- Sidebar scroll-->\r\n  <div class=\"scroll-sidebar\">\r\n    <!-- User profile -->\r\n    <div class=\"user-profile\">\r\n      <!-- User profile image -->\r\n      <div class=\"profile-img\"> <img [src]=\"user.image\" alt=\"user\" />\r\n        <!-- this is blinking heartbit-->\r\n        <div class=\"notify setpos\"> <span class=\"heartbit\"></span> <span class=\"point\"></span> </div>\r\n      </div>\r\n      <!-- User profile text-->\r\n      <div class=\"profile-text\">\r\n        <a href=\"#\" class=\"dropdown-toggle u-dropdown\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"true\">\r\n          {{user.name}} <i class=\"fa fa-angle-down\"></i></a>\r\n        <div class=\"dropdown-menu animated flipInY\">\r\n          <!-- text-->\r\n          <a href=\"#\" class=\"dropdown-item\"><i class=\"ti-user\"></i> My Profile</a>\r\n          <!-- text-->\r\n          <!-- <a href=\"#\" class=\"dropdown-item\"><i class=\"ti-wallet\"></i> My Balance</a> -->\r\n          <!-- text-->\r\n          <a href=\"#\" class=\"dropdown-item\"><i class=\"ti-email\"></i> Inbox</a>\r\n          <!-- text-->\r\n          <div class=\"dropdown-divider\"></div>\r\n          <!-- text-->\r\n          <a [routerLink]=\"['/admin/add']\" class=\"dropdown-item\"><i class=\"ti-settings\"></i> Admin Settings</a>\r\n          <!-- text-->\r\n          <div class=\"dropdown-divider\"></div>\r\n          <!-- text-->\r\n          <button type=\"button\" (click)=\"onLogout()\" class=\"dropdown-item\"><i class=\"fa fa-power-off\"></i> Logout</button>\r\n          <!-- text-->\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <!-- End User profile text-->\r\n    <!-- Sidebar navigation-->\r\n    <nav class=\"sidebar-nav\">\r\n      <ul id=\"sidebarnav\">\r\n        <li class=\"nav-devider\"></li>\r\n        <li class=\"nav-small-cap\">PERSONAL</li>\r\n        <li [class.active]=\"showMenu === 'start'\">\r\n          <a routerLink=\"/admin/starter\" (click)=\"addExpandClass('start')\" [routerLinkActive]=\"['router-link-active']\"><i class=\"icon-speedometer\"></i><span\r\n              class=\"hide-menu\">Starter Page</span></a>\r\n        </li>\r\n        <li class=\"nav-small-cap\">DASHBOARD</li>\r\n        <li>\r\n          <a routerLink=\"/admin/questions\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n            class=\"mdi mdi-message-bulleted\"></i><span class=\"hide-menu\">Questions</span></a>\r\n        </li>\r\n        <li>\r\n            <a routerLink=\"/admin/events\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n              class=\"mdi mdi-calendar-clock\"></i><span class=\"hide-menu\">Events</span></a>\r\n          </li>\r\n        <li class=\"nav-small-cap\">UI COMPONENTS</li>\r\n        <li>\r\n          <a routerLink=\"/admin/accordion\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n              class=\"mdi mdi-equal\"></i><span class=\"hide-menu\">Accordion</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/alert\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i class=\"mdi mdi-message-bulleted\"></i><span\r\n              class=\"hide-menu\">Alert</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/carousel\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n              class=\"mdi mdi-view-carousel\"></i><span class=\"hide-menu\">Carousel</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/datepicker\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n              class=\"mdi mdi-calendar-clock\"></i><span class=\"hide-menu\">Datepicker</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/dropdown\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n              class=\"mdi mdi-arrange-bring-to-front\"></i><span class=\"hide-menu\">Dropdown - Collapse</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/modal\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i class=\"mdi mdi-tablet\"></i><span\r\n              class=\"hide-menu\">Modal</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/pagination\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n              class=\"mdi mdi-backburger\"></i><span class=\"hide-menu\">Pagination</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/poptool\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i class=\"mdi mdi-image-filter-vintage\"></i><span\r\n              class=\"hide-menu\">Popover & Tooltip</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/progressbar\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n              class=\"mdi mdi-poll\"></i><span class=\"hide-menu\">Progressbar</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/rating\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i class=\"mdi mdi-bandcamp\"></i><span\r\n              class=\"hide-menu\">Ratings</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/tabs\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i class=\"mdi mdi-sort-variant\"></i><span\r\n              class=\"hide-menu\">Tabs</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/timepicker\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n              class=\"mdi mdi-calendar-clock\"></i><span class=\"hide-menu\">Timepicker</span></a>\r\n        </li>\r\n        <li>\r\n          <a routerLink=\"/admin/typehead\" (click)=\"addExpandClass('component')\" [routerLinkActive]=\"['router-link-active']\"><i\r\n              class=\"mdi mdi-blur-radial\"></i><span class=\"hide-menu\">Typehead</span></a>\r\n        </li>\r\n\r\n      </ul>\r\n    </nav>\r\n    <!-- End Sidebar navigation -->\r\n  </div>\r\n  <!-- End Sidebar scroll-->\r\n</aside>\r\n<!-- ============================================================== -->\r\n<!-- End Left Sidebar - style you can find in sidebar.scss  -->\r\n<!-- ============================================================== -->"
 
 /***/ }),
 

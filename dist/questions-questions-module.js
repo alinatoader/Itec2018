@@ -135,7 +135,7 @@ var QuestionsCreateComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n    <div class=\"col-12\">\r\n        <div class=\"card\">\r\n            <div class=\"card-body\">\r\n                <a routerLink=\"/admin/questions/create\" class=\"btn btn-info btn-large\">Create new question</a>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div *ngIf=\"categories\">\r\n    <div class=\"row\" *ngFor=\"let category of categories\">\r\n        <div class=\"col-12\">\r\n            <div class=\"card\">\r\n                <div class=\"card-body\">\r\n                    <h3 class=\"card-title\">{{category}} </h3>\r\n                    <form role=\"search\" class=\"app-search hidden-sm-down\">\r\n                        <input type=\"text\" placeholder=\"Search...\" class=\"form-control\"> <a href=\"\"><i class=\"fa fa-search\"></i></a>\r\n                    </form>\r\n                    <ngb-accordion #acc=\"ngbAccordion\">\r\n                        <span *ngFor=\"let question of questions[category]\">\r\n                            <ngb-panel [id]=\"question.text\" [title]=\"question.text\">\r\n                                <ng-template ngbPanelContent>\r\n                                    <button type=\"button\" style=\"margin-right:5px;\" class=\"btn btn-warning btn-sm\"\r\n                                        (click)=\"editQuestion(question.id)\">Edit</button>\r\n                                    <button type=\"button\" class=\"btn btn-danger btn-sm\" (click)=\"deleteQuestion(question.id)\">Delete</button>\r\n                                    <div class=\"row\">\r\n                                        <div class=\"col-md-6\">\r\n                                            <div><label class=\"control-label\">Time: {{question.time}}</label></div>\r\n                                            <div><label class=\"control-label\">Difficulty: {{question.difficulty}}</label></div>\r\n                                            <div><label class=\"control-label\">Score: {{question.score}}</label></div>\r\n                                            <div><label class=\"control-label\">Category: {{question.category}}</label></div>\r\n                                        </div>\r\n                                        <div class=\"col-md-6\"><img [src]=\"question.image\" alt=\"question image\" style=\"max-height:100px\" /></div>\r\n                                    </div>\r\n                                    <h4>Answers</h4>\r\n                                    <div class=\"row\">\r\n                                        <div  class=\"col-md-6\" *ngFor=\"let answer of question.answersList\">\r\n                                            <div [ngClass]=\"answer.correct ? 'text-success' : 'text-danger'\">{{answer.value}}</div>\r\n                                        </div>\r\n                                    </div>\r\n                                </ng-template>\r\n                            </ngb-panel>\r\n                        </span>\r\n                    </ngb-accordion>\r\n                    <!-- <p>\r\n                    <button class=\"btn btn-sm btn-outline-primary\" (click)=\"acc.toggle('toggle-1')\">Toggle first</button>\r\n                    <button class=\"btn btn-sm btn-outline-primary\" (click)=\"acc.toggle('toggle-2')\">Toggle second</button>\r\n                </p> -->\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"row\">\r\n    <div class=\"col-12\">\r\n        <div class=\"card\">\r\n            <div class=\"card-body\">\r\n                <a routerLink=\"/admin/questions/create\" class=\"btn btn-info btn-large\">Create new question</a>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div *ngIf=\"categories\">\r\n    <div class=\"row\" *ngFor=\"let category of categories\">\r\n        <div class=\"col-12\">\r\n            <div class=\"card\">\r\n                <div class=\"card-body\">\r\n                    <h3 class=\"card-title\">{{category}} </h3>\r\n                    <form role=\"search\" class=\"app-search hidden-sm-down\">\r\n\r\n                        <select class=\"form-control\" title=\"Difficulty\" (change)=\"filter($event, category, sortSelect, searchInput)\"\r\n                            #difficultySelect>\r\n                            <option selected>NONE</option>\r\n                            <option>BEGINNER</option>\r\n                            <option>EASY</option>\r\n                            <option>MEDIUM</option>\r\n                            <option>HARD</option>\r\n                            <option>LEGEND</option>\r\n                        </select>\r\n                        <select class=\"form-control\" title=\"Sort\" (change)=\"sort($event, category, difficultySelect, searchInput)\"\r\n                            #sortSelect>\r\n                            <option value=\"\" disabled selected>Sort</option>\r\n                            <option>ASC</option>\r\n                            <option>DESC</option>\r\n                        </select>\r\n\r\n                        <input type=\"text\" placeholder=\"Search...\" class=\"form-control\" (input)=\"search($event, category, difficultySelect, sortSelect)\"\r\n                            #searchInput>\r\n                        <a href=\"\"><i class=\"fa fa-search\"></i></a>\r\n                    </form>\r\n                    <ngb-accordion #acc=\"ngbAccordion\">\r\n                        <span *ngFor=\"let question of questions[category]\">\r\n                            <ngb-panel [id]=\"question.text\" [title]=\"question.text\">\r\n                                <ng-template ngbPanelContent>\r\n                                    <button type=\"button\" style=\"margin-right:5px;\" class=\"btn btn-warning btn-sm\"\r\n                                        (click)=\"editQuestion(question.id)\">Edit</button>\r\n                                    <button type=\"button\" class=\"btn btn-danger btn-sm\" (click)=\"deleteQuestion(question.id)\">Delete</button>\r\n                                    <div class=\"row\">\r\n                                        <div class=\"col-md-6\">\r\n                                            <div><label class=\"control-label\">Time: {{question.time}}</label></div>\r\n                                            <div><label class=\"control-label\">Difficulty: {{question.difficulty}}</label></div>\r\n                                            <div><label class=\"control-label\">Score: {{question.score}}</label></div>\r\n                                            <div><label class=\"control-label\">Category: {{question.category}}</label></div>\r\n                                        </div>\r\n                                        <div class=\"col-md-6\"><img [src]=\"question.image\" alt=\"question image\" style=\"max-height:100px\" /></div>\r\n                                    </div>\r\n                                    <h4>Answers</h4>\r\n                                    <div class=\"row\">\r\n                                        <div class=\"col-md-6\" *ngFor=\"let answer of question.answersList\">\r\n                                            <div [ngClass]=\"answer.correct ? 'text-success' : 'text-danger'\">{{answer.value}}</div>\r\n                                        </div>\r\n                                    </div>\r\n                                </ng-template>\r\n                            </ngb-panel>\r\n                        </span>\r\n                    </ngb-accordion>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -206,10 +206,47 @@ var QuestionsDisplayComponent = /** @class */ (function () {
             console.log(error);
         });
     };
-    QuestionsDisplayComponent.prototype.searchByText = function (category, text) {
-        var myquestions = this.questions[category];
-        var m = myquestions.find(function (q) { return q.text.indexOf(text) > -1; });
-        console.log(m);
+    QuestionsDisplayComponent.prototype.search = function (event, category, difficultySelect, sortSelect) {
+        var _this = this;
+        var searchText = event.target.value;
+        var body = {
+            searchedText: searchText,
+            difficulty: difficultySelect.value,
+            category: category,
+            sortBoolean: sortSelect.value === 'ASC' ? true : false
+        };
+        this.questionsService.filter(body)
+            .subscribe(function (response) {
+            _this.questions[category] = response;
+        }, function (error) { return console.log(error); });
+    };
+    QuestionsDisplayComponent.prototype.filter = function (event, category, sortSelect, searchInput) {
+        var _this = this;
+        var filterDifficulty = event.target.value;
+        var body = {
+            searchedText: searchInput.value,
+            difficulty: filterDifficulty === 'Difficulty' ? null : filterDifficulty,
+            category: category,
+            sortBoolean: sortSelect.value === 'ASC' ? true : false
+        };
+        this.questionsService.filter(body)
+            .subscribe(function (response) {
+            _this.questions[category] = response;
+        }, function (error) { return console.log(error); });
+    };
+    QuestionsDisplayComponent.prototype.sort = function (event, category, difficultySelect, searchInput) {
+        var _this = this;
+        var sortDir = event.target.value;
+        var body = {
+            searchedText: searchInput.value,
+            difficulty: difficultySelect.value,
+            category: category,
+            sortBoolean: sortDir === 'ASC' ? true : false
+        };
+        this.questionsService.filter(body)
+            .subscribe(function (response) {
+            _this.questions[category] = response;
+        }, function (error) { return console.log(error); });
     };
     QuestionsDisplayComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -391,6 +428,10 @@ var QuestionsService = /** @class */ (function () {
     };
     QuestionsService.prototype.update = function (id, question) {
         return this.http.put(this.apiUrl + id, question);
+    };
+    QuestionsService.prototype.filter = function (body) {
+        console.log(body);
+        return this.http.post(this.apiUrl + 'filter', body);
     };
     QuestionsService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({

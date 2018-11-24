@@ -7,8 +7,9 @@
 
             <select class="form-control" title="Status" (change)="filter($event)">
                 <option value="" disabled selected>Status</option>
+                <option>NONE</option>
                 <option>EXPIRED</option>
-                <option>IN PROGRESS</option>
+                <option>INPROGRESS</option>
                 <option>INCOMING</option>
             </select>
             <select class="form-control" title="Sort" (change)="sort($event)">

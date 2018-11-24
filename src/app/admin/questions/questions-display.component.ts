@@ -56,17 +56,45 @@ export class QuestionsDisplayComponent implements OnInit {
         );
     }
 
-    search(event, category){
-        var searchText = event.target.value;
+    search(event, category, difficultySelect, sortSelect) {
+        let searchText = event.target.value;
+        const body = {
+            searchedText: searchText,
+            difficulty: difficultySelect.value,
+            category: category,
+            sortBoolean: sortSelect.value === 'ASC' ? true : false
+        }
+        this.questionsService.filter(body)
+            .subscribe(response => {
+                this.questions[category] = response;
+            }, error => console.log(error))
     }
 
-    filter(event, category){
-        var filterDifficulty = event.target.value;
-        console.log(filterDifficulty);
+    filter(event, category, sortSelect, searchInput) {
+        const filterDifficulty = event.target.value;
+        const body = {
+            searchedText: searchInput.value,
+            difficulty: filterDifficulty === 'Difficulty' ? null : filterDifficulty,
+            category: category,
+            sortBoolean: sortSelect.value === 'ASC' ? true : false
+        }
+        this.questionsService.filter(body)
+            .subscribe(response => {
+                this.questions[category] = response;
+            }, error => console.log(error));
     }
 
-    sort(event, category){
-        var sortDir = event.target.value;
-        console.log(sortDir);
+    sort(event, category, difficultySelect, searchInput) {
+        let sortDir = event.target.value;
+        const body = {
+            searchedText: searchInput.value,
+            difficulty: difficultySelect.value,
+            category: category,
+            sortBoolean: sortDir === 'ASC' ? true : false
+        };
+        this.questionsService.filter(body)
+            .subscribe(response => {
+                this.questions[category] = response;
+            }, error => console.log(error));
     }
 }

@@ -202,6 +202,12 @@ var UserService = /** @class */ (function () {
     UserService.prototype.confirm = function (email) {
         return this.http.post(this.apiUrl + '/admin/user/update/isConfirmed/' + email, null);
     };
+    UserService.prototype.getAll = function () {
+        return this.http.get(this.apiUrl + '/admin/user');
+    };
+    UserService.prototype.modifyAdminRole = function (email) {
+        return this.http.post(this.apiUrl + '/admin/user/update/isAdmin/' + email, null);
+    };
     UserService.prototype.ngOnInit = function () {
     };
     UserService = __decorate([

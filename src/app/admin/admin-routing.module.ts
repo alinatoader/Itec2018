@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
+import { AdminAddComponent } from './admin-add/admin-add.component';
 
 const routes: Routes = [
     {
@@ -8,6 +9,7 @@ const routes: Routes = [
         children: [
             { path: 'questions', loadChildren: './questions/questions.module#QuestionsModule' },
             { path: 'events', loadChildren: './events/events.module#EventsModule' },
+            { path: 'add', component: AdminAddComponent },
 
             { path: 'starter', loadChildren: './starter/starter.module#StarterModule' },
             { path: 'accordion', loadChildren: './component/accordion/accordion.module#AccordionModule' },
