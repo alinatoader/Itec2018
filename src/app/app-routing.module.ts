@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { NotFoundComponent } from './404/not-found.component';
+import { UserGuard } from './user/user.guard';
 
 const routes: Routes = [
   {
@@ -21,11 +22,11 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: './user/user.module#UserModule',
-    canActivate: [AuthGuard]
+    canActivate: [UserGuard]
   },
   {
     path: '**',
-    loadChildren: './404/not-found.module#NotFoundModule'
+    loadChildren: './404/not-found.module#NotFoundModule',
   }
 ];
 

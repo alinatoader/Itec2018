@@ -7,6 +7,7 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class SignupConfirmComponent implements OnInit, AfterViewInit {
     confirmed = false;
+
     constructor(private userService: UserService, private route: ActivatedRoute) { }
 
     confirm(email: string) {

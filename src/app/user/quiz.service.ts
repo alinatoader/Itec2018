@@ -5,7 +5,19 @@ import { HttpClient } from "@angular/common/http";
     providedIn: 'root',
 })
 export class QuizService {
-    apiUrl = 'https://apiitec2018tm.herokuapp.com';
+    apiUrl = 'https://apiitec2018tm.herokuapp.com/';
 
     constructor(private http: HttpClient) { }
+
+    getQuestions(quizId: number) {
+        return this.http.get(this.apiUrl + '/question/test/' + quizId);
+    }
+
+    postResult(result:any){
+        return this.http.post(this.apiUrl + '/result', result);
+    }
+
+    getQuizCompleted(email:string, quizId: number){
+        return this.http.get(this.apiUrl + '/result/' + email + '/' + quizId);
+    }
 }

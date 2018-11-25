@@ -7,10 +7,11 @@ import { AuthGuard } from './shared/guard/auth.guard';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { APP_BASE_HREF, HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { QRCodeModule } from 'angularx-qrcode';
-
+import { UserGuard } from './user/user.guard';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+  ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -19,6 +20,7 @@ import { QRCodeModule } from 'angularx-qrcode';
   ],
   providers: [
     AuthGuard,
+    UserGuard,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: APP_BASE_HREF, useValue: '/' }
   ],

@@ -283,9 +283,10 @@ var QuestionsDisplayComponent = /** @class */ (function () {
         this.open2(content);
     };
     QuestionsDisplayComponent.prototype.uploadFile = function (event) {
-        this.questionsService.upload(this.uploadForm.value.file)
+        var _this = this;
+        this.questionsService.upload(event.target.files.item(0))
             .subscribe(function (_) {
-            // this.router.navigateByUrl('/admin/questions');
+            _this.router.navigateByUrl('/admin/questions');
         }, function (error) {
             console.log(error);
         });

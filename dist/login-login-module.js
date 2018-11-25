@@ -580,10 +580,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(router, loginService, socialAuthService) {
+    function LoginComponent(router, loginService, socialAuthService, route) {
         this.router = router;
         this.loginService = loginService;
         this.socialAuthService = socialAuthService;
+        this.route = route;
         this.errorMessage = null;
     }
     LoginComponent.prototype.ngOnInit = function () {
@@ -591,6 +592,7 @@ var LoginComponent = /** @class */ (function () {
             email: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](''),
             password: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('')
         });
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     };
     LoginComponent.prototype.ngAfterViewInit = function () {
         $(function () {
@@ -608,13 +610,17 @@ var LoginComponent = /** @class */ (function () {
         var _this = this;
         this.loginService.login(this.loginForm.value).toPromise()
             .then(function (response) {
-            console.log(response);
             if (response == null) {
                 _this.errorMessage = 'Invalid credentials!';
             }
             else {
                 _this.loginService.saveUserInLocalStorage(response);
-                _this.router.navigateByUrl('admin');
+                if (response.admin) {
+                    _this.router.navigateByUrl('admin');
+                }
+                else {
+                    _this.router.navigateByUrl(_this.returnUrl);
+                }
             }
         })
             .catch(function (error) {
@@ -645,7 +651,10 @@ var LoginComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./login.component.html */ "./src/app/login/login.component.html"),
             styles: [__webpack_require__(/*! ./login.component.css */ "./src/app/login/login.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _shared_services_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"], angular_6_social_login__WEBPACK_IMPORTED_MODULE_4__["AuthService"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+            _shared_services_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"],
+            angular_6_social_login__WEBPACK_IMPORTED_MODULE_4__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -724,6 +733,73 @@ var LoginModule = /** @class */ (function () {
         })
     ], LoginModule);
     return LoginModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/services/user.service.ts":
+/*!*************************************************!*\
+  !*** ./src/app/shared/services/user.service.ts ***!
+  \*************************************************/
+/*! exports provided: UserService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserService", function() { return UserService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var UserService = /** @class */ (function () {
+    function UserService(http) {
+        this.http = http;
+        this.apiUrl = 'https://apiitec2018tm.herokuapp.com';
+    }
+    UserService.prototype.login = function (user) {
+        return this.http.post(this.apiUrl + '/login', user);
+    };
+    UserService.prototype.saveUserInLocalStorage = function (user) {
+        localStorage.setItem('user', JSON.stringify(user));
+    };
+    UserService.prototype.getUserFromLocalStorage = function () {
+        return JSON.parse(localStorage.getItem('user'));
+    };
+    UserService.prototype.logout = function () {
+        localStorage.clear();
+    };
+    UserService.prototype.register = function (user) {
+        return this.http.post(this.apiUrl + '/register', user);
+    };
+    UserService.prototype.confirm = function (email) {
+        return this.http.post(this.apiUrl + '/admin/user/update/isConfirmed/' + email, null);
+    };
+    UserService.prototype.getAll = function () {
+        return this.http.get(this.apiUrl + '/admin/user');
+    };
+    UserService.prototype.modifyAdminRole = function (email) {
+        return this.http.post(this.apiUrl + '/admin/user/update/isAdmin/' + email, null);
+    };
+    UserService.prototype.ngOnInit = function () {
+    };
+    UserService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root',
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], UserService);
+    return UserService;
 }());
 
 

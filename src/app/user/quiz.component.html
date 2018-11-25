@@ -1,1 +1,39 @@
-this is the user page
+<!-- <div  class="quiz-box">
+        <div class="quiz-body text-center">
+                <h3 class="text-uppercase">Success</h3>
+                <p class="text-muted m-t-30 m-b-30">You've successfully confirmed your account! You can log in now. </p>
+                <a class="btn btn-info btn-rounded waves-effect waves-light m-b-40" [routerLink]="['/']">Go to Login</a>
+        </div>
+</div> -->
+
+<div class="row" style="background:white" *ngIf="!errorMessage; else errorTemplate">
+    <div class="col-md-12" *ngFor="let question of questions">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">{{question.text}}  - {{question.score}}</h3>
+                <h6 class="card-subtitle">A typeahead example that gets values from a static string</h6>
+                <div *ngFor="let answer of question.answersList">
+                    <span *ngIf="answer.checked; else uncheckedAnswer"><button type="button" class="btn btn-success"
+                            (click)="toggleChecked(question.id, answer.id)"></button>
+                        {{answer.value}}</span>
+                    <ng-template #uncheckedAnswer>
+                        <button type="button" class="btn btn-danger" (click)="toggleChecked(question.id,answer.id)"></button>
+                        {{answer.value}}
+                    </ng-template>
+                    {{answer.correct}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+            <button type="button" class="btn btn-info btn-lg" (click)="submitQuiz()">Submit Quiz</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #errorTemplate>
+    <div class="alert alert-danger">{{errorMessage}}</div>
+</ng-template>

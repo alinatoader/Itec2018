@@ -132,9 +132,9 @@ export class QuestionsDisplayComponent implements OnInit {
     }
 
     uploadFile(event:any) {
-        this.questionsService.upload(this.uploadForm.value.file)
+        this.questionsService.upload(event.target.files.item(0))
             .subscribe(_ => {
-               // this.router.navigateByUrl('/admin/questions');
+                this.router.navigateByUrl('/admin/questions');
             }, error => {
                 console.log(error)
             });

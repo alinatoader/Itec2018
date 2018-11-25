@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../shared/services/user.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AuthService, FacebookLoginProvider, GoogleLoginProvider, LinkedinLoginProvider } from 'angular-6-social-login';
@@ -12,14 +12,19 @@ import { AuthService, FacebookLoginProvider, GoogleLoginProvider, LinkedinLoginP
 export class LoginComponent implements OnInit, AfterViewInit {
     loginForm: FormGroup;
     errorMessage: string = null;
+    returnUrl: string;
 
-    constructor(public router: Router, private loginService: UserService, private socialAuthService: AuthService) { }
+    constructor(public router: Router,
+        private loginService: UserService,
+        private socialAuthService: AuthService,
+        private route: ActivatedRoute) { }
 
     ngOnInit() {
         this.loginForm = new FormGroup({
             email: new FormControl(''),
             password: new FormControl('')
         });
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
     ngAfterViewInit() {
@@ -38,12 +43,15 @@ export class LoginComponent implements OnInit, AfterViewInit {
     onLoggedin() {
         this.loginService.login(this.loginForm.value).toPromise()
             .then(response => {
-                console.log(response);
                 if (response == null) {
                     this.errorMessage = 'Invalid credentials!';
                 } else {
                     this.loginService.saveUserInLocalStorage(response);
-                    this.router.navigateByUrl('admin');
+                    if ((response as any).admin) {
+                        this.router.navigateByUrl('admin');
+                    } else {
+                        this.router.navigateByUrl(this.returnUrl);
+                    }
                 }
             })
             .catch(error => {

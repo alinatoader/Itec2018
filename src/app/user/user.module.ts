@@ -5,6 +5,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserRoutingModule } from './user.routing-module';
 import { QuizComponent } from './quiz.component';
 import { AdminModule } from '../admin/admin.module';
+import { NavigationComponent } from '../shared/header-navigation/navigation.component';
+import { SidebarComponent } from '../shared/sidebar/sidebar.component';
+import { BreadcrumbComponent } from '../shared/breadcrumb/breadcrumb.component';
+import { SIDEBAR_TOGGLE_DIRECTIVES } from '../shared/sidebar.directive';
 
 @NgModule({
     imports: [
@@ -12,10 +16,12 @@ import { AdminModule } from '../admin/admin.module';
         ReactiveFormsModule,
         HttpClientModule,
         UserRoutingModule,
-        AdminModule
+        AdminModule,
+
     ],
     declarations: [
-        QuizComponent
+        QuizComponent,
+        
     ],
 
 })

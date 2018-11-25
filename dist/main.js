@@ -14,8 +14,8 @@ var map = {
 	],
 	"./admin/admin.module": [
 		"./src/app/admin/admin.module.ts",
-		"common",
-		"admin-admin-module"
+		"default~admin-admin-module~user-user-module",
+		"common"
 	],
 	"./component/accordion/accordion.module": [
 		"./src/app/admin/component/accordion/accordion.module.ts",
@@ -92,6 +92,12 @@ var map = {
 	"./starter/starter.module": [
 		"./src/app/admin/starter/starter.module.ts",
 		"starter-starter-module"
+	],
+	"./user/user.module": [
+		"./src/app/user/user.module.ts",
+		"default~admin-admin-module~user-user-module",
+		"common",
+		"user-user-module"
 	]
 };
 function webpackAsyncContext(req) {
@@ -130,12 +136,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
 /* harmony import */ var _shared_guard_auth_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./shared/guard/auth.guard */ "./src/app/shared/guard/auth.guard.ts");
+/* harmony import */ var _user_user_guard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./user/user.guard */ "./src/app/user/user.guard.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -155,8 +163,13 @@ var routes = [
         canActivate: [_shared_guard_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]]
     },
     {
+        path: 'user',
+        loadChildren: './user/user.module#UserModule',
+        canActivate: [_user_user_guard__WEBPACK_IMPORTED_MODULE_4__["UserGuard"]]
+    },
+    {
         path: '**',
-        loadChildren: './404/not-found.module#NotFoundModule'
+        loadChildren: './404/not-found.module#NotFoundModule',
     }
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -254,6 +267,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _user_user_guard__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./user/user.guard */ "./src/app/user/user.guard.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -268,12 +282,15 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-            declarations: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]],
+            declarations: [
+                _app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"],
+            ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
@@ -282,6 +299,7 @@ var AppModule = /** @class */ (function () {
             ],
             providers: [
                 _shared_guard_auth_guard__WEBPACK_IMPORTED_MODULE_4__["AuthGuard"],
+                _user_user_guard__WEBPACK_IMPORTED_MODULE_8__["UserGuard"],
                 { provide: _angular_common__WEBPACK_IMPORTED_MODULE_7__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_7__["HashLocationStrategy"] },
                 { provide: _angular_common__WEBPACK_IMPORTED_MODULE_7__["APP_BASE_HREF"], useValue: '/' }
             ],
@@ -334,6 +352,55 @@ var AuthGuard = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], AuthGuard);
     return AuthGuard;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/user/user.guard.ts":
+/*!************************************!*\
+  !*** ./src/app/user/user.guard.ts ***!
+  \************************************/
+/*! exports provided: UserGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserGuard", function() { return UserGuard; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var UserGuard = /** @class */ (function () {
+    function UserGuard(router, route) {
+        this.router = router;
+        this.route = route;
+    }
+    UserGuard.prototype.canActivate = function (route, state) {
+        if (localStorage.getItem('user')) {
+            return true;
+        }
+        console.log(state);
+        this.router.navigate(['/signup'], { queryParams: { returnUrl: state.url } });
+        return false;
+    };
+    UserGuard = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]])
+    ], UserGuard);
+    return UserGuard;
 }());
 
 

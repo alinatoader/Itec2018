@@ -897,15 +897,16 @@ var EventsCreateComponent = /** @class */ (function () {
     }
     EventsCreateComponent.prototype.ngOnInit = function () {
         this.eventCreateForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+            id: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](0),
             name: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
             description: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
             startDate: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
             endDate: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
             quizzes: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('')
         });
-        this.name = this.route.snapshot.paramMap.get('name');
-        if (this.name) {
-            this.getEventByName(this.name);
+        this.id = this.route.snapshot.paramMap.get('id');
+        if (this.id) {
+            this.getEventByName(this.id);
         }
     };
     EventsCreateComponent.prototype.addEvent = function () {
@@ -919,7 +920,7 @@ var EventsCreateComponent = /** @class */ (function () {
         });
     };
     EventsCreateComponent.prototype.saveEvent = function () {
-        if (this.name) {
+        if (this.id) {
             this.updateEvent();
         }
         else {
@@ -928,9 +929,7 @@ var EventsCreateComponent = /** @class */ (function () {
     };
     EventsCreateComponent.prototype.updateEvent = function () {
         var _this = this;
-        //const formValue = this.eventCreateForm.value;
-        //const event = { name: formValue.name, description: formValue.description, startDate: formValue.startDate, endDate: formValue.endDate };
-        this.eventsService.update(this.name, this.eventCreateForm.value)
+        this.eventsService.update(this.id, this.eventCreateForm.value)
             .subscribe(function (response) {
             console.log(response);
             _this.router.navigateByUrl('/admin/events');
@@ -938,9 +937,9 @@ var EventsCreateComponent = /** @class */ (function () {
             console.log(error);
         });
     };
-    EventsCreateComponent.prototype.getEventByName = function (name) {
+    EventsCreateComponent.prototype.getEventByName = function (id) {
         var _this = this;
-        this.eventsService.getByName(name).subscribe(function (response) {
+        this.eventsService.getById(id).subscribe(function (response) {
             console.log(response);
             _this.eventCreateForm.setValue(response);
         }, function (error) { return console.log(error); });
@@ -967,7 +966,7 @@ var EventsCreateComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"col-12\">\r\n    <div class=\"card\">\r\n      <div class=\"card-body\">\r\n        <a routerLink=\"/admin/events/create\" class=\"btn btn-info btn-large\">Create new event</a>\r\n        <form role=\"search\" class=\"app-search hidden-sm-down\">\r\n\r\n            <select class=\"form-control\" title=\"Status\" (change)=\"filter($event)\">\r\n                <option value=\"\" disabled selected>Status</option>\r\n                <option>NONE</option>\r\n                <option>EXPIRED</option>\r\n                <option>INPROGRESS</option>\r\n                <option>INCOMING</option>\r\n            </select>\r\n            <select class=\"form-control\" title=\"Sort\" (change)=\"sort($event)\">\r\n                <option value=\"\" disabled selected>Sort</option>\r\n                <option>ASC</option>\r\n                <option>DESC</option>\r\n            </select>\r\n\r\n            <input type=\"text\" placeholder=\"Search...\" class=\"form-control\" (input)=\"search($event)\">\r\n            <a href=\"\"><i class=\"fa fa-search\"></i></a>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-6\" *ngFor=\"let event of events\">\r\n    <div class=\"card\">\r\n      <div class=\"card-body\">\r\n        <h3 class=\"card-title\">\r\n          {{event.name}}\r\n          <div style=\"float:right;\">\r\n            <button type=\"button\" class=\"btn btn-info btn-sm\" (click)=\"addQuiz(event.id)\">Add quiz</button>\r\n            <button type=\"button\" class=\"btn btn-warning btn-sm\" (click)=\"editEvent(event.name)\">Edit</button>\r\n            <button type=\"button\" class=\"btn btn-danger btn-sm\" (click)=\"deleteEvent(event.name)\">Delete</button>\r\n          </div>\r\n        </h3>\r\n        <h6 class=\"card-subtitle\">{{event.description}}</h6>\r\n        <ngb-tabset>\r\n          <ngb-tab title=\"Dates\">\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Begins: {{event.startDate}}</p>\r\n              <p class=\"p-t-20\">Ends: {{event.endDate}}</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab title=\"Quizzes\">\r\n            <ng-template ngbTabContent>\r\n              <p *ngFor=\"let quiz of event.quizzes\" class=\"p-t-20\">\r\n                {{quiz.id}}\r\n                <span style=\"float:right\"><button type=\"button\" class=\"btn btn-info btn-sm\" (click)=\"generateQR(quiz.id, content)\">Generate\r\n                    QRCode</button></span>\r\n              </p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab>\r\n            <ng-template ngbTabTitle><b>Leaderboard</b></ng-template>\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Leaderboard</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab title=\"Statistics\">\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Statistics</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n        </ngb-tabset>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <ng-template #content let-c=\"close\" let-d=\"dismiss\">\r\n    <div class=\"modal-header\">\r\n      <h4 class=\"modal-title\">Scan this!</h4>\r\n      <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\r\n        <span aria-hidden=\"true\">&times;</span>\r\n      </button>\r\n    </div>\r\n    <div class=\"modal-body\" style=\"margin-left:auto; margin-right:auto\">\r\n      <form [formGroup]=\"emailForm\">\r\n        <label class=\"control-label\">User email: </label>\r\n        <input type=\"email\" formControlName=\"email\" class=\"form-control\" (input)=\"onEmailChange($event)\">\r\n      </form>\r\n      <br />\r\n      <div *ngIf=\"linkForQR\">\r\n        <qrcode [qrdata]=\"linkForQR\" [size]=\"256\" [level]=\"'M'\"></qrcode>\r\n      </div>\r\n    </div>\r\n  </ng-template>"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col-12\">\r\n    <div class=\"card\">\r\n      <div class=\"card-body\">\r\n        <a routerLink=\"/admin/events/create\" class=\"btn btn-info btn-large\">Create new event</a>\r\n        <form role=\"search\" class=\"app-search hidden-sm-down\">\r\n\r\n            <select class=\"form-control\" title=\"Status\" (change)=\"filter($event, sortSelect, searchInput)\" #statusSelect>\r\n                <option selected>NONE</option>\r\n                <option>EXPIRED</option>\r\n                <option>INPROGRESS</option>\r\n                <option>INCOMING</option>\r\n            </select>\r\n            <select class=\"form-control\" title=\"Sort\" (change)=\"sort($event, statusSelect, searchInput)\" #sortSelect>\r\n                <option value=\"\" disabled selected>Sort</option>\r\n                <option >ASC</option>\r\n                <option>DESC</option>\r\n            </select>\r\n\r\n            <input type=\"text\" placeholder=\"Search...\" class=\"form-control\" (input)=\"search($event, statusSelect, sortSelect)\" #searchInput>\r\n            <a href=\"\"><i class=\"fa fa-search\"></i></a>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-6\" *ngFor=\"let event of events\">\r\n    <div class=\"card\">\r\n      <div class=\"card-body\">\r\n        <h3 class=\"card-title\">\r\n          {{event.name}}\r\n          <div style=\"float:right;\">\r\n            <button type=\"button\" class=\"btn btn-info btn-sm\" (click)=\"addQuiz(event.id)\">Add quiz</button>\r\n            <button type=\"button\" class=\"btn btn-warning btn-sm\" (click)=\"editEvent(event.id)\">Edit</button>\r\n            <button type=\"button\" class=\"btn btn-danger btn-sm\" (click)=\"deleteEvent(event.id)\">Delete</button>\r\n          </div>\r\n        </h3>\r\n        <h6 class=\"card-subtitle\">{{event.description}}</h6>\r\n        <ngb-tabset>\r\n          <ngb-tab title=\"Dates\">\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Begins: {{event.startDate}}</p>\r\n              <p class=\"p-t-20\">Ends: {{event.endDate}}</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab title=\"Quizzes\">\r\n            <ng-template ngbTabContent>\r\n              <p *ngFor=\"let quiz of event.quizzes\" class=\"p-t-20\">\r\n                {{quiz.name}}\r\n                <span style=\"float:right\"><button type=\"button\" class=\"btn btn-info btn-sm\" (click)=\"generateQR(quiz.id, content)\">Generate\r\n                    QRCode</button></span>\r\n              </p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab>\r\n            <ng-template ngbTabTitle><b>Leaderboard</b></ng-template>\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Leaderboard</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab title=\"Statistics\">\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Statistics</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n        </ngb-tabset>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <ng-template #content let-c=\"close\" let-d=\"dismiss\">\r\n    <div class=\"modal-header\">\r\n      <h4 class=\"modal-title\">Scan this!</h4>\r\n      <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\r\n        <span aria-hidden=\"true\">&times;</span>\r\n      </button>\r\n    </div>\r\n    <div class=\"modal-body\" style=\"margin-left:auto; margin-right:auto\">\r\n      <form [formGroup]=\"emailForm\">\r\n        <label class=\"control-label\">User email: </label>\r\n        <input type=\"email\" formControlName=\"email\" class=\"form-control\" (input)=\"onEmailChange($event)\">\r\n      </form>\r\n      <br />\r\n      <div *ngIf=\"linkForQR\">\r\n        <qrcode [qrdata]=\"linkForQR\" [size]=\"256\" [level]=\"'M'\"></qrcode>\r\n      </div>\r\n    </div>\r\n  </ng-template>"
 
 /***/ }),
 
@@ -1023,16 +1022,16 @@ var EventsDisplayComponent = /** @class */ (function () {
             console.log(error);
         });
     };
-    EventsDisplayComponent.prototype.deleteEvent = function (name) {
+    EventsDisplayComponent.prototype.deleteEvent = function (id) {
         var _this = this;
-        this.eventsService.delete(name).subscribe(function (_) {
+        this.eventsService.delete(id).subscribe(function (_) {
             _this.getAll();
         }, function (error) {
             console.log(error);
         });
     };
-    EventsDisplayComponent.prototype.editEvent = function (name) {
-        this.router.navigateByUrl('/admin/events/create/' + name);
+    EventsDisplayComponent.prototype.editEvent = function (id) {
+        this.router.navigateByUrl('/admin/events/create/' + id);
     };
     EventsDisplayComponent.prototype.addQuiz = function (eventId) {
         this.router.navigateByUrl('/admin/events/quiz/' + eventId);
@@ -1077,16 +1076,44 @@ var EventsDisplayComponent = /** @class */ (function () {
             return "with: " + reason;
         }
     };
-    EventsDisplayComponent.prototype.search = function (event) {
-        var searchText = event.target.value;
+    EventsDisplayComponent.prototype.search = function (event, statusSelect, sortSelect) {
+        var _this = this;
+        var searchValue = event.target.value;
+        var body = {
+            searchName: searchValue,
+            eventStatus: statusSelect.value,
+            sortByDate: sortSelect.value === 'ASC' ? true : false,
+        };
+        this.eventsService.filter(body)
+            .subscribe(function (response) {
+            _this.events = response;
+        }, function (error) { return console.log(error); });
     };
-    EventsDisplayComponent.prototype.filter = function (event) {
-        var filterDifficulty = event.target.value;
-        console.log(filterDifficulty);
+    EventsDisplayComponent.prototype.filter = function (event, sortSelect, searchInput) {
+        var _this = this;
+        var filterStatus = event.target.value;
+        var body = {
+            searchName: searchInput.value,
+            eventStatus: filterStatus,
+            sortByDate: sortSelect.value === 'ASC' ? true : false,
+        };
+        this.eventsService.filter(body)
+            .subscribe(function (response) {
+            _this.events = response;
+        }, function (error) { return console.log(error); });
     };
-    EventsDisplayComponent.prototype.sort = function (event) {
+    EventsDisplayComponent.prototype.sort = function (event, statusSelect, searchInput) {
+        var _this = this;
         var sortDir = event.target.value;
-        console.log(sortDir);
+        var body = {
+            searchName: searchInput.value,
+            eventStatus: statusSelect.value,
+            sortByDate: sortDir === 'ASC' ? true : false,
+        };
+        this.eventsService.filter(body)
+            .subscribe(function (response) {
+            _this.events = response;
+        }, function (error) { return console.log(error); });
     };
     EventsDisplayComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1143,7 +1170,7 @@ var routes = [
         component: _events_create_component__WEBPACK_IMPORTED_MODULE_3__["EventsCreateComponent"]
     },
     {
-        path: 'create/:name',
+        path: 'create/:id',
         component: _events_create_component__WEBPACK_IMPORTED_MODULE_3__["EventsCreateComponent"]
     },
     {
@@ -1261,17 +1288,24 @@ var EventsService = /** @class */ (function () {
     EventsService.prototype.getAll = function () {
         return this.http.get(this.apiUrl);
     };
-    EventsService.prototype.delete = function (name) {
-        return this.http.delete(this.apiUrl + name);
+    EventsService.prototype.delete = function (id) {
+        return this.http.delete(this.apiUrl + id);
     };
-    EventsService.prototype.getByName = function (name) {
-        return this.http.get(this.apiUrl + name);
+    EventsService.prototype.getById = function (id) {
+        return this.http.get(this.apiUrl + id);
     };
     EventsService.prototype.create = function (event) {
         return this.http.post(this.apiUrl, event);
     };
-    EventsService.prototype.update = function (name, event) {
-        return this.http.put(this.apiUrl + name, event);
+    EventsService.prototype.update = function (id, event) {
+        return this.http.put(this.apiUrl + id, event);
+    };
+    EventsService.prototype.filter = function (body) {
+        console.log(body);
+        return this.http.post(this.apiUrl + 'filter', body);
+    };
+    EventsService.prototype.createQuiz = function (quiz) {
+        return this.http.post('https://apiitec2018tm.herokuapp.com/quiz', quiz);
     };
     EventsService.prototype.ngOnInit = function () {
     };
@@ -1342,15 +1376,15 @@ var QuizCreateComponent = /** @class */ (function () {
         this.eventId = Number(this.route.snapshot.paramMap.get('eventId'));
     };
     QuizCreateComponent.prototype.saveQuiz = function () {
-        console.log(this.quizCreateForm.value);
-        // this.eventsService.create(this.quizCreateForm.value)
-        //     .subscribe(response => {
-        //         console.log(response);
-        //         this.router.navigateByUrl('/admin/events');
-        //     }, error => {
-        //         console.log(error);
-        //     }
-        //     );
+        var _this = this;
+        var quiz = this.quizCreateForm.value;
+        quiz.eventId = this.eventId;
+        this.eventsService.createQuiz(quiz)
+            .subscribe(function (response) {
+            _this.router.navigateByUrl('/admin/events');
+        }, function (error) {
+            console.log(error);
+        });
     };
     QuizCreateComponent.prototype.addNewRule = function () {
         this.quizCreateForm.get('ruleList').push(new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
