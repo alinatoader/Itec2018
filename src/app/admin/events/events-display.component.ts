@@ -75,7 +75,7 @@ export class EventsDisplayComponent implements OnInit {
     onEmailChange(event) {
         const emailInput = this.emailForm.get('email');
         if (emailInput.valid) {
-            this.linkForQR = 'https://quizzmee.herokuapp.com/#/quiz/' + this.quizId + '/' + emailInput.value;
+            this.linkForQR = 'https://quizzmee.herokuapp.com/#/user/quiz/' + this.quizId + '/' + emailInput.value;
         }
     }
 
