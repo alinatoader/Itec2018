@@ -22,7 +22,6 @@ export class EventsCreateComponent implements OnInit {
             description: new FormControl(''),
             startDate: new FormControl(''),
             endDate: new FormControl(''),
-            quizzes: new FormControl('')
         });
         this.id = this.route.snapshot.paramMap.get('id');
         if (this.id) {

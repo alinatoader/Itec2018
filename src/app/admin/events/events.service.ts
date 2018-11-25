@@ -22,6 +22,7 @@ export class EventsService implements OnInit {
     }
 
     create(event: any) {
+        console.log(event);
         return this.http.post(this.apiUrl, event);
     }
 

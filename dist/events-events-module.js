@@ -902,7 +902,6 @@ var EventsCreateComponent = /** @class */ (function () {
             description: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
             startDate: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
             endDate: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
-            quizzes: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('')
         });
         this.id = this.route.snapshot.paramMap.get('id');
         if (this.id) {
@@ -1295,6 +1294,7 @@ var EventsService = /** @class */ (function () {
         return this.http.get(this.apiUrl + id);
     };
     EventsService.prototype.create = function (event) {
+        console.log(event);
         return this.http.post(this.apiUrl, event);
     };
     EventsService.prototype.update = function (id, event) {
