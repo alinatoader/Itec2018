@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div  class=\"quiz-box\">\r\n        <div class=\"quiz-body text-center\">\r\n                <h3 class=\"text-uppercase\">Success</h3>\r\n                <p class=\"text-muted m-t-30 m-b-30\">You've successfully confirmed your account! You can log in now. </p>\r\n                <a class=\"btn btn-info btn-rounded waves-effect waves-light m-b-40\" [routerLink]=\"['/']\">Go to Login</a>\r\n        </div>\r\n</div> -->\r\n\r\n<div class=\"row\" style=\"background:white\" *ngIf=\"!errorMessage; else errorTemplate\">\r\n    <div class=\"col-md-12\" *ngFor=\"let question of questions\">\r\n        <div class=\"card\">\r\n            <div class=\"card-body\">\r\n                <h3 class=\"card-title\">{{question.text}}  - {{question.score}}</h3>\r\n                <h6 class=\"card-subtitle\">A typeahead example that gets values from a static string</h6>\r\n                <div *ngFor=\"let answer of question.answersList\">\r\n                    <span *ngIf=\"answer.checked; else uncheckedAnswer\"><button type=\"button\" class=\"btn btn-success\"\r\n                            (click)=\"toggleChecked(question.id, answer.id)\"></button>\r\n                        {{answer.value}}</span>\r\n                    <ng-template #uncheckedAnswer>\r\n                        <button type=\"button\" class=\"btn btn-danger\" (click)=\"toggleChecked(question.id,answer.id)\"></button>\r\n                        {{answer.value}}\r\n                    </ng-template>\r\n                    {{answer.correct}}\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"col-md-12\">\r\n        <div class=\"card\">\r\n            <div class=\"card-body\">\r\n            <button type=\"button\" class=\"btn btn-info btn-lg\" (click)=\"submitQuiz()\">Submit Quiz</button>\r\n        </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<ng-template #errorTemplate>\r\n    <div class=\"alert alert-danger\">{{errorMessage}}</div>\r\n</ng-template>"
+module.exports = "<div class=\"row\" style=\"background:white\" *ngIf=\"!errorMessage; else errorTemplate\">\r\n    <div class=\"col-md-12\" *ngFor=\"let question of questions\">\r\n        <div class=\"card\">\r\n            <div class=\"card-body\">\r\n                <h3 class=\"card-title\">{{question.text}}  - {{question.score}}</h3>\r\n                <h6 class=\"card-subtitle\">A typeahead example that gets values from a static string</h6>\r\n                <div *ngFor=\"let answer of question.answersList\">\r\n                    <span *ngIf=\"answer.checked; else uncheckedAnswer\"><button type=\"button\" class=\"btn btn-success\"\r\n                            (click)=\"toggleChecked(question.id, answer.id)\"></button>\r\n                        {{answer.value}}</span>\r\n                    <ng-template #uncheckedAnswer>\r\n                        <button type=\"button\" class=\"btn btn-danger\" (click)=\"toggleChecked(question.id,answer.id)\"></button>\r\n                        {{answer.value}}\r\n                    </ng-template>\r\n                    {{answer.correct}}\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"card\">\r\n            <img [src]=\"question.image\" alt=\"QuestionImage\">\r\n        </div>\r\n    </div>\r\n    <div class=\"col-md-12\">\r\n        <div class=\"card\">\r\n            <div class=\"card-body\">\r\n            <button type=\"button\" class=\"btn btn-info btn-lg\" (click)=\"submitQuiz()\">Submit Quiz</button>\r\n        </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<ng-template #errorTemplate>\r\n    <div class=\"alert alert-danger\">{{errorMessage}}</div>\r\n</ng-template>"
 
 /***/ }),
 
@@ -51,6 +51,7 @@ var QuizComponent = /** @class */ (function () {
         var loggedUser = this.userService.getUserFromLocalStorage();
         if (loggedUser.email !== this.email) {
             this.errorMessage = 'You are not allowed to enter this page!';
+            console.log(this.errorMessage);
             this.router.navigateByUrl('/404');
         }
         this.getQuizCompleted();
@@ -61,6 +62,7 @@ var QuizComponent = /** @class */ (function () {
             .subscribe(function (response) {
             if (response) {
                 _this.errorMessage = 'You have already completed this quiz!';
+                console.log(_this.errorMessage);
                 _this.router.navigateByUrl('/404');
             }
             else {
@@ -185,7 +187,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var QuizService = /** @class */ (function () {
     function QuizService(http) {
         this.http = http;
-        this.apiUrl = 'https://apiitec2018tm.herokuapp.com/';
+        this.apiUrl = 'https://apiitec2018tm.herokuapp.com';
     }
     QuizService.prototype.getQuestions = function (quizId) {
         return this.http.get(this.apiUrl + '/question/test/' + quizId);
