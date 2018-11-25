@@ -1,11 +1,3 @@
-<!-- <div  class="quiz-box">
-        <div class="quiz-body text-center">
-                <h3 class="text-uppercase">Success</h3>
-                <p class="text-muted m-t-30 m-b-30">You've successfully confirmed your account! You can log in now. </p>
-                <a class="btn btn-info btn-rounded waves-effect waves-light m-b-40" [routerLink]="['/']">Go to Login</a>
-        </div>
-</div> -->
-
 <div class="row" style="background:white" *ngIf="!errorMessage; else errorTemplate">
     <div class="col-md-12" *ngFor="let question of questions">
         <div class="card">
@@ -23,6 +15,9 @@
                     {{answer.correct}}
                 </div>
             </div>
+        </div>
+        <div class="card">
+            <img [src]="question.image" alt="QuestionImage">
         </div>
     </div>
     <div class="col-md-12">

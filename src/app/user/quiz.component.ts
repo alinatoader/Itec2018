@@ -21,6 +21,7 @@ export class QuizComponent implements OnInit, AfterViewInit {
         const loggedUser = this.userService.getUserFromLocalStorage();
         if (loggedUser.email !== this.email) {
             this.errorMessage = 'You are not allowed to enter this page!';
+            console.log(this.errorMessage);
             this.router.navigateByUrl('/404');
         }
         this.getQuizCompleted();
@@ -31,6 +32,7 @@ export class QuizComponent implements OnInit, AfterViewInit {
             .subscribe(response => {
                 if (response) {
                     this.errorMessage = 'You have already completed this quiz!';
+                    console.log(this.errorMessage);
                     this.router.navigateByUrl('/404');
                 } else {
                     this.errorMessage = undefined;
