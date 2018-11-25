@@ -2,8 +2,11 @@
     <div class="col-md-12" *ngFor="let question of questions">
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">{{question.text}}  - {{question.score}}</h3>
-                <h6 class="card-subtitle">A typeahead example that gets values from a static string</h6>
+                <h3 class="card-title">{{question.text}} - {{question.score}}</h3>
+                <h6 class="card-subtitle">Question subtitle</h6>
+                <div>
+                    <img [src]="question.image" alt="QuestionImage" style="max-height:100px; float:right">
+                </div>
                 <div *ngFor="let answer of question.answersList">
                     <span *ngIf="answer.checked; else uncheckedAnswer"><button type="button" class="btn btn-success"
                             (click)="toggleChecked(question.id, answer.id)"></button>
@@ -16,15 +19,12 @@
                 </div>
             </div>
         </div>
-        <div class="card">
-            <img [src]="question.image" alt="QuestionImage">
-        </div>
     </div>
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-            <button type="button" class="btn btn-info btn-lg" (click)="submitQuiz()">Submit Quiz</button>
-        </div>
+                <button type="button" class="btn btn-info btn-lg" (click)="submitQuiz()">Submit Quiz</button>
+            </div>
         </div>
     </div>
 </div>

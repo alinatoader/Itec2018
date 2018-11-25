@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { NgbPanelChangeEvent, NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { QuestionsService } from "./questions.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 @Component({
@@ -134,7 +134,8 @@ export class QuestionsDisplayComponent implements OnInit {
     uploadFile(event:any) {
         this.questionsService.upload(event.target.files.item(0))
             .subscribe(_ => {
-                this.router.navigateByUrl('/admin/questions');
+                console.log('imported');
+                window.location.reload();
             }, error => {
                 console.log(error)
             });
