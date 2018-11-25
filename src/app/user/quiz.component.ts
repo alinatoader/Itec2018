@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { QuizService } from "./quiz.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { UserService } from "../shared/services/user.service";
 
 @Component({
     templateUrl: 'quiz.component.html'
@@ -11,11 +12,17 @@ export class QuizComponent implements OnInit, AfterViewInit {
     email: string;
     errorMessage: string;
 
-    constructor(private quizService: QuizService, private route: ActivatedRoute) { }
+    constructor(private quizService: QuizService, private route: ActivatedRoute,
+        private userService: UserService, private router: Router) { }
 
     ngOnInit(): void {
         this.quizId = Number(this.route.snapshot.paramMap.get('id'));
         this.email = this.route.snapshot.paramMap.get('email');
+        const loggedUser = this.userService.getUserFromLocalStorage();
+        if (loggedUser.email !== this.email) {
+            this.errorMessage = 'You are not allowed to enter this page!';
+            this.router.navigateByUrl('/404');
+        }
         this.getQuizCompleted();
     }
 
@@ -24,6 +31,7 @@ export class QuizComponent implements OnInit, AfterViewInit {
             .subscribe(response => {
                 if (response) {
                     this.errorMessage = 'You have already completed this quiz!';
+                    this.router.navigateByUrl('/404');
                 } else {
                     this.errorMessage = undefined;
                     this.getQuestions();

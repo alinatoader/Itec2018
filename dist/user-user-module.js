@@ -24,6 +24,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _quiz_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./quiz.service */ "./src/app/user/quiz.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _shared_services_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/services/user.service */ "./src/app/shared/services/user.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -36,14 +37,22 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var QuizComponent = /** @class */ (function () {
-    function QuizComponent(quizService, route) {
+    function QuizComponent(quizService, route, userService, router) {
         this.quizService = quizService;
         this.route = route;
+        this.userService = userService;
+        this.router = router;
     }
     QuizComponent.prototype.ngOnInit = function () {
         this.quizId = Number(this.route.snapshot.paramMap.get('id'));
         this.email = this.route.snapshot.paramMap.get('email');
+        var loggedUser = this.userService.getUserFromLocalStorage();
+        if (loggedUser.email !== this.email) {
+            this.errorMessage = 'You are not allowed to enter this page!';
+            this.router.navigateByUrl('/404');
+        }
         this.getQuizCompleted();
     };
     QuizComponent.prototype.getQuizCompleted = function () {
@@ -52,6 +61,7 @@ var QuizComponent = /** @class */ (function () {
             .subscribe(function (response) {
             if (response) {
                 _this.errorMessage = 'You have already completed this quiz!';
+                _this.router.navigateByUrl('/404');
             }
             else {
                 _this.errorMessage = undefined;
@@ -139,7 +149,8 @@ var QuizComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             template: __webpack_require__(/*! ./quiz.component.html */ "./src/app/user/quiz.component.html")
         }),
-        __metadata("design:paramtypes", [_quiz_service__WEBPACK_IMPORTED_MODULE_1__["QuizService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
+        __metadata("design:paramtypes", [_quiz_service__WEBPACK_IMPORTED_MODULE_1__["QuizService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+            _shared_services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], QuizComponent);
     return QuizComponent;
 }());

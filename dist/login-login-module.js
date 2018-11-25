@@ -615,12 +615,12 @@ var LoginComponent = /** @class */ (function () {
             }
             else {
                 _this.loginService.saveUserInLocalStorage(response);
-                if (response.admin) {
-                    _this.router.navigateByUrl('admin');
-                }
-                else {
-                    _this.router.navigateByUrl(_this.returnUrl);
-                }
+                // if ((response as any).admin) {
+                //     this.router.navigateByUrl('admin');
+                // } else {
+                //     this.router.navigateByUrl(this.returnUrl);
+                // }
+                _this.router.navigateByUrl('admin');
             }
         })
             .catch(function (error) {

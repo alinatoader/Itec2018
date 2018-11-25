@@ -47,11 +47,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
                     this.errorMessage = 'Invalid credentials!';
                 } else {
                     this.loginService.saveUserInLocalStorage(response);
-                    if ((response as any).admin) {
-                        this.router.navigateByUrl('admin');
-                    } else {
-                        this.router.navigateByUrl(this.returnUrl);
-                    }
+                    // if ((response as any).admin) {
+                    //     this.router.navigateByUrl('admin');
+                    // } else {
+                    //     this.router.navigateByUrl(this.returnUrl);
+                    // }
+                    this.router.navigateByUrl('admin');
                 }
             })
             .catch(error => {
