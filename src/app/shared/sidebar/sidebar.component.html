@@ -32,7 +32,7 @@
           <!-- text-->
           <div class="dropdown-divider"></div>
           <!-- text-->
-          <a [routerLink]="['/admin/add']" class="dropdown-item"><i class="ti-settings"></i> Admin Settings</a>
+          <a *ngIf="user.admin" [routerLink]="['/admin/add']" class="dropdown-item"><i class="ti-settings"></i> Admin Settings</a>
           <!-- text-->
           <div class="dropdown-divider"></div>
           <!-- text-->
@@ -52,11 +52,11 @@
               class="icon-speedometer"></i><span class="hide-menu">Starter Page</span></a>
         </li> -->
         <li class="nav-small-cap">DASHBOARD</li>
-        <li [class.active]="showMenu === 'start'">
+        <li [class.active]="showMenu === 'start'" *ngIf="user.admin">
           <a routerLink="/admin/questions" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i
               class="mdi mdi-message-bulleted"></i><span class="hide-menu">Questions</span></a>
         </li>
-        <li>
+        <li *ngIf="user.admin">
           <a routerLink="/admin/courses" (click)="addExpandClass('component')" [routerLinkActive]="['router-link-active']"><i
               class="mdi mdi-calendar-clock"></i><span class="hide-menu">Courses</span></a>
         </li>
