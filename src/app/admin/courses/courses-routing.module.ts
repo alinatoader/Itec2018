@@ -1,28 +1,28 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EventsDisplayComponent } from './events-display.component';
-import { EventsCreateComponent } from './events-create.component';
+import { CoursesDisplayComponent } from './courses-display.component';
+import { CoursesCreateComponent } from './courses-create.component';
 import { QuizCreateComponent } from './quiz-create.component';
 
 const routes: Routes = [
     {
         path: '',
         data: {
-            title: 'Events - Display',
+            title: 'Courses - Display',
             urls: [{ title: 'Dashboard', url: '/' }, { title: 'ngComponent' }, { title: 'Tabs' }]
         },
-        component: EventsDisplayComponent,
+        component: CoursesDisplayComponent,
     },
     {
         path: 'create',
-        component: EventsCreateComponent
+        component: CoursesCreateComponent
     },
     {
         path: 'create/:id',
-        component: EventsCreateComponent
+        component: CoursesCreateComponent
     },
     {
-        path: 'quiz/:eventId',
+        path: 'quiz/:courseId',
         component: QuizCreateComponent
     }
 ];
@@ -32,4 +32,4 @@ const routes: Routes = [
         RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class EventsRoutingModule { }
+export class CoursesRoutingModule { }

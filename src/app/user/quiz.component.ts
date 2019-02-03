@@ -98,7 +98,7 @@ export class QuizComponent implements OnInit, AfterViewInit {
         this.quizService.postResult(responseModel)
             .subscribe(_ => {
                 console.log('success');
-                this.getQuizCompleted();
+                this.router.navigateByUrl('/admin/quizzes');
             }, error => {
                 console.log(error);
             })

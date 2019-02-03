@@ -1,16 +1,16 @@
 import { Component, OnInit } from "@angular/core";
-import { EventsService } from "./events.service";
 import { FormGroup, FormControl, FormArray } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
+import { CoursesService } from "./courses.service";
 
 @Component({
     templateUrl: 'quiz-create.component.html'
 })
 export class QuizCreateComponent implements OnInit {
-    eventId: number;
+    courseId: number;
     quizCreateForm: FormGroup;
 
-    constructor(private eventsService: EventsService, private router: Router,
+    constructor(private eventsService: CoursesService, private router: Router,
         private route: ActivatedRoute) { }
 
     ngOnInit(): void {
@@ -20,16 +20,16 @@ export class QuizCreateComponent implements OnInit {
             time: new FormControl(''),
             ruleList: new FormArray([])
         });
-        this.eventId = Number(this.route.snapshot.paramMap.get('eventId'));
+        this.courseId = Number(this.route.snapshot.paramMap.get('courseId'));
 
     }
 
     saveQuiz() {
         let quiz = this.quizCreateForm.value;
-        quiz.eventId = this.eventId;
+        quiz.courseId = this.courseId;
         this.eventsService.createQuiz(quiz)
             .subscribe(response => {
-                this.router.navigateByUrl('/admin/events');
+                this.router.navigateByUrl('/admin/courses');
             }, error => {
                 console.log(error);
             }

@@ -1,0 +1,20 @@
+<div *ngIf="quizzes">
+    <div class="row" *ngFor="let quiz of quizzes">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">{{quiz.name}}
+                    </h3>
+                        <h4 class="card-subtitle">
+                            <span *ngFor="let rule of quiz.ruleList">
+                                #{{rule.category}} - {{rule.difficulty}}
+                            </span>
+                            <div style="float:right;">
+                                <button [disabled]="quiz.taken" type="button" class="btn btn-info btn-lg" (click)="goToQuiz(quiz.id)">Start</button>
+                            </div>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

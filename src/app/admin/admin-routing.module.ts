@@ -8,8 +8,10 @@ const routes: Routes = [
         path: '', component: AdminComponent,
         children: [
             { path: 'questions', loadChildren: './questions/questions.module#QuestionsModule' },
-            { path: 'events', loadChildren: './events/events.module#EventsModule' },
+            { path: 'courses', loadChildren: './courses/courses.module#CoursesModule' },
             { path: 'add', component: AdminAddComponent },
+            { path: 'quizzes', loadChildren: './quizzes/quizzes.module#QuizzesModule' },
+
 
             { path: 'starter', loadChildren: './starter/starter.module#StarterModule' },
             { path: 'accordion', loadChildren: './component/accordion/accordion.module#AccordionModule' },

@@ -5,8 +5,9 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
     providedIn: 'root',
 })
 export class UserService implements OnInit {
-    apiUrl = 'https://apiitec2018tm.herokuapp.com';
-
+    //apiUrl = 'https://apiitec2018tm.herokuapp.com';
+    apiUrl = 'http://localhost:8080';
+    
     constructor(private http: HttpClient) { }
 
     login(user: any) {

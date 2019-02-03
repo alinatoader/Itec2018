@@ -5,8 +5,9 @@ import { Injectable } from "@angular/core";
     providedIn: 'root',
 })
 export class QuestionsService {
-    apiUrl = 'https://apiitec2018tm.herokuapp.com/question/';
-
+    //apiUrl = 'https://apiitec2018tm.herokuapp.com/question/';
+    apiUrl = 'http://localhost:8080/question/';
+    
     constructor(private http: HttpClient) { }
 
     getAll() {

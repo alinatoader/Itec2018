@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgbTabChangeEvent, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { EventsService } from "./events.service";
 import { Router } from "@angular/router";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { CoursesService } from "./courses.service";
 @Component({
-    templateUrl: 'events-display.component.html',
+    templateUrl: 'courses-display.component.html',
     styles: [`
     .dark-modal .modal-content {
       background-color: #009efb;
@@ -15,14 +15,15 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
     }
   `]
 })
-export class EventsDisplayComponent implements OnInit {
-    events: any;
+export class CoursesDisplayComponent implements OnInit {
+    courses: any;
     public linkForQR: string = null;
     closeResult: string;
     emailForm: FormGroup;
     quizId = 0;
+    teachers: any;
 
-    constructor(private eventsService: EventsService, private router: Router,
+    constructor(private coursesService: CoursesService, private router: Router,
         private modalService: NgbModal, private modalService2: NgbModal) { }
 
     public beforeChange($event: NgbTabChangeEvent) {
@@ -32,16 +33,25 @@ export class EventsDisplayComponent implements OnInit {
     };
 
     getAll() {
-        this.eventsService.getAll().subscribe(events => {
-            this.events = events;
+        this.coursesService.getAll().subscribe(courses => {
+            this.courses = courses;console.log(this.courses);
         },
             error => {
                 console.log(error);
             })
     }
 
-    deleteEvent(id:number) {
-        this.eventsService.delete(id).subscribe(_ => {
+    getAllTeachers() {
+        this.coursesService.getAllTeachers().subscribe(teachers => {
+            this.teachers = teachers;
+        },
+            error => {
+                console.log(error);
+            })
+    }
+
+    deleteCourse(id:number) {
+        this.coursesService.delete(id).subscribe(_ => {
             this.getAll();
         },
             error => {
@@ -50,16 +60,17 @@ export class EventsDisplayComponent implements OnInit {
         );
     }
 
-    editEvent(id:number) {
-        this.router.navigateByUrl('/admin/events/create/' + id);
+    editCourse(id:number) {
+        this.router.navigateByUrl('/admin/courses/create/' + id);
     }
 
-    addQuiz(eventId: number) {
-        this.router.navigateByUrl('/admin/events/quiz/' + eventId);
+    addQuiz(courseId: number) {
+        this.router.navigateByUrl('/admin/courses/quiz/' + courseId);
     }
 
     ngOnInit(): void {
         this.getAll();
+        this.getAllTeachers();
         this.emailForm = new FormGroup({
             email: new FormControl('', Validators.email)
         })
@@ -72,7 +83,7 @@ export class EventsDisplayComponent implements OnInit {
         this.open2(content);
     }
 
-    onEmailChange(event) {
+    onEmailChange(course) {
         const emailInput = this.emailForm.get('email');
         if (emailInput.valid) {
             this.linkForQR = 'https://quizzmee.herokuapp.com/#/user/quiz/' + this.quizId + '/' + emailInput.value;
@@ -101,42 +112,45 @@ export class EventsDisplayComponent implements OnInit {
         }
     }
 
-    search(event, statusSelect, sortSelect) {
-        const searchValue = event.target.value;
+    search(course, statusSelect, sortSelect) {
+        const searchValue = course.target.value;
         const body = {
             searchName: searchValue,
-            eventStatus: statusSelect.value,
+            teacherName: statusSelect.value,
             sortByDate: sortSelect.value === 'ASC' ? true : false,
+            sort: sortSelect.value !== 'NONE' ? true: false
         }
-        this.eventsService.filter(body)
+        this.coursesService.filter(body)
             .subscribe(response => {
-                this.events = response;
+                this.courses = response;
             }, error => console.log(error));
     }
 
-    filter(event, sortSelect, searchInput) {
-        const filterStatus = event.target.value;
+    filter(course, sortSelect, searchInput) {
+        const filterStatus = course.target.value;
         const body = {
             searchName: searchInput.value,
-            eventStatus: filterStatus,
+            teacherName: filterStatus,
             sortByDate: sortSelect.value === 'ASC' ? true : false,
+            sort: sortSelect.value !== 'NONE' ? true: false
         }
-        this.eventsService.filter(body)
+        this.coursesService.filter(body)
             .subscribe(response => {
-                this.events = response;
+                this.courses = response;
             }, error => console.log(error));
     }
 
-    sort(event, statusSelect, searchInput) {
-        const sortDir = event.target.value;
+    sort(course, statusSelect, searchInput) {
+        const sortDir = course.target.value;
         const body = {
             searchName: searchInput.value,
-            eventStatus: statusSelect.value,
+            teacherName: statusSelect.value,
             sortByDate: sortDir === 'ASC' ? true : false,
+            sort: sortDir !== 'NONE' ? true: false
         }
-        this.eventsService.filter(body)
+        this.coursesService.filter(body)
             .subscribe(response => {
-                this.events = response;
+                this.courses = response;
             }, error => console.log(error));
     }
 }

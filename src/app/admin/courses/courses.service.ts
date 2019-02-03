@@ -4,13 +4,18 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 @Injectable({
     providedIn: 'root',
 })
-export class EventsService implements OnInit {
-    apiUrl = 'https://apiitec2018tm.herokuapp.com/event/';
+export class CoursesService implements OnInit {
+    //apiUrl = 'https://apiitec2018tm.herokuapp.com/event/';
+    apiUrl = 'http://localhost:8080/course/';
 
     constructor(private http: HttpClient) { }
 
     getAll() {
         return this.http.get(this.apiUrl);
+    }
+
+    getAllTeachers(){
+        return this.http.get(this.apiUrl + 'teachers');
     }
 
     delete(id: number) {
@@ -36,7 +41,8 @@ export class EventsService implements OnInit {
     }
 
     createQuiz(quiz: any) {
-        return this.http.post('https://apiitec2018tm.herokuapp.com/quiz', quiz);
+        //return this.http.post('https://apiitec2018tm.herokuapp.com/quiz', quiz);
+        return this.http.post('http://localhost:8080/quiz', quiz);
     }
 
     ngOnInit(): void {
