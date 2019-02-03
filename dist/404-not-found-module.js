@@ -59,7 +59,7 @@ module.exports = "/*.error-box {\r\n  height: 100%;\r\n  position: fixed;\r\n  b
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"error-box\">\r\n    <div class=\"error-body text-center\">\r\n        <h1>404</h1>\r\n        <h3 class=\"text-uppercase\">Page Not Found !</h3>\r\n        <p class=\"text-muted m-t-30 m-b-30\">YOU SEEM TO BE TRYING TO FIND HIS WAY HOME</p>\r\n        <a class=\"btn btn-info btn-rounded waves-effect waves-light m-b-40\" [routerLink]=\"['/']\">Back to home</a> </div>\r\n    <footer class=\"footer text-center\">© 2018 A&B</footer>\r\n</div>"
+module.exports = "<div class=\"error-box\">\r\n    <div class=\"error-body text-center\">\r\n        <h1>404</h1>\r\n        <h3 class=\"text-uppercase\">Page Not Found !</h3>\r\n        <p class=\"text-muted m-t-30 m-b-30\">YOU SEEM TO BE TRYING TO FIND HIS WAY HOME</p>\r\n        <a class=\"btn btn-info btn-rounded waves-effect waves-light m-b-40\" [routerLink]=\"['/']\">Back to home</a> </div>\r\n    <footer class=\"footer text-center\">© 2019 A&B</footer>\r\n</div>"
 
 /***/ }),
 

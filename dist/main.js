@@ -71,9 +71,9 @@ var map = {
 		"common",
 		"component-typehead-typehead-module"
 	],
-	"./events/events.module": [
-		"./src/app/admin/events/events.module.ts",
-		"events-events-module"
+	"./courses/courses.module": [
+		"./src/app/admin/courses/courses.module.ts",
+		"courses-courses-module"
 	],
 	"./login/login.module": [
 		"./src/app/login/login.module.ts",
@@ -83,6 +83,11 @@ var map = {
 	"./questions/questions.module": [
 		"./src/app/admin/questions/questions.module.ts",
 		"questions-questions-module"
+	],
+	"./quizzes/quizzes.module": [
+		"./src/app/admin/quizzes/quizzes.module.ts",
+		"common",
+		"quizzes-quizzes-module"
 	],
 	"./signup/signup.module": [
 		"./src/app/signup/signup.module.ts",

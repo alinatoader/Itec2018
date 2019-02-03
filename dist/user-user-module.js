@@ -130,7 +130,7 @@ var QuizComponent = /** @class */ (function () {
         this.quizService.postResult(responseModel)
             .subscribe(function (_) {
             console.log('success');
-            _this.getQuizCompleted();
+            _this.router.navigateByUrl('/admin/quizzes');
         }, function (error) {
             console.log(error);
         });
@@ -155,56 +155,6 @@ var QuizComponent = /** @class */ (function () {
             _shared_services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], QuizComponent);
     return QuizComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/user/quiz.service.ts":
-/*!**************************************!*\
-  !*** ./src/app/user/quiz.service.ts ***!
-  \**************************************/
-/*! exports provided: QuizService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QuizService", function() { return QuizService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var QuizService = /** @class */ (function () {
-    function QuizService(http) {
-        this.http = http;
-        this.apiUrl = 'https://apiitec2018tm.herokuapp.com';
-    }
-    QuizService.prototype.getQuestions = function (quizId) {
-        return this.http.get(this.apiUrl + '/question/test/' + quizId);
-    };
-    QuizService.prototype.postResult = function (result) {
-        return this.http.post(this.apiUrl + '/result', result);
-    };
-    QuizService.prototype.getQuizCompleted = function (email, quizId) {
-        return this.http.get(this.apiUrl + '/result/' + email + '/' + quizId);
-    };
-    QuizService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
-            providedIn: 'root',
-        }),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
-    ], QuizService);
-    return QuizService;
 }());
 
 

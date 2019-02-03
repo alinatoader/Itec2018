@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["events-events-module"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["courses-courses-module"],{
 
 /***/ "./node_modules/angularx-qrcode/dist/angularx-qrcode.module.js":
 /*!*********************************************************************!*\
@@ -851,31 +851,31 @@ var QRCode;
 
 /***/ }),
 
-/***/ "./src/app/admin/events/events-create.component.html":
-/*!***********************************************************!*\
-  !*** ./src/app/admin/events/events-create.component.html ***!
-  \***********************************************************/
+/***/ "./src/app/admin/courses/courses-create.component.html":
+/*!*************************************************************!*\
+  !*** ./src/app/admin/courses/courses-create.component.html ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\r\n    <div class=\"card-body\">\r\n        <h3 class=\"card-title\">\r\n            Create new event\r\n        </h3>\r\n        <form class=\"form-horizontal form-material\" id=\"eventCreateForm\" (submit)=\"saveEvent()\" [formGroup]=\"eventCreateForm\">\r\n            <input class=\"form-control\" type=\"text\" required=\"\" placeholder=\"Name\" formControlName=\"name\">\r\n            <input class=\"form-control\" type=\"text\" required=\"\" placeholder=\"Description\" formControlName=\"description\">\r\n            <input class=\"form-control\" type=\"text\" required=\"\" placeholder=\"StartDate\" formControlName=\"startDate\">\r\n            <input class=\"form-control\" type=\"text\" required=\"\" placeholder=\"EndDate\" formControlName=\"endDate\">\r\n            <div class=\"text-center m-t-20\">\r\n                <button type=\"submit\" [disabled]=\"eventCreateForm.invalid\" class=\"btn btn-info btn-md btn-block text-uppercase waves-effect waves-light\">\r\n                    Save</button>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"card\">\r\n    <div class=\"card-body\">\r\n        <h3 class=\"card-title\">\r\n            Create new course\r\n        </h3>\r\n        <form class=\"form-horizontal form-material\" id=\"courseCreateForm\" (submit)=\"savecourse()\" [formGroup]=\"courseCreateForm\">\r\n            <input class=\"form-control\" type=\"text\" required=\"\" placeholder=\"Name\" formControlName=\"name\">\r\n            <input class=\"form-control\" type=\"text\" required=\"\" placeholder=\"Description\" formControlName=\"description\">\r\n            <input class=\"form-control\" type=\"text\" required=\"\" placeholder=\"Teacher Name\" formControlName=\"teacherName\">\r\n            <div class=\"text-center m-t-20\">\r\n                <button type=\"submit\" [disabled]=\"courseCreateForm.invalid\" class=\"btn btn-info btn-md btn-block text-uppercase waves-effect waves-light\">\r\n                    Save</button>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
-/***/ "./src/app/admin/events/events-create.component.ts":
-/*!*********************************************************!*\
-  !*** ./src/app/admin/events/events-create.component.ts ***!
-  \*********************************************************/
-/*! exports provided: EventsCreateComponent */
+/***/ "./src/app/admin/courses/courses-create.component.ts":
+/*!***********************************************************!*\
+  !*** ./src/app/admin/courses/courses-create.component.ts ***!
+  \***********************************************************/
+/*! exports provided: CoursesCreateComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventsCreateComponent", function() { return EventsCreateComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CoursesCreateComponent", function() { return CoursesCreateComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _events_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./events.service */ "./src/app/admin/events/events.service.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _courses_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./courses.service */ "./src/app/admin/courses/courses.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -889,101 +889,100 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-var EventsCreateComponent = /** @class */ (function () {
-    function EventsCreateComponent(eventsService, router, route) {
-        this.eventsService = eventsService;
+var CoursesCreateComponent = /** @class */ (function () {
+    function CoursesCreateComponent(coursesService, router, route) {
+        this.coursesService = coursesService;
         this.router = router;
         this.route = route;
     }
-    EventsCreateComponent.prototype.ngOnInit = function () {
-        this.eventCreateForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
-            id: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](0),
-            name: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
-            description: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
-            startDate: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
-            endDate: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
+    CoursesCreateComponent.prototype.ngOnInit = function () {
+        this.courseCreateForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
+            id: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](0),
+            name: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](''),
+            description: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](''),
+            teacherName: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](''),
         });
         this.id = this.route.snapshot.paramMap.get('id');
         if (this.id) {
-            this.getEventByName(this.id);
+            this.getcourseByName(this.id);
         }
     };
-    EventsCreateComponent.prototype.addEvent = function () {
+    CoursesCreateComponent.prototype.addcourse = function () {
         var _this = this;
-        this.eventsService.create(this.eventCreateForm.value)
+        this.coursesService.create(this.courseCreateForm.value)
             .subscribe(function (response) {
             console.log(response);
-            _this.router.navigateByUrl('/admin/events');
+            _this.router.navigateByUrl('/admin/courses');
         }, function (error) {
             console.log(error);
         });
     };
-    EventsCreateComponent.prototype.saveEvent = function () {
+    CoursesCreateComponent.prototype.savecourse = function () {
         if (this.id) {
-            this.updateEvent();
+            this.updatecourse();
         }
         else {
-            this.addEvent();
+            this.addcourse();
         }
     };
-    EventsCreateComponent.prototype.updateEvent = function () {
+    CoursesCreateComponent.prototype.updatecourse = function () {
         var _this = this;
-        this.eventsService.update(this.id, this.eventCreateForm.value)
+        this.coursesService.update(this.id, this.courseCreateForm.value)
             .subscribe(function (response) {
             console.log(response);
-            _this.router.navigateByUrl('/admin/events');
+            _this.router.navigateByUrl('/admin/courses');
         }, function (error) {
             console.log(error);
         });
     };
-    EventsCreateComponent.prototype.getEventByName = function (id) {
+    CoursesCreateComponent.prototype.getcourseByName = function (id) {
         var _this = this;
-        this.eventsService.getById(id).subscribe(function (response) {
+        this.coursesService.getById(id).subscribe(function (response) {
             console.log(response);
-            _this.eventCreateForm.setValue(response);
+            _this.courseCreateForm.setValue(response);
         }, function (error) { return console.log(error); });
     };
-    EventsCreateComponent = __decorate([
+    CoursesCreateComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-events-create',
-            template: __webpack_require__(/*! ./events-create.component.html */ "./src/app/admin/events/events-create.component.html")
+            selector: 'app-courses-create',
+            template: __webpack_require__(/*! ./courses-create.component.html */ "./src/app/admin/courses/courses-create.component.html")
         }),
-        __metadata("design:paramtypes", [_events_service__WEBPACK_IMPORTED_MODULE_1__["EventsService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])
-    ], EventsCreateComponent);
-    return EventsCreateComponent;
+        __metadata("design:paramtypes", [_courses_service__WEBPACK_IMPORTED_MODULE_3__["CoursesService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
+    ], CoursesCreateComponent);
+    return CoursesCreateComponent;
 }());
 
 
 
 /***/ }),
 
-/***/ "./src/app/admin/events/events-display.component.html":
-/*!************************************************************!*\
-  !*** ./src/app/admin/events/events-display.component.html ***!
-  \************************************************************/
+/***/ "./src/app/admin/courses/courses-display.component.html":
+/*!**************************************************************!*\
+  !*** ./src/app/admin/courses/courses-display.component.html ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"col-12\">\r\n    <div class=\"card\">\r\n      <div class=\"card-body\">\r\n        <a routerLink=\"/admin/events/create\" class=\"btn btn-info btn-large\">Create new event</a>\r\n        <form role=\"search\" class=\"app-search hidden-sm-down\">\r\n\r\n            <select class=\"form-control\" title=\"Status\" (change)=\"filter($event, sortSelect, searchInput)\" #statusSelect>\r\n                <option selected>NONE</option>\r\n                <option>EXPIRED</option>\r\n                <option>INPROGRESS</option>\r\n                <option>INCOMING</option>\r\n            </select>\r\n            <select class=\"form-control\" title=\"Sort\" (change)=\"sort($event, statusSelect, searchInput)\" #sortSelect>\r\n                <option value=\"\" disabled selected>Sort</option>\r\n                <option >ASC</option>\r\n                <option>DESC</option>\r\n            </select>\r\n\r\n            <input type=\"text\" placeholder=\"Search...\" class=\"form-control\" (input)=\"search($event, statusSelect, sortSelect)\" #searchInput>\r\n            <a href=\"\"><i class=\"fa fa-search\"></i></a>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-6\" *ngFor=\"let event of events\">\r\n    <div class=\"card\">\r\n      <div class=\"card-body\">\r\n        <h3 class=\"card-title\">\r\n          {{event.name}}\r\n          <div style=\"float:right;\">\r\n            <button type=\"button\" class=\"btn btn-info btn-sm\" (click)=\"addQuiz(event.id)\">Add quiz</button>\r\n            <button type=\"button\" class=\"btn btn-warning btn-sm\" (click)=\"editEvent(event.id)\">Edit</button>\r\n            <button type=\"button\" class=\"btn btn-danger btn-sm\" (click)=\"deleteEvent(event.id)\">Delete</button>\r\n          </div>\r\n        </h3>\r\n        <h6 class=\"card-subtitle\">{{event.description}}</h6>\r\n        <ngb-tabset>\r\n          <ngb-tab title=\"Dates\">\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Begins: {{event.startDate}}</p>\r\n              <p class=\"p-t-20\">Ends: {{event.endDate}}</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab title=\"Quizzes\">\r\n            <ng-template ngbTabContent>\r\n              <p *ngFor=\"let quiz of event.quizzes\" class=\"p-t-20\">\r\n                {{quiz.name}}\r\n                <span style=\"float:right\"><button type=\"button\" class=\"btn btn-info btn-sm\" (click)=\"generateQR(quiz.id, content)\">Generate\r\n                    QRCode</button></span>\r\n              </p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab>\r\n            <ng-template ngbTabTitle><b>Leaderboard</b></ng-template>\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Leaderboard</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n          <ngb-tab title=\"Statistics\">\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\">Statistics</p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n        </ngb-tabset>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <ng-template #content let-c=\"close\" let-d=\"dismiss\">\r\n    <div class=\"modal-header\">\r\n      <h4 class=\"modal-title\">Scan this!</h4>\r\n      <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\r\n        <span aria-hidden=\"true\">&times;</span>\r\n      </button>\r\n    </div>\r\n    <div class=\"modal-body\" style=\"margin-left:auto; margin-right:auto\">\r\n      <form [formGroup]=\"emailForm\">\r\n        <label class=\"control-label\">User email: </label>\r\n        <input type=\"email\" formControlName=\"email\" class=\"form-control\" (input)=\"onEmailChange($event)\">\r\n      </form>\r\n      <br />\r\n      <div *ngIf=\"linkForQR\">\r\n        <qrcode [qrdata]=\"linkForQR\" [size]=\"256\" [level]=\"'M'\"></qrcode>\r\n      </div>\r\n    </div>\r\n  </ng-template>"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col-12\">\r\n    <div class=\"card\">\r\n      <div class=\"card-body\">\r\n        <a routerLink=\"/admin/courses/create\" class=\"btn btn-info btn-large\">Create new course</a>\r\n        <form role=\"search\" class=\"app-search hidden-sm-down\">\r\n\r\n          <select class=\"form-control\" title=\"Status\" (change)=\"filter($event, sortSelect, searchInput)\" #statusSelect>\r\n            <option selected>NONE</option>\r\n            <option *ngFor=\"let teacher of teachers\">{{teacher}}</option>\r\n          </select>\r\n          <select class=\"form-control\" title=\"Sort\" (change)=\"sort($event, statusSelect, searchInput)\" #sortSelect>\r\n            <option selected>NONE</option>\r\n            <option>ASC</option>\r\n            <option>DESC</option>\r\n          </select>\r\n\r\n          <input type=\"text\" placeholder=\"Search...\" class=\"form-control\" (input)=\"search($event, statusSelect, sortSelect)\"\r\n            #searchInput>\r\n          <a href=\"\"><i class=\"fa fa-search\"></i></a>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-md-6\" *ngFor=\"let course of courses\">\r\n    <div class=\"card\">\r\n      <div class=\"card-body\">\r\n        <h3 class=\"card-title\">\r\n          {{course.name}}\r\n          <div style=\"float:right;\">\r\n            <button type=\"button\" class=\"btn btn-info btn-sm\" (click)=\"addQuiz(course.id)\">Add quiz</button>\r\n            <button type=\"button\" class=\"btn btn-warning btn-sm\" (click)=\"editCourse(course.id)\">Edit</button>\r\n            <button type=\"button\" class=\"btn btn-danger btn-sm\" (click)=\"deleteCourse(course.id)\">Delete</button>\r\n          </div>\r\n        </h3>\r\n        <h6 class=\"card-subtitle\">{{course.description}} - {{course.teacherName}}</h6>\r\n        <ngb-tabset>\r\n          <ngb-tab title=\"Quizzes\">\r\n            <ng-template ngbTabContent>\r\n              <p *ngFor=\"let quiz of course.quizzes\" class=\"p-t-20\">\r\n                {{quiz.name}}\r\n                <span style=\"float:right\"><button type=\"button\" class=\"btn btn-info btn-sm\" (click)=\"generateQR(quiz.id, content)\">Generate\r\n                    QRCode</button></span>\r\n              </p>\r\n            </ng-template>\r\n          </ngb-tab>\r\n\r\n          <ngb-tab title=\"Files\">\r\n            <ng-template ngbTabContent>\r\n              <p class=\"p-t-20\" style=\"float:right;\"> <button (click)=\"uploadnewFile(upload, course)\" type=\"button\"\r\n                  class=\"btn btn-info btn-sm\">Upload\r\n                  new file</button></p>\r\n              <div *ngFor=\"let file of course.files\">\r\n                <button style=\"margin-top: 5px;\" type=\"button\" class=\"btn btn-outline-info btn-sm\" (click)=\"downloadFile(file)\">{{file}}</button>\r\n              </div>\r\n            </ng-template>\r\n          </ngb-tab>\r\n        </ngb-tabset>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <ng-template #content let-c=\"close\" let-d=\"dismiss\">\r\n    <div class=\"modal-header\">\r\n      <h4 class=\"modal-title\">Scan this!</h4>\r\n      <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\r\n        <span aria-hidden=\"true\">&times;</span>\r\n      </button>\r\n    </div>\r\n    <div class=\"modal-body\" style=\"margin-left:auto; margin-right:auto\">\r\n      <form [formGroup]=\"emailForm\">\r\n        <label class=\"control-label\">User email: </label>\r\n        <input type=\"email\" formControlName=\"email\" class=\"form-control\" (input)=\"onEmailChange($event)\">\r\n      </form>\r\n      <br />\r\n      <div *ngIf=\"linkForQR\">\r\n        <qrcode [qrdata]=\"linkForQR\" [size]=\"256\" [level]=\"'M'\"></qrcode>\r\n      </div>\r\n    </div>\r\n  </ng-template>\r\n\r\n  <ng-template #upload let-c=\"close\" let-d=\"dismiss\">\r\n    <div class=\"modal-header\">\r\n      <h4 class=\"modal-title\">Upload file for {{course.name}}</h4>\r\n      <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\r\n        <span aria-hidden=\"true\">&times;</span>\r\n      </button>\r\n    </div>\r\n    <div class=\"modal-body\" style=\"margin-left:auto; margin-right:auto\">\r\n      <form [formGroup]=\"uploadForm\" enctype=\"multipart/form-data\">\r\n        <input type=\"file\" formControlName=\"file\" class=\"form-control\" (input)=\"uploadFile($event)\">\r\n      </form>\r\n      <br />\r\n    </div>\r\n  </ng-template>"
 
 /***/ }),
 
-/***/ "./src/app/admin/events/events-display.component.ts":
-/*!**********************************************************!*\
-  !*** ./src/app/admin/events/events-display.component.ts ***!
-  \**********************************************************/
-/*! exports provided: EventsDisplayComponent */
+/***/ "./src/app/admin/courses/courses-display.component.ts":
+/*!************************************************************!*\
+  !*** ./src/app/admin/courses/courses-display.component.ts ***!
+  \************************************************************/
+/*! exports provided: CoursesDisplayComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventsDisplayComponent", function() { return EventsDisplayComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CoursesDisplayComponent", function() { return CoursesDisplayComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
-/* harmony import */ var _events_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./events.service */ "./src/app/admin/events/events.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _courses_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./courses.service */ "./src/app/admin/courses/courses.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -998,62 +997,97 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-var EventsDisplayComponent = /** @class */ (function () {
-    function EventsDisplayComponent(eventsService, router, modalService, modalService2) {
-        this.eventsService = eventsService;
+var CoursesDisplayComponent = /** @class */ (function () {
+    function CoursesDisplayComponent(coursesService, router, modalService, modalService2) {
+        this.coursesService = coursesService;
         this.router = router;
         this.modalService = modalService;
         this.modalService2 = modalService2;
         this.linkForQR = null;
         this.quizId = 0;
     }
-    EventsDisplayComponent.prototype.beforeChange = function ($event) {
+    CoursesDisplayComponent.prototype.beforeChange = function ($event) {
         if ($event.nextId === 'tab-preventchange2') {
             $event.preventDefault();
         }
     };
     ;
-    EventsDisplayComponent.prototype.getAll = function () {
+    CoursesDisplayComponent.prototype.getAll = function () {
         var _this = this;
-        this.eventsService.getAll().subscribe(function (events) {
-            _this.events = events;
+        this.coursesService.getAll().subscribe(function (courses) {
+            _this.courses = courses;
+            console.log(_this.courses);
+            var _loop_1 = function (i) {
+                _this.coursesService.getFiles(_this.courses[i].id).subscribe(function (response) {
+                    _this.courses[i].files = response;
+                }, function (error) {
+                    console.log(error);
+                });
+            };
+            for (var i = 0; i < _this.courses.length; i++) {
+                _loop_1(i);
+            }
         }, function (error) {
             console.log(error);
         });
     };
-    EventsDisplayComponent.prototype.deleteEvent = function (id) {
+    CoursesDisplayComponent.prototype.getAllTeachers = function () {
         var _this = this;
-        this.eventsService.delete(id).subscribe(function (_) {
+        this.coursesService.getAllTeachers().subscribe(function (teachers) {
+            _this.teachers = teachers;
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    CoursesDisplayComponent.prototype.deleteCourse = function (id) {
+        var _this = this;
+        this.coursesService.delete(id).subscribe(function (_) {
             _this.getAll();
         }, function (error) {
             console.log(error);
         });
     };
-    EventsDisplayComponent.prototype.editEvent = function (id) {
-        this.router.navigateByUrl('/admin/events/create/' + id);
+    CoursesDisplayComponent.prototype.editCourse = function (id) {
+        this.router.navigateByUrl('/admin/courses/create/' + id);
     };
-    EventsDisplayComponent.prototype.addQuiz = function (eventId) {
-        this.router.navigateByUrl('/admin/events/quiz/' + eventId);
+    CoursesDisplayComponent.prototype.addQuiz = function (courseId) {
+        this.router.navigateByUrl('/admin/courses/quiz/' + courseId);
     };
-    EventsDisplayComponent.prototype.ngOnInit = function () {
+    CoursesDisplayComponent.prototype.ngOnInit = function () {
         this.getAll();
-        this.emailForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormGroup"]({
-            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].email)
+        this.getAllTeachers();
+        this.emailForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
+            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].email)
+        });
+        this.uploadForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
+            file: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]()
         });
     };
-    EventsDisplayComponent.prototype.generateQR = function (quizId, content) {
+    CoursesDisplayComponent.prototype.generateQR = function (quizId, content) {
         this.linkForQR = null;
         this.emailForm.reset();
         this.quizId = quizId;
         this.open2(content);
     };
-    EventsDisplayComponent.prototype.onEmailChange = function (event) {
+    CoursesDisplayComponent.prototype.uploadFile = function (event) {
+        this.coursesService.upload(this.course.id, event.target.files.item(0))
+            .subscribe(function (_) {
+            window.location.reload();
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    CoursesDisplayComponent.prototype.uploadnewFile = function (content, course) {
+        this.course = course;
+        this.open2(content);
+    };
+    CoursesDisplayComponent.prototype.onEmailChange = function (course) {
         var emailInput = this.emailForm.get('email');
         if (emailInput.valid) {
             this.linkForQR = 'https://quizzmee.herokuapp.com/#/user/quiz/' + this.quizId + '/' + emailInput.value;
         }
     };
-    EventsDisplayComponent.prototype.open2 = function (content) {
+    CoursesDisplayComponent.prototype.open2 = function (content) {
         var _this = this;
         this.modalService.open(content).result.then(function (result) {
             _this.closeResult = "Closed with: " + result;
@@ -1061,10 +1095,10 @@ var EventsDisplayComponent = /** @class */ (function () {
             _this.closeResult = "Dismissed " + _this.getDismissReason(reason);
         });
     };
-    EventsDisplayComponent.prototype.open = function (content) {
+    CoursesDisplayComponent.prototype.open = function (content) {
         this.modalService2.open(content, { windowClass: 'dark-modal' });
     };
-    EventsDisplayComponent.prototype.getDismissReason = function (reason) {
+    CoursesDisplayComponent.prototype.getDismissReason = function (reason) {
         if (reason === _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["ModalDismissReasons"].ESC) {
             return 'by pressing ESC';
         }
@@ -1075,75 +1109,90 @@ var EventsDisplayComponent = /** @class */ (function () {
             return "with: " + reason;
         }
     };
-    EventsDisplayComponent.prototype.search = function (event, statusSelect, sortSelect) {
+    CoursesDisplayComponent.prototype.search = function (course, statusSelect, sortSelect) {
         var _this = this;
-        var searchValue = event.target.value;
+        var searchValue = course.target.value;
         var body = {
             searchName: searchValue,
-            eventStatus: statusSelect.value,
+            teacherName: statusSelect.value,
             sortByDate: sortSelect.value === 'ASC' ? true : false,
+            sort: sortSelect.value !== 'NONE' ? true : false
         };
-        this.eventsService.filter(body)
+        this.coursesService.filter(body)
             .subscribe(function (response) {
-            _this.events = response;
+            _this.courses = response;
         }, function (error) { return console.log(error); });
     };
-    EventsDisplayComponent.prototype.filter = function (event, sortSelect, searchInput) {
+    CoursesDisplayComponent.prototype.filter = function (course, sortSelect, searchInput) {
         var _this = this;
-        var filterStatus = event.target.value;
+        var filterStatus = course.target.value;
         var body = {
             searchName: searchInput.value,
-            eventStatus: filterStatus,
+            teacherName: filterStatus,
             sortByDate: sortSelect.value === 'ASC' ? true : false,
+            sort: sortSelect.value !== 'NONE' ? true : false
         };
-        this.eventsService.filter(body)
+        this.coursesService.filter(body)
             .subscribe(function (response) {
-            _this.events = response;
+            _this.courses = response;
         }, function (error) { return console.log(error); });
     };
-    EventsDisplayComponent.prototype.sort = function (event, statusSelect, searchInput) {
+    CoursesDisplayComponent.prototype.sort = function (course, statusSelect, searchInput) {
         var _this = this;
-        var sortDir = event.target.value;
+        var sortDir = course.target.value;
         var body = {
             searchName: searchInput.value,
-            eventStatus: statusSelect.value,
+            teacherName: statusSelect.value,
             sortByDate: sortDir === 'ASC' ? true : false,
+            sort: sortDir !== 'NONE' ? true : false
         };
-        this.eventsService.filter(body)
+        this.coursesService.filter(body)
             .subscribe(function (response) {
-            _this.events = response;
+            _this.courses = response;
         }, function (error) { return console.log(error); });
     };
-    EventsDisplayComponent = __decorate([
+    CoursesDisplayComponent.prototype.downloadFile = function (fileName) {
+        this.coursesService.downloadFile(fileName).subscribe(function (data) {
+            var blob = new Blob([data]);
+            var downloadURL = window.URL.createObjectURL(data);
+            var link = document.createElement('a');
+            link.href = downloadURL;
+            link.download = fileName;
+            link.click();
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    CoursesDisplayComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            template: __webpack_require__(/*! ./events-display.component.html */ "./src/app/admin/events/events-display.component.html"),
+            template: __webpack_require__(/*! ./courses-display.component.html */ "./src/app/admin/courses/courses-display.component.html"),
             styles: ["\n    .dark-modal .modal-content {\n      background-color: #009efb;\n      color: white;\n    }\n    .dark-modal .close {\n      color: white;   \n    }\n  "]
         }),
-        __metadata("design:paramtypes", [_events_service__WEBPACK_IMPORTED_MODULE_2__["EventsService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
+        __metadata("design:paramtypes", [_courses_service__WEBPACK_IMPORTED_MODULE_4__["CoursesService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
             _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["NgbModal"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["NgbModal"]])
-    ], EventsDisplayComponent);
-    return EventsDisplayComponent;
+    ], CoursesDisplayComponent);
+    return CoursesDisplayComponent;
 }());
 
 
 
 /***/ }),
 
-/***/ "./src/app/admin/events/events-routing.module.ts":
-/*!*******************************************************!*\
-  !*** ./src/app/admin/events/events-routing.module.ts ***!
-  \*******************************************************/
-/*! exports provided: EventsRoutingModule */
+/***/ "./src/app/admin/courses/courses-routing.module.ts":
+/*!*********************************************************!*\
+  !*** ./src/app/admin/courses/courses-routing.module.ts ***!
+  \*********************************************************/
+/*! exports provided: CoursesRoutingModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventsRoutingModule", function() { return EventsRoutingModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CoursesRoutingModule", function() { return CoursesRoutingModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _events_display_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./events-display.component */ "./src/app/admin/events/events-display.component.ts");
-/* harmony import */ var _events_create_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./events-create.component */ "./src/app/admin/events/events-create.component.ts");
-/* harmony import */ var _quiz_create_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./quiz-create.component */ "./src/app/admin/events/quiz-create.component.ts");
+/* harmony import */ var _courses_display_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./courses-display.component */ "./src/app/admin/courses/courses-display.component.ts");
+/* harmony import */ var _courses_create_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./courses-create.component */ "./src/app/admin/courses/courses-create.component.ts");
+/* harmony import */ var _quiz_create_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./quiz-create.component */ "./src/app/admin/courses/quiz-create.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1159,61 +1208,61 @@ var routes = [
     {
         path: '',
         data: {
-            title: 'Events - Display',
+            title: 'Courses - Display',
             urls: [{ title: 'Dashboard', url: '/' }, { title: 'ngComponent' }, { title: 'Tabs' }]
         },
-        component: _events_display_component__WEBPACK_IMPORTED_MODULE_2__["EventsDisplayComponent"],
+        component: _courses_display_component__WEBPACK_IMPORTED_MODULE_2__["CoursesDisplayComponent"],
     },
     {
         path: 'create',
-        component: _events_create_component__WEBPACK_IMPORTED_MODULE_3__["EventsCreateComponent"]
+        component: _courses_create_component__WEBPACK_IMPORTED_MODULE_3__["CoursesCreateComponent"]
     },
     {
         path: 'create/:id',
-        component: _events_create_component__WEBPACK_IMPORTED_MODULE_3__["EventsCreateComponent"]
+        component: _courses_create_component__WEBPACK_IMPORTED_MODULE_3__["CoursesCreateComponent"]
     },
     {
-        path: 'quiz/:eventId',
+        path: 'quiz/:courseId',
         component: _quiz_create_component__WEBPACK_IMPORTED_MODULE_4__["QuizCreateComponent"]
     }
 ];
-var EventsRoutingModule = /** @class */ (function () {
-    function EventsRoutingModule() {
+var CoursesRoutingModule = /** @class */ (function () {
+    function CoursesRoutingModule() {
     }
-    EventsRoutingModule = __decorate([
+    CoursesRoutingModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
             imports: [
                 _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forChild(routes)
             ],
             exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
         })
-    ], EventsRoutingModule);
-    return EventsRoutingModule;
+    ], CoursesRoutingModule);
+    return CoursesRoutingModule;
 }());
 
 
 
 /***/ }),
 
-/***/ "./src/app/admin/events/events.module.ts":
-/*!***********************************************!*\
-  !*** ./src/app/admin/events/events.module.ts ***!
-  \***********************************************/
-/*! exports provided: EventsModule */
+/***/ "./src/app/admin/courses/courses.module.ts":
+/*!*************************************************!*\
+  !*** ./src/app/admin/courses/courses.module.ts ***!
+  \*************************************************/
+/*! exports provided: CoursesModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventsModule", function() { return EventsModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CoursesModule", function() { return CoursesModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _events_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./events-routing.module */ "./src/app/admin/events/events-routing.module.ts");
-/* harmony import */ var _events_display_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./events-display.component */ "./src/app/admin/events/events-display.component.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
-/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
-/* harmony import */ var _events_create_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./events-create.component */ "./src/app/admin/events/events-create.component.ts");
-/* harmony import */ var _quiz_create_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./quiz-create.component */ "./src/app/admin/events/quiz-create.component.ts");
-/* harmony import */ var angularx_qrcode__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! angularx-qrcode */ "./node_modules/angularx-qrcode/dist/index.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+/* harmony import */ var _quiz_create_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./quiz-create.component */ "./src/app/admin/courses/quiz-create.component.ts");
+/* harmony import */ var angularx_qrcode__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! angularx-qrcode */ "./node_modules/angularx-qrcode/dist/index.js");
+/* harmony import */ var _courses_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./courses-routing.module */ "./src/app/admin/courses/courses-routing.module.ts");
+/* harmony import */ var _courses_display_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./courses-display.component */ "./src/app/admin/courses/courses-display.component.ts");
+/* harmony import */ var _courses_create_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./courses-create.component */ "./src/app/admin/courses/courses-create.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1229,43 +1278,43 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-var EventsModule = /** @class */ (function () {
-    function EventsModule() {
+var CoursesModule = /** @class */ (function () {
+    function CoursesModule() {
     }
-    EventsModule = __decorate([
+    CoursesModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
             imports: [
-                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
-                _angular_common__WEBPACK_IMPORTED_MODULE_4__["CommonModule"],
-                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_5__["NgbModule"].forRoot(),
-                _events_routing_module__WEBPACK_IMPORTED_MODULE_1__["EventsRoutingModule"],
-                angularx_qrcode__WEBPACK_IMPORTED_MODULE_8__["QRCodeModule"]
+                _angular_forms__WEBPACK_IMPORTED_MODULE_1__["ReactiveFormsModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormsModule"],
+                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbModule"].forRoot(),
+                _courses_routing_module__WEBPACK_IMPORTED_MODULE_6__["CoursesRoutingModule"],
+                angularx_qrcode__WEBPACK_IMPORTED_MODULE_5__["QRCodeModule"]
             ],
             declarations: [
-                _events_display_component__WEBPACK_IMPORTED_MODULE_2__["EventsDisplayComponent"],
-                _events_create_component__WEBPACK_IMPORTED_MODULE_6__["EventsCreateComponent"],
-                _quiz_create_component__WEBPACK_IMPORTED_MODULE_7__["QuizCreateComponent"]
+                _courses_display_component__WEBPACK_IMPORTED_MODULE_7__["CoursesDisplayComponent"],
+                _courses_create_component__WEBPACK_IMPORTED_MODULE_8__["CoursesCreateComponent"],
+                _quiz_create_component__WEBPACK_IMPORTED_MODULE_4__["QuizCreateComponent"]
             ]
         })
-    ], EventsModule);
-    return EventsModule;
+    ], CoursesModule);
+    return CoursesModule;
 }());
 
 
 
 /***/ }),
 
-/***/ "./src/app/admin/events/events.service.ts":
-/*!************************************************!*\
-  !*** ./src/app/admin/events/events.service.ts ***!
-  \************************************************/
-/*! exports provided: EventsService */
+/***/ "./src/app/admin/courses/courses.service.ts":
+/*!**************************************************!*\
+  !*** ./src/app/admin/courses/courses.service.ts ***!
+  \**************************************************/
+/*! exports provided: CoursesService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventsService", function() { return EventsService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CoursesService", function() { return CoursesService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -1279,64 +1328,80 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-var EventsService = /** @class */ (function () {
-    function EventsService(http) {
+var CoursesService = /** @class */ (function () {
+    function CoursesService(http) {
         this.http = http;
-        this.apiUrl = 'https://apiitec2018tm.herokuapp.com/event/';
+        //apiUrl = 'https://apiitec2018tm.herokuapp.com/event/';
+        this.apiUrl = 'http://localhost:8080/course/';
     }
-    EventsService.prototype.getAll = function () {
+    CoursesService.prototype.getAll = function () {
         return this.http.get(this.apiUrl);
     };
-    EventsService.prototype.delete = function (id) {
+    CoursesService.prototype.getAllTeachers = function () {
+        return this.http.get(this.apiUrl + 'teachers');
+    };
+    CoursesService.prototype.delete = function (id) {
         return this.http.delete(this.apiUrl + id);
     };
-    EventsService.prototype.getById = function (id) {
+    CoursesService.prototype.getById = function (id) {
         return this.http.get(this.apiUrl + id);
     };
-    EventsService.prototype.create = function (event) {
+    CoursesService.prototype.create = function (event) {
         console.log(event);
         return this.http.post(this.apiUrl, event);
     };
-    EventsService.prototype.update = function (id, event) {
+    CoursesService.prototype.update = function (id, event) {
         return this.http.put(this.apiUrl + id, event);
     };
-    EventsService.prototype.filter = function (body) {
+    CoursesService.prototype.filter = function (body) {
         console.log(body);
         return this.http.post(this.apiUrl + 'filter', body);
     };
-    EventsService.prototype.createQuiz = function (quiz) {
-        return this.http.post('https://apiitec2018tm.herokuapp.com/quiz', quiz);
+    CoursesService.prototype.createQuiz = function (quiz) {
+        //return this.http.post('https://apiitec2018tm.herokuapp.com/quiz', quiz);
+        return this.http.post('http://localhost:8080/quiz', quiz);
     };
-    EventsService.prototype.ngOnInit = function () {
+    CoursesService.prototype.upload = function (courseId, file) {
+        var data = new FormData();
+        data.append('file', file);
+        return this.http.post(this.apiUrl + 'upload/' + courseId, data);
     };
-    EventsService = __decorate([
+    CoursesService.prototype.getFiles = function (courseId) {
+        return this.http.get(this.apiUrl + 'files/' + courseId);
+    };
+    CoursesService.prototype.downloadFile = function (fileName) {
+        return this.http.get(this.apiUrl + 'download/' + fileName, { responseType: 'blob' });
+    };
+    CoursesService.prototype.ngOnInit = function () {
+    };
+    CoursesService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root',
         }),
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
-    ], EventsService);
-    return EventsService;
+    ], CoursesService);
+    return CoursesService;
 }());
 
 
 
 /***/ }),
 
-/***/ "./src/app/admin/events/quiz-create.component.html":
-/*!*********************************************************!*\
-  !*** ./src/app/admin/events/quiz-create.component.html ***!
-  \*********************************************************/
+/***/ "./src/app/admin/courses/quiz-create.component.html":
+/*!**********************************************************!*\
+  !*** ./src/app/admin/courses/quiz-create.component.html ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\r\n    <div class=\"card-body\">\r\n        <h3 class=\"card-title\">\r\n            Create new quiz\r\n        </h3>\r\n        <form class=\"form-horizontal form-material\" id=\"quizCreateForm\" (submit)=\"saveQuiz()\" [formGroup]=\"quizCreateForm\">\r\n\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"Name\" formControlName=\"name\" title=\"name\">\r\n            <input class=\"form-control\" type=\"number\" placeholder=\"Time\" formControlName=\"time\" title=\"Time\">\r\n            <input class=\"form-control\" type=\"number\" placeholder=\"Score\" formControlName=\"score\" title=\"Score\">\r\n            <hr />\r\n            <fieldset formArrayName=\"ruleList\">\r\n                <h4>Rules: </h4>\r\n                <div class=\"form-group row\" *ngFor=\"let rule of quizCreateForm.get('ruleList').controls; let i=index\"\r\n                    [formGroup]=\"rule\">\r\n                    <select class=\"form-control\" formControlName=\"category\" title=\"Category\">\r\n                        <option value=\"\" disabled selected>Category</option>\r\n                        <option>SCIENCE</option>\r\n                        <option>FOOTBALL</option>\r\n                        <option>HISTORY </option>\r\n                        <option>MATH</option>\r\n                    </select>\r\n                    <select class=\"form-control\" formControlName=\"difficulty\" title=\"Difficulty\">\r\n                        <option value=\"\" disabled selected>Difficulty</option>\r\n                        <option>BEGINNER</option>\r\n                        <option>EASY</option>\r\n                        <option>MEDIUM</option>\r\n                        <option>HARD</option>\r\n                        <option>LEGEND</option>\r\n                    </select>\r\n                    <input class=\"form-control\" type=\"number\" placeholder=\"NoQuestions\" formControlName=\"nrOfQuiestion\"\r\n                        title=\"NoQuestions\">\r\n                    <div class=\"col-sm-1 py-1\">\r\n                        <button type=\"button\" class=\"btn\" (click)=\"quizCreateForm.get('ruleList').removeAt(i)\">-</button>\r\n                    </div>\r\n                </div>\r\n            </fieldset>\r\n            <div class=\"form-group row\">\r\n                <div class=\"col-sm-2 col-sm-offset-10\">\r\n                    <div class=\"form-group row\">\r\n                        <button type=\"button\" class=\"btn btn-link\" (click)=\"addNewRule()\">+</button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"text-center m-t-20\">\r\n                <button type=\"submit\" [disabled]=\"quizCreateForm.invalid\" class=\"btn btn-info btn-md btn-block text-uppercase waves-effect waves-light\">\r\n                    Save</button>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"card\">\r\n    <div class=\"card-body\">\r\n        <h3 class=\"card-title\">\r\n            Create new quiz\r\n        </h3>\r\n        <form class=\"form-horizontal form-material\" id=\"quizCreateForm\" (submit)=\"saveQuiz()\" [formGroup]=\"quizCreateForm\">\r\n\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"Name\" formControlName=\"name\" title=\"name\">\r\n            <input class=\"form-control\" type=\"number\" placeholder=\"Time\" formControlName=\"time\" title=\"Time\">\r\n            <input class=\"form-control\" type=\"number\" placeholder=\"Score\" formControlName=\"score\" title=\"Score\">\r\n            <hr />\r\n            <fieldset formArrayName=\"ruleList\">\r\n                <h4>Rules: </h4>\r\n                <div class=\"form-group row\" *ngFor=\"let rule of quizCreateForm.get('ruleList').controls; let i=index\"\r\n                    [formGroup]=\"rule\">\r\n                    <select class=\"form-control\" formControlName=\"category\" title=\"Category\">\r\n                        <option value=\"\" disabled selected>Category</option>\r\n                        <option>ALGEBRA</option>\r\n                        <option>GEOMETRIE</option>\r\n                        <option>ASC</option>\r\n                        <option>ANALIZA</option>\r\n                        <option>TPJAD</option>\r\n                        <option>EMBEDDED</option>\r\n                        <option>SO</option>\r\n                    </select>\r\n                    <select class=\"form-control\" formControlName=\"difficulty\" title=\"Difficulty\">\r\n                        <option value=\"\" disabled selected>Difficulty</option>\r\n                        <option>BEGINNER</option>\r\n                        <option>EASY</option>\r\n                        <option>MEDIUM</option>\r\n                        <option>HARD</option>\r\n                        <option>LEGEND</option>\r\n                    </select>\r\n                    <input class=\"form-control\" type=\"number\" placeholder=\"NoQuestions\" formControlName=\"nrOfQuiestion\"\r\n                        title=\"NoQuestions\">\r\n                    <div class=\"col-sm-1 py-1\">\r\n                        <button type=\"button\" class=\"btn\" (click)=\"quizCreateForm.get('ruleList').removeAt(i)\">-</button>\r\n                    </div>\r\n                </div>\r\n            </fieldset>\r\n            <div class=\"form-group row\">\r\n                <div class=\"col-sm-2 col-sm-offset-10\">\r\n                    <div class=\"form-group row\">\r\n                        <button type=\"button\" class=\"btn btn-link\" (click)=\"addNewRule()\">+</button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"text-center m-t-20\">\r\n                <button type=\"submit\" [disabled]=\"quizCreateForm.invalid\" class=\"btn btn-info btn-md btn-block text-uppercase waves-effect waves-light\">\r\n                    Save</button>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
-/***/ "./src/app/admin/events/quiz-create.component.ts":
-/*!*******************************************************!*\
-  !*** ./src/app/admin/events/quiz-create.component.ts ***!
-  \*******************************************************/
+/***/ "./src/app/admin/courses/quiz-create.component.ts":
+/*!********************************************************!*\
+  !*** ./src/app/admin/courses/quiz-create.component.ts ***!
+  \********************************************************/
 /*! exports provided: QuizCreateComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1344,9 +1409,9 @@ module.exports = "<div class=\"card\">\r\n    <div class=\"card-body\">\r\n     
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QuizCreateComponent", function() { return QuizCreateComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _events_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./events.service */ "./src/app/admin/events/events.service.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _courses_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./courses.service */ "./src/app/admin/courses/courses.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1367,38 +1432,38 @@ var QuizCreateComponent = /** @class */ (function () {
         this.route = route;
     }
     QuizCreateComponent.prototype.ngOnInit = function () {
-        this.quizCreateForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
-            name: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
-            score: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
-            time: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
-            ruleList: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormArray"]([])
+        this.quizCreateForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
+            name: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](''),
+            score: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](''),
+            time: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](''),
+            ruleList: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormArray"]([])
         });
-        this.eventId = Number(this.route.snapshot.paramMap.get('eventId'));
+        this.courseId = Number(this.route.snapshot.paramMap.get('courseId'));
     };
     QuizCreateComponent.prototype.saveQuiz = function () {
         var _this = this;
         var quiz = this.quizCreateForm.value;
-        quiz.eventId = this.eventId;
+        quiz.courseId = this.courseId;
         this.eventsService.createQuiz(quiz)
             .subscribe(function (response) {
-            _this.router.navigateByUrl('/admin/events');
+            _this.router.navigateByUrl('/admin/courses');
         }, function (error) {
             console.log(error);
         });
     };
     QuizCreateComponent.prototype.addNewRule = function () {
-        this.quizCreateForm.get('ruleList').push(new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
-            category: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
-            difficulty: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
-            nrOfQuiestion: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('')
+        this.quizCreateForm.get('ruleList').push(new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
+            category: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](''),
+            difficulty: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](''),
+            nrOfQuiestion: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('')
         }));
     };
     QuizCreateComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            template: __webpack_require__(/*! ./quiz-create.component.html */ "./src/app/admin/events/quiz-create.component.html")
+            template: __webpack_require__(/*! ./quiz-create.component.html */ "./src/app/admin/courses/quiz-create.component.html")
         }),
-        __metadata("design:paramtypes", [_events_service__WEBPACK_IMPORTED_MODULE_1__["EventsService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])
+        __metadata("design:paramtypes", [_courses_service__WEBPACK_IMPORTED_MODULE_3__["CoursesService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
     ], QuizCreateComponent);
     return QuizCreateComponent;
 }());
@@ -1408,4 +1473,4 @@ var QuizCreateComponent = /** @class */ (function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=events-events-module.js.map
+//# sourceMappingURL=courses-courses-module.js.map
