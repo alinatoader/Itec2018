@@ -47,9 +47,14 @@
             </ng-template>
           </ngb-tab>
 
-          <ngb-tab title="Statistics">
+          <ngb-tab title="Files">
             <ng-template ngbTabContent>
-              <p class="p-t-20">Statistics</p>
+              <p class="p-t-20" style="float:right;"> <button (click)="uploadnewFile(upload, course)" type="button"
+                  class="btn btn-info btn-sm">Upload
+                  new file</button></p>
+              <div *ngFor="let file of course.files">
+                <button style="margin-top: 5px;" type="button" class="btn btn-outline-info btn-sm" (click)="downloadFile(file)">{{file}}</button>
+              </div>
             </ng-template>
           </ngb-tab>
         </ngb-tabset>
@@ -73,5 +78,20 @@
       <div *ngIf="linkForQR">
         <qrcode [qrdata]="linkForQR" [size]="256" [level]="'M'"></qrcode>
       </div>
+    </div>
+  </ng-template>
+
+  <ng-template #upload let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Upload file for {{course.name}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" style="margin-left:auto; margin-right:auto">
+      <form [formGroup]="uploadForm" enctype="multipart/form-data">
+        <input type="file" formControlName="file" class="form-control" (input)="uploadFile($event)">
+      </form>
+      <br />
     </div>
   </ng-template>

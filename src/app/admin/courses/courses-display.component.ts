@@ -22,6 +22,8 @@ export class CoursesDisplayComponent implements OnInit {
     emailForm: FormGroup;
     quizId = 0;
     teachers: any;
+    uploadForm: FormGroup;
+    course: any;
 
     constructor(private coursesService: CoursesService, private router: Router,
         private modalService: NgbModal, private modalService2: NgbModal) { }
@@ -34,7 +36,16 @@ export class CoursesDisplayComponent implements OnInit {
 
     getAll() {
         this.coursesService.getAll().subscribe(courses => {
-            this.courses = courses;console.log(this.courses);
+            this.courses = courses; console.log(this.courses);
+            for (let i = 0; i < this.courses.length; i++) {
+                this.coursesService.getFiles(this.courses[i].id).subscribe(
+                    response => {
+                        this.courses[i].files = response;
+                    }, error => {
+                        console.log(error);
+                    }
+                )
+            }
         },
             error => {
                 console.log(error);
@@ -50,7 +61,7 @@ export class CoursesDisplayComponent implements OnInit {
             })
     }
 
-    deleteCourse(id:number) {
+    deleteCourse(id: number) {
         this.coursesService.delete(id).subscribe(_ => {
             this.getAll();
         },
@@ -60,7 +71,7 @@ export class CoursesDisplayComponent implements OnInit {
         );
     }
 
-    editCourse(id:number) {
+    editCourse(id: number) {
         this.router.navigateByUrl('/admin/courses/create/' + id);
     }
 
@@ -73,13 +84,30 @@ export class CoursesDisplayComponent implements OnInit {
         this.getAllTeachers();
         this.emailForm = new FormGroup({
             email: new FormControl('', Validators.email)
-        })
+        });
+        this.uploadForm = new FormGroup({
+            file: new FormControl()
+        });
     }
 
     generateQR(quizId: number, content) {
         this.linkForQR = null;
         this.emailForm.reset();
         this.quizId = quizId;
+        this.open2(content);
+    }
+
+    uploadFile(event) {
+        this.coursesService.upload(this.course.id, event.target.files.item(0))
+            .subscribe(_ => {
+                window.location.reload();
+            }, error => {
+                console.log(error);
+            });
+    }
+
+    uploadnewFile(content, course) {
+        this.course = course;
         this.open2(content);
     }
 
@@ -118,7 +146,7 @@ export class CoursesDisplayComponent implements OnInit {
             searchName: searchValue,
             teacherName: statusSelect.value,
             sortByDate: sortSelect.value === 'ASC' ? true : false,
-            sort: sortSelect.value !== 'NONE' ? true: false
+            sort: sortSelect.value !== 'NONE' ? true : false
         }
         this.coursesService.filter(body)
             .subscribe(response => {
@@ -132,7 +160,7 @@ export class CoursesDisplayComponent implements OnInit {
             searchName: searchInput.value,
             teacherName: filterStatus,
             sortByDate: sortSelect.value === 'ASC' ? true : false,
-            sort: sortSelect.value !== 'NONE' ? true: false
+            sort: sortSelect.value !== 'NONE' ? true : false
         }
         this.coursesService.filter(body)
             .subscribe(response => {
@@ -146,11 +174,26 @@ export class CoursesDisplayComponent implements OnInit {
             searchName: searchInput.value,
             teacherName: statusSelect.value,
             sortByDate: sortDir === 'ASC' ? true : false,
-            sort: sortDir !== 'NONE' ? true: false
+            sort: sortDir !== 'NONE' ? true : false
         }
         this.coursesService.filter(body)
             .subscribe(response => {
                 this.courses = response;
             }, error => console.log(error));
+    }
+
+    downloadFile(fileName: string) {
+        this.coursesService.downloadFile(fileName).subscribe(
+            data => {
+                let blob = new Blob([data]);
+                var downloadURL = window.URL.createObjectURL(data);
+                var link = document.createElement('a');
+                link.href = downloadURL;
+                link.download = fileName;
+                link.click();
+            }, error => {
+                console.log(error);
+            }
+        )
     }
 }

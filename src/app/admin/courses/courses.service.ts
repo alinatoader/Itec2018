@@ -1,5 +1,6 @@
 import { OnInit, Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root',
@@ -14,7 +15,7 @@ export class CoursesService implements OnInit {
         return this.http.get(this.apiUrl);
     }
 
-    getAllTeachers(){
+    getAllTeachers() {
         return this.http.get(this.apiUrl + 'teachers');
     }
 
@@ -43,6 +44,20 @@ export class CoursesService implements OnInit {
     createQuiz(quiz: any) {
         //return this.http.post('https://apiitec2018tm.herokuapp.com/quiz', quiz);
         return this.http.post('http://localhost:8080/quiz', quiz);
+    }
+
+    upload(courseId: number, file: any) {
+        let data = new FormData();
+        data.append('file', file);
+        return this.http.post(this.apiUrl + 'upload/' + courseId, data);
+    }
+
+    getFiles(courseId: number) {
+        return this.http.get(this.apiUrl + 'files/' + courseId);
+    }
+
+    downloadFile(fileName: string): Observable<Blob> {
+        return this.http.get(this.apiUrl + 'download/' + fileName, { responseType: 'blob' });
     }
 
     ngOnInit(): void {
