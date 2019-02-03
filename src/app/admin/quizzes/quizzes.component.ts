@@ -33,9 +33,10 @@ export class QuizzesComponent {
                 const user = this.userService.getUserFromLocalStorage();
                 for (let i = 0; i < this.quizzes.length; i++) {
                     this.quizzesService.getQuizCompleted(user.email, this.quizzes[i].id).subscribe(response =>{
-                        this,quizzes[i].taken = response;
+                        this.quizzes[i].result = response;
                     });
                 }
+                console.log(this.quizzes);
             }, error => {
                 console.log(error);
             });
