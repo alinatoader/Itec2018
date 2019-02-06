@@ -5,8 +5,8 @@ import { HttpClient } from "@angular/common/http";
     providedIn: 'root',
 })
 export class QuizService {
-    //apiUrl = 'https://apiitec2018tm.herokuapp.com';
-    apiUrl='http://localhost:8080';
+    apiUrl = 'https://apiitec2018tm.herokuapp.com';
+    //apiUrl='http://localhost:8080';
 
     constructor(private http: HttpClient) { }
 

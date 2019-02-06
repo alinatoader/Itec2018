@@ -6,8 +6,8 @@ import { Observable } from "rxjs";
     providedIn: 'root',
 })
 export class CoursesService implements OnInit {
-    //apiUrl = 'https://apiitec2018tm.herokuapp.com/event/';
-    apiUrl = 'http://localhost:8080/course/';
+    apiUrl = 'https://apiitec2018tm.herokuapp.com/course/';
+    //apiUrl = 'http://localhost:8080/course/';
 
     constructor(private http: HttpClient) { }
 
@@ -42,8 +42,8 @@ export class CoursesService implements OnInit {
     }
 
     createQuiz(quiz: any) {
-        //return this.http.post('https://apiitec2018tm.herokuapp.com/quiz', quiz);
-        return this.http.post('http://localhost:8080/quiz', quiz);
+        return this.http.post('https://apiitec2018tm.herokuapp.com/quiz', quiz);
+        // return this.http.post('http://localhost:8080/quiz', quiz);
     }
 
     upload(courseId: number, file: any) {

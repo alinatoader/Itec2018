@@ -1329,10 +1329,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var CoursesService = /** @class */ (function () {
+    //apiUrl = 'http://localhost:8080/course/';
     function CoursesService(http) {
         this.http = http;
-        //apiUrl = 'https://apiitec2018tm.herokuapp.com/event/';
-        this.apiUrl = 'http://localhost:8080/course/';
+        this.apiUrl = 'https://apiitec2018tm.herokuapp.com/course/';
     }
     CoursesService.prototype.getAll = function () {
         return this.http.get(this.apiUrl);
@@ -1358,8 +1358,8 @@ var CoursesService = /** @class */ (function () {
         return this.http.post(this.apiUrl + 'filter', body);
     };
     CoursesService.prototype.createQuiz = function (quiz) {
-        //return this.http.post('https://apiitec2018tm.herokuapp.com/quiz', quiz);
-        return this.http.post('http://localhost:8080/quiz', quiz);
+        return this.http.post('https://apiitec2018tm.herokuapp.com/quiz', quiz);
+        // return this.http.post('http://localhost:8080/quiz', quiz);
     };
     CoursesService.prototype.upload = function (courseId, file) {
         var data = new FormData();

@@ -110,10 +110,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var QuizService = /** @class */ (function () {
+    //apiUrl='http://localhost:8080';
     function QuizService(http) {
         this.http = http;
-        //apiUrl = 'https://apiitec2018tm.herokuapp.com';
-        this.apiUrl = 'http://localhost:8080';
+        this.apiUrl = 'https://apiitec2018tm.herokuapp.com';
     }
     QuizService.prototype.getQuestions = function (quizId) {
         return this.http.get(this.apiUrl + '/question/test/' + quizId);

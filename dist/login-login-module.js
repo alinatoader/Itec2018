@@ -763,10 +763,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var UserService = /** @class */ (function () {
+    //apiUrl = 'http://localhost:8080';
     function UserService(http) {
         this.http = http;
-        //apiUrl = 'https://apiitec2018tm.herokuapp.com';
-        this.apiUrl = 'http://localhost:8080';
+        this.apiUrl = 'https://apiitec2018tm.herokuapp.com';
     }
     UserService.prototype.login = function (user) {
         return this.http.post(this.apiUrl + '/login', user);

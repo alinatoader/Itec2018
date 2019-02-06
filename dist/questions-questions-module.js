@@ -454,10 +454,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var QuestionsService = /** @class */ (function () {
+    //apiUrl = 'http://localhost:8080/question/';
     function QuestionsService(http) {
         this.http = http;
-        //apiUrl = 'https://apiitec2018tm.herokuapp.com/question/';
-        this.apiUrl = 'http://localhost:8080/question/';
+        this.apiUrl = 'https://apiitec2018tm.herokuapp.com/question/';
     }
     QuestionsService.prototype.getAll = function () {
         return this.http.get(this.apiUrl);
